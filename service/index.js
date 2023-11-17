@@ -30,6 +30,6 @@ io.on("connection", (socket) => {
   });
 });
 
-app.use("/noir", noir);
+/* app.use("/noir", noir); */
 
 server.listen(port, () => console.log("Server running on port 4000"));
