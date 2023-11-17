@@ -10,6 +10,10 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@noir-lang/backend_barretenberg": "^0.19.2",
+    "@noir-lang/noir_js": "^0.19.2",
+    "@noir-lang/noir_wasm": "^0.19.2",
+    "@noir-lang/source-resolver": "^0.19.2",
     "chai": "^4.3.10",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
@@ -20,7 +24,8 @@
     "nodemon": "^2.0.22",
     "noir": "^0.0.1",
     "qrcode": "^1.5.3",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "viem": "^1.19.3"
   },
   "scripts": {
     "start": "node index.js",

@@ -21,10 +21,6 @@ fn main(signature : pub [u8;64], message: [u8;32]) {
     let valid_signature = ecdsa_secp256k1::verify_signature(TRUSTED_PUBLIC_KEY_X, TRUSTED_PUBLIC_KEY_Y, signature, message);
 
     assert(valid_signature);
-
-    
-
-     
 }
 
 #[test]
