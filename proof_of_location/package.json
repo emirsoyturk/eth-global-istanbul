@@ -1,0 +1,14 @@
+{
+  "name": "proof_of_location",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@noir-lang/barretenberg": "^2.19.0",
+    "@noir-lang/noir_js": "^0.19.2",
+    "crypto": "^1.0.1",
+    "ethers": "^5.8.1",
+    "secp256k1": "^5.0.0",
+    "viem": "^1.19.3"
+  }
+}
