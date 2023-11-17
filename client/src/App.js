@@ -1,6 +1,6 @@
 import './App.css';
 import Footer from './Components/Footer/Footer';
-import QrCodeScanner from './Components/QR/QR';
+import QrCodeScanner from './Pages/QR/QR';
 import MainPage from './Pages/Mainpage/Mainpage';
 import { Route, Routes } from 'react-router-dom';
 
@@ -13,11 +13,6 @@ function App() {
                 <Route exact path="/landing" element={<h1>Landing Page</h1>} />
             </Routes>
 
-            {/*                 <Header />
-                <div className="flex-grow mx-auto max-w-screen-xl">
-                    <CardItem title={"Baslik There"} subtitle={"Subtitle There"} imageSrc={DefaultImage} />
-                    <SmallCards />
-                </div> */}
             <Footer />
         </div>
     );
