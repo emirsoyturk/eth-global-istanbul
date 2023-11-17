@@ -5,6 +5,8 @@ import { SiGoogleanalytics } from "react-icons/si";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import FooterBG from '../../Images/footer_bg.svg'; // Import your image
 
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div className="relative w-full flex flex-row justify-around items-center text-softPurple sticky bottom-0 p-4">
@@ -15,7 +17,7 @@ const Footer = () => {
         <FaHome size={28} className="cursor-pointer text-purple" />
       </div>
       <div className="flex-shrink-0 p-2 bg-purple rounded-full p-2 cursor-pointer absolute bottom-12">
-        <MdOutlineQrCodeScanner size={48} />
+        <Link to={'./qr'}> <MdOutlineQrCodeScanner size={48} /> </Link>
       </div>
       <div className="flex-shrink-0 p-2 pl-4 pt-4">
         <SiGoogleanalytics size={28} className="cursor-pointer text-purple" />

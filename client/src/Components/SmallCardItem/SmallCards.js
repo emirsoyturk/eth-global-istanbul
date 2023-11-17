@@ -1,7 +1,7 @@
 import React from "react";
 import SmallCardItem from "./SmallCardItem";
 import DefaultImage from '../../Images/img1.png'
-/* import './SmallCards.css'; */
+import './SmallCards.css';
 
 const SmallCards = () => {
     return (
