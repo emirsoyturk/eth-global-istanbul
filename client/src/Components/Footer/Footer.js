@@ -10,22 +10,22 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="relative w-full flex flex-row justify-around items-center text-softPurple sticky bottom-0 p-4">
-      <div className="flex-shrink-0 p-1 pt-4">
+      <div className="flex-shrink-0 p-1 pt-4 text-pink">
         <FaHome size={28} className="cursor-pointer" />
       </div>
       <div className="flex-shrink-0 p-2 pr-4 pt-4">
-        <FaHome size={28} className="cursor-pointer text-purple" />
+        <FaHome size={28} className="cursor-pointer text-pink" />
       </div>
       <div className="flex-shrink-0 p-2 bg-purple rounded-full p-2 cursor-pointer absolute bottom-12">
-        <Link to={'./qr'}> <MdOutlineQrCodeScanner size={48} /> </Link>
+        <Link to={'./qr'}> <MdOutlineQrCodeScanner size={48} className="text-purpleBlack"/> </Link>
       </div>
       <div className="flex-shrink-0 p-2 pl-4 pt-4">
-        <SiGoogleanalytics size={28} className="cursor-pointer text-purple" />
+        <SiGoogleanalytics size={28} className="cursor-pointer text-pink" />
       </div>
       <div className="flex-shrink-0 p-1 pt-4">
-        <MdSettings size={28} className="cursor-pointer" />
+        <MdSettings size={28} className="cursor-pointer text-pink" />
       </div>
-      <div className="absolute inset-0 bg-cover bg-center z-[-1]" style={{ backgroundImage: `url(${FooterBG})`, height: '200px' }} />
+      <div className="absolute inset-0 bg-cover bg-center z-[-1]" style={{ backgroundImage: `url(${FooterBG})`/* , height: '200px' */ }} />
     </div>
   );
 };

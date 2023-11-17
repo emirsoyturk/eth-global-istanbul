@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
-const SmallCardItem = ({ subtitle, imageSrc }) => {
+const SmallCardItem = ({ subtitle, imageSrc, bgColor }) => {
+    console.log(bgColor)
   return (
-    <div className="flex flex-col mx-1 bg-white rounded-lg shadow-xl justify-center items-center bg-softPurple">
+    <div className={`flex flex-col mx-1 ${bgColor} rounded-lg shadow-xl justify-center items-center`}>
       <div className="m-4">
         <img className="w-full h-auto object-cover" src={imageSrc} alt="Card" />
       </div>
