@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import CardItem from './Components/CardItem/CardItem';
+import SmallCards from './Components/SmallCardItem/SmallCards';
+import DefaultImage from './Images/img1.png'
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col min-h-screen text-purple font-bold flex-grow mx-auto max-w-screen-xl">
+      <Header />
+      <div className="flex-grow mx-auto max-w-screen-xl">
+        <CardItem title={"Baslik There"} subtitle={"Subtitle There"} imageSrc={DefaultImage} />
+        <SmallCards />
+      </div>
+      <Footer />
     </div>
   );
 }
 
 export default App;
+
