@@ -36,7 +36,7 @@ function Login() {
 
     return (
         <div className='h-[100vh] flex justify-center items-center'>
-            <div className='h-[50vh] w-[80vw] flex flex-wrap justify-between rounded-xl'>
+{/*             <div className='h-[50vh] w-[80vw] flex flex-wrap justify-between rounded-xl'>
             {connectors.map((connector) => (
                 <button
                     disabled={!connector.ready}
@@ -54,8 +54,8 @@ function Login() {
             ))}
 
             {error && <div>{error.message}</div>}
-            </div>
-            {/* <ConnectButton /> */}
+            </div> */}
+            <ConnectButton />
         </div>
     )
 }
