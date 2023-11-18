@@ -1,12 +1,6 @@
 const noirService = require("../services/noir.service");
 const path = require("path");
-const {
-  toHex,
-  hexToNumber,
-  fromHex,
-  hashMessage,
-  recoverPublicKey,
-} = require("viem");
+const { toHex } = require("viem");
 
 const { Noir } = require("@noir-lang/noir_js");
 const { BarretenbergBackend } = require("@noir-lang/backend_barretenberg");
@@ -126,8 +120,6 @@ async function main() {
   console.log(recursiveProof.publicInputs.map((i) => toHex(i)));
 }
 
-main();
-
 async function proveLocation(req, res) {
   const { signature, lat, long, timestamp } = req.body;
 
@@ -157,54 +149,59 @@ async function proveLocation(req, res) {
   });
 }
 
-main();
-
 async function proveInside(req, res) {
   const { publicInputs, proof, location, borders } = req.body;
   const { circuits, backends, noirs } = await setup();
   const numPublicInputs = 64;
 
-  console.log(jsonToArray(publicInputs).length);
-  console.log(jsonToArray(proof).length);
+  const proofData = {
+    publicInputs: publicInputs.map((x) => jsonToArray(x)),
+    proof: jsonToArray(proof),
+  };
 
   const { proofAsFields, vkAsFields, vkHash } =
     await backends.proof_of_location.generateIntermediateProofArtifacts(
-      {
-        publicInputs: jsonToArray(publicInputs),
-        proof: jsonToArray(proof),
-      },
+      proofData,
       numPublicInputs
     );
 
-  // const aggregationObject = Array(16).fill(
-  //   "0x0000000000000000000000000000000000000000000000000000000000000000"
-  // );
+  const aggregationObject = Array(16).fill(
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+  );
 
-  // recursiveInputs = {
-  //   verification_key: vkAsFields,
-  //   proof: proofAsFields,
-  //   public_inputs: publicInputs,
-  //   key_hash: vkHash,
-  //   input_aggregation_object: aggregationObject,
-  //   location: {
-  //     latitude: { integer: location.latitude.x, fraction: 0 },
-  //     longitude: { integer: location.longitude.x, fraction: 0 },
-  //   },
-  //   borders: borders.map((border) =>
-  //     JSON.parse(
-  //       `{latitude:{integer: ${border.latitude.x},fraction:0},longitude:{integer:${border.longitude.x},fraction:0}}`
-  //     )
-  //   ),
-  // };
+  recursiveInputs = {
+    verification_key: vkAsFields,
+    proof: proofAsFields,
+    public_inputs: publicInputs.map((x) => toHex(jsonToArray(x))),
+    key_hash: vkHash,
+    input_aggregation_object: aggregationObject,
+    location: {
+      latitude: { integer: location.latitude.x, fraction: 0 },
+      longitude: { integer: location.longitude.x, fraction: 0 },
+    },
+    borders: borders.map((border) =>
+      JSON.parse(
+        `{
+          "latitude":{
+             "integer": ${border.latitude.x},
+             "fraction":0
+          },
+          "longitude":{
+             "integer":${border.longitude.x},
+             "fraction":0
+          }
+       }`
+      )
+    ),
+  };
 
-  // console.log(recursiveInputs);
-
-  // recursiveProof = await noirs.proof_of_inside.generateFinalProof(
-  //   recursiveInputs
-  // );
+  recursiveProof = await noirs.proof_of_inside.generateFinalProof(
+    recursiveInputs
+  );
 
   res.json({
-    proof: "a",
+    proof: toHex(jsonToArray(recursiveProof.proof)),
+    publicInputs: recursiveProof.publicInputs.map((i) => toHex(jsonToArray(i))),
   });
 }
 

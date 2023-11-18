@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-// import "./plonk_vk.sol";
+import "./plonk_vk.sol";
 
 contract Map {
     struct Location {
@@ -11,13 +11,19 @@ contract Map {
 
     mapping(address => Location[]) locationHistory;
 
+    UltraVerifier verifier;
+
+    constructor(address _verifier) {
+        verifier = UltraVerifier(_verifier);
+    }
+
     event LocationAdded(Location location);
 
     function addLocation(
         bytes calldata _proof,
         bytes32[] calldata _publicInputs
     ) public {
-        // require(baseUltraVerifier.verify(_proof, _publicInputs), "Wrong proof");
+        require(verifier.verify(_proof, _publicInputs), "Wrong proof");
 
         uint locationCount = 4;
 

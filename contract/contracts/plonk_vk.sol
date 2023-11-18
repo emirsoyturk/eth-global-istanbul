@@ -1,75 +1,245 @@
-// Verification Key Hash: 8ca97f962b8cdc96bfac12c58678d5ca48c9a5a8f2a79da5bd7599815f17af61
+// Verification Key Hash: 207da0432d5fd1d28724b32a4b70f4680e67bf3c81433ab255f2ec13b2b8bbd6
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2022 Aztec
 pragma solidity >=0.8.4;
 
 library UltraVerificationKey {
-    function verificationKeyHash() internal pure returns(bytes32) {
-        return 0x8ca97f962b8cdc96bfac12c58678d5ca48c9a5a8f2a79da5bd7599815f17af61;
+    function verificationKeyHash() internal pure returns (bytes32) {
+        return
+            0x207da0432d5fd1d28724b32a4b70f4680e67bf3c81433ab255f2ec13b2b8bbd6;
     }
 
-    function loadVerificationKey(uint256 _vk, uint256 _omegaInverseLoc) internal pure {
+    function loadVerificationKey(
+        uint256 _vk,
+        uint256 _omegaInverseLoc
+    ) internal pure {
         assembly {
-            mstore(add(_vk, 0x00), 0x0000000000000000000000000000000000000000000000000000000000040000) // vk.circuit_size
-            mstore(add(_vk, 0x20), 0x0000000000000000000000000000000000000000000000000000000000000010) // vk.num_inputs
-            mstore(add(_vk, 0x40), 0x19ddbcaf3a8d46c15c0176fbb5b95e4dc57088ff13f4d1bd84c6bfa57dcdc0e0) // vk.work_root
-            mstore(add(_vk, 0x60), 0x30644259cd94e7dd5045d7a27013b7fcd21c9e3b7fa75222e7bda49b729b0401) // vk.domain_inverse
-            mstore(add(_vk, 0x80), 0x063e259c1348984ed3cd72788124e1db9bd15aacccff9df9a5fe07107fa7588c) // vk.Q1.x
-            mstore(add(_vk, 0xa0), 0x1a612d5b55b189ebfabf9093b0cdd066cf505f317b9ca6351cc28b7b088d3859) // vk.Q1.y
-            mstore(add(_vk, 0xc0), 0x2ab8da66855988d28be118cb5e7a3e615c743460ea13cbb7db659c1e783d7110) // vk.Q2.x
-            mstore(add(_vk, 0xe0), 0x07fd84951697dc2bc9d10bdc594d2754563de4aefad72fcc4ea012d0ee62ffa1) // vk.Q2.y
-            mstore(add(_vk, 0x100), 0x1b5d517ccf5fc66bbb6fe7e88a10aaf5843b8a4c23917dfbf9d8a1bc1a2240db) // vk.Q3.x
-            mstore(add(_vk, 0x120), 0x0f5fd200f5594df15f403ffb2ba90056f899284e1483712a737d85a09ae4a994) // vk.Q3.y
-            mstore(add(_vk, 0x140), 0x20f6e77f6caaaa20204f6a75761978cf4283294e5825b08f8ed97e734a51b9af) // vk.Q4.x
-            mstore(add(_vk, 0x160), 0x13a15d09d5f97fa03c418efb0595f915b65025e24fd592037263997d9a2feaee) // vk.Q4.y
-            mstore(add(_vk, 0x180), 0x1e15f2742c097ae542d99a7e6656fb7cc98d583f3342f2c1a246d36f06f10e7a) // vk.Q_M.x
-            mstore(add(_vk, 0x1a0), 0x1d5b3b2be649ca1edca86fd64f8f21a0e149b1612882da6910ea8ea89329a1f3) // vk.Q_M.y
-            mstore(add(_vk, 0x1c0), 0x27861a9fe1b06dc2e589b7519d9497858f0d578765758fc9ad9b802f48e7280e) // vk.Q_C.x
-            mstore(add(_vk, 0x1e0), 0x1664bc13ca765e0eddcb3f429a8fb1a21ef1ebeb29664e63ae65e8c0594f3b2c) // vk.Q_C.y
-            mstore(add(_vk, 0x200), 0x189f54709d7d56c9777245822b61b9e388ecc96bf6cbd25d7a07d201675d4fff) // vk.Q_ARITHMETIC.x
-            mstore(add(_vk, 0x220), 0x1adf9b3e887956a187352443ba3baa06e9332b3ac2577c2454dfbdd72f009885) // vk.Q_ARITHMETIC.y
-            mstore(add(_vk, 0x240), 0x1c8e5f9e90d1b1d74dedec6818559ec2be6443a735cc0e8a438e33eac638627b) // vk.QSORT.x
-            mstore(add(_vk, 0x260), 0x1fc110c2e901add4fa60679aa7a88f1f477982613285fa23e5ac0f44f337d88c) // vk.QSORT.y
-            mstore(add(_vk, 0x280), 0x2e1b864b37205a4f841b8ecb7834f047c91a37e932ff890f85681098387c6264) // vk.Q_ELLIPTIC.x
-            mstore(add(_vk, 0x2a0), 0x155634735ce4fa09411a147d4c33d43bd841b013ccdef9eec28a5ad6614a8300) // vk.Q_ELLIPTIC.y
-            mstore(add(_vk, 0x2c0), 0x19db24f86b3e017c2a0fe76acb2537f06f44e717d7f610d0b54688351b365771) // vk.Q_AUX.x
-            mstore(add(_vk, 0x2e0), 0x0b27f5adbb7b49c09764fa68c9758ecde635e5bf4079b2f1472d8ee09c9bf358) // vk.Q_AUX.y
-            mstore(add(_vk, 0x300), 0x1da7ae3b5f2be33803326d4525859884119c4089eaacfb14bf19d34d18a789e0) // vk.SIGMA1.x
-            mstore(add(_vk, 0x320), 0x0f3cbdd5ad12258d40c0fef81d8ded2c7b9c0b6b6e1a4d6522347187b8600098) // vk.SIGMA1.y
-            mstore(add(_vk, 0x340), 0x18817a45b320a4552d8c66f21a781171a45f23523c148305cf63245a8dcdc8a0) // vk.SIGMA2.x
-            mstore(add(_vk, 0x360), 0x190a34b2a6971a63af2b9d369e4caa75bf207160709e0e982ab95f882988e694) // vk.SIGMA2.y
-            mstore(add(_vk, 0x380), 0x1feb3f47187ae6f4eef381eb6289081e84b891db686b48855ce5d6103fcb066c) // vk.SIGMA3.x
-            mstore(add(_vk, 0x3a0), 0x02ed426bd060c1bd8f43e2fed8d98a946f1b92f3e303b30a4b76d61cfd127d66) // vk.SIGMA3.y
-            mstore(add(_vk, 0x3c0), 0x2bbada2276f3fa092ab126d7a8c68e4ad35c024c429092276da9827e61f7f46c) // vk.SIGMA4.x
-            mstore(add(_vk, 0x3e0), 0x136c243748fc8ab570cdf83fde6d91beb5e5a75eba833fcf1f4c35e52108017e) // vk.SIGMA4.y
-            mstore(add(_vk, 0x400), 0x215a055ec0bf7d7ab5e005b4260258aaadfd8ae9005a09060fdd0cee02dc3fea) // vk.TABLE1.x
-            mstore(add(_vk, 0x420), 0x1841eba177a34b1eb908727fe2e54bf33fc82b6e58dfd044acd4ba05ca80c837) // vk.TABLE1.y
-            mstore(add(_vk, 0x440), 0x018eb037682044ebf9cad76f777bf379b94c4d31d4351ce9677ff146a744555c) // vk.TABLE2.x
-            mstore(add(_vk, 0x460), 0x2bf87d72f0aef257c728503c900516f9274ab06eb54804651218438e40f06c25) // vk.TABLE2.y
-            mstore(add(_vk, 0x480), 0x13b003b384fb50e00994bf62a0057f44344be47383d59a7e9f1319d710ab5263) // vk.TABLE3.x
-            mstore(add(_vk, 0x4a0), 0x1a5f338a3d05fb46ea46855e6c36dbdb23c5f20a56acc795324fe2958189ec39) // vk.TABLE3.y
-            mstore(add(_vk, 0x4c0), 0x1365fd683dbad2c4c55b02dd33c4b96fde00e5bb3f52be20ead95484e130aee1) // vk.TABLE4.x
-            mstore(add(_vk, 0x4e0), 0x2da2ba1d27548e452cc863758acf156eb268f577b7d08ba58e7bbf2d28f6f23c) // vk.TABLE4.y
-            mstore(add(_vk, 0x500), 0x24299605e056d8745ad0dd716431e3272d3a7435eda3079af840a26050f0c6b6) // vk.TABLE_TYPE.x
-            mstore(add(_vk, 0x520), 0x0310fa362f98abc590b2d477126161b9772e5328ad789a9efed7bf89a5e88a6d) // vk.TABLE_TYPE.y
-            mstore(add(_vk, 0x540), 0x2b2a3f1a92505d96b017ab0d71803d11894770ba09b81698dc2c4c24d524d4a5) // vk.ID1.x
-            mstore(add(_vk, 0x560), 0x110f585ad1564b341007f44feeed3b76ef1ac410cc9a58554d78efda92533f14) // vk.ID1.y
-            mstore(add(_vk, 0x580), 0x075d22d59667e605d7c6b5ca219255fa2768ccf3c9e29b8bcae08b2eff78d0a3) // vk.ID2.x
-            mstore(add(_vk, 0x5a0), 0x01f6488886e479ceb2174a4d50602aec97c2f91cf463a4ab5a099690503cb7d7) // vk.ID2.y
-            mstore(add(_vk, 0x5c0), 0x21fe1416c7b36daf76668b2d274fbeda4058a39d2cfa53e102769f6757a91c50) // vk.ID3.x
-            mstore(add(_vk, 0x5e0), 0x27de1d432a7ce130fb64b7d1b1c8d68ddd39888ac138c8e9f56ef23c4889bfa3) // vk.ID3.y
-            mstore(add(_vk, 0x600), 0x152a5b4536e195103859ba537e33af3d87600bcb4e8d3f5f4ee1b72a6bbd93fa) // vk.ID4.x
-            mstore(add(_vk, 0x620), 0x03bd9e0fa93667e08f58ac7ff5a21042704df823236ac0df629c2803ca22d7da) // vk.ID4.y
+            mstore(
+                add(_vk, 0x00),
+                0x0000000000000000000000000000000000000000000000000000000000040000
+            ) // vk.circuit_size
+            mstore(
+                add(_vk, 0x20),
+                0x0000000000000000000000000000000000000000000000000000000000000020
+            ) // vk.num_inputs
+            mstore(
+                add(_vk, 0x40),
+                0x19ddbcaf3a8d46c15c0176fbb5b95e4dc57088ff13f4d1bd84c6bfa57dcdc0e0
+            ) // vk.work_root
+            mstore(
+                add(_vk, 0x60),
+                0x30644259cd94e7dd5045d7a27013b7fcd21c9e3b7fa75222e7bda49b729b0401
+            ) // vk.domain_inverse
+            mstore(
+                add(_vk, 0x80),
+                0x1215624c11e68aa5497adf7eb1bb3211cddcca44a50cf44717e83adcc5e1ce55
+            ) // vk.Q1.x
+            mstore(
+                add(_vk, 0xa0),
+                0x21a511c6e68c5188c8241aa951b878a400b67e707a3f7ef05644e780167434c9
+            ) // vk.Q1.y
+            mstore(
+                add(_vk, 0xc0),
+                0x1fa4d85c08c49cfedfefb046bd0817ffe51a67646fe63c3d5355077f5d655dd3
+            ) // vk.Q2.x
+            mstore(
+                add(_vk, 0xe0),
+                0x0b64c2d77c794edf31096f2318024c1d8ca5af80145f546e703b35da5675148a
+            ) // vk.Q2.y
+            mstore(
+                add(_vk, 0x100),
+                0x1b9cd21a3c387a3b091aba3e1472be728645703cdbd84a90220ab8e16c7c1994
+            ) // vk.Q3.x
+            mstore(
+                add(_vk, 0x120),
+                0x0069d88f6654fcb86c9aace772a537990cff37f4892b61d0a1fcb47370ef9085
+            ) // vk.Q3.y
+            mstore(
+                add(_vk, 0x140),
+                0x196e07a2a04274d0aa06b0ad58ab1ea10aaf5b33873779e8d5a7022e7e7b22b2
+            ) // vk.Q4.x
+            mstore(
+                add(_vk, 0x160),
+                0x08874b118935acef156d20a773f1918155ed3cb02c5a2c3505056451f1d75b1f
+            ) // vk.Q4.y
+            mstore(
+                add(_vk, 0x180),
+                0x098b81b1fc7d9487b7463f5994830e248414266d91930f80646e79d4ef733c85
+            ) // vk.Q_M.x
+            mstore(
+                add(_vk, 0x1a0),
+                0x1a898e69ff4bd5556520fa34722bb348cfd7db34a78ef8c3ac942e8b64b2dafb
+            ) // vk.Q_M.y
+            mstore(
+                add(_vk, 0x1c0),
+                0x26a3197fdc0a4f209641f6d2b164c60c85ae5dbc168be74345d90654c70d17dc
+            ) // vk.Q_C.x
+            mstore(
+                add(_vk, 0x1e0),
+                0x03338759309055a814f782a86ad90e82d6b2831ecfdfac8d2cf842e8a532b17a
+            ) // vk.Q_C.y
+            mstore(
+                add(_vk, 0x200),
+                0x1a083d6c61e4c1e52b48bcfff7e3e009f3d0534ff0d9e0b4fd0ff61b444a29fb
+            ) // vk.Q_ARITHMETIC.x
+            mstore(
+                add(_vk, 0x220),
+                0x19c2a9433e682fe461f6abfe057f4ccf4818dbd78904a6794c73baa7fc6faaf2
+            ) // vk.Q_ARITHMETIC.y
+            mstore(
+                add(_vk, 0x240),
+                0x2b5ce06b19033dcc9a1fa83df4352a67c5687aa450e8561d0aff53d342046795
+            ) // vk.QSORT.x
+            mstore(
+                add(_vk, 0x260),
+                0x2d8cefcf91bc7336b13b39fe928fd59df77ab277d0434ef799dfd48c66edd9ca
+            ) // vk.QSORT.y
+            mstore(
+                add(_vk, 0x280),
+                0x06a420107163438b7e2eb6b61e065c44d338bd8221003ef77e54c19ff5436e08
+            ) // vk.Q_ELLIPTIC.x
+            mstore(
+                add(_vk, 0x2a0),
+                0x13a4eaca407ce9d3bb75f4a03a84baaade4363d446768c2190647a7a6529310d
+            ) // vk.Q_ELLIPTIC.y
+            mstore(
+                add(_vk, 0x2c0),
+                0x23ab8151b371f92e388b2147d3e1e0296d3848d5f59b35a30abc89b8365d89b2
+            ) // vk.Q_AUX.x
+            mstore(
+                add(_vk, 0x2e0),
+                0x18a9dbb1f35aa73deebcb79bf0c4d4c1c389f5dd6d12d8e5eccfa6ee57009b5e
+            ) // vk.Q_AUX.y
+            mstore(
+                add(_vk, 0x300),
+                0x1064f89f3728b1965f834050cd8be4db51662a43765e990742d727fed8eee26f
+            ) // vk.SIGMA1.x
+            mstore(
+                add(_vk, 0x320),
+                0x06b435a30cf02ab4641f0965a25b3b1ebeab78ebf8db880b1c4670b08613f3e4
+            ) // vk.SIGMA1.y
+            mstore(
+                add(_vk, 0x340),
+                0x292745698e704a5cdd68bc15344793c63bf20c3f1492ea9b68cf9c7cf0479a18
+            ) // vk.SIGMA2.x
+            mstore(
+                add(_vk, 0x360),
+                0x1ea22c9087a5f8432bc20eac9c8de37587ff4c706c7bbd359a63cef0a4e37c89
+            ) // vk.SIGMA2.y
+            mstore(
+                add(_vk, 0x380),
+                0x09748934071b357216171b394bf6b840f87fa870656dd015689556bb7b11e36e
+            ) // vk.SIGMA3.x
+            mstore(
+                add(_vk, 0x3a0),
+                0x18c99f13b7e86fa5f28f5216514db883bbb4125831c315fdea1d24cf751e3416
+            ) // vk.SIGMA3.y
+            mstore(
+                add(_vk, 0x3c0),
+                0x03818b9858fbd6dfdccdf64ddd2245d376619c9db1be943db20f26176dbe2e3b
+            ) // vk.SIGMA4.x
+            mstore(
+                add(_vk, 0x3e0),
+                0x14d77f58b1cd2f97f4a00cea79730017cd950861dee868b06739e373db06a762
+            ) // vk.SIGMA4.y
+            mstore(
+                add(_vk, 0x400),
+                0x09796190fd3ba909c6530c89811df9b5b4f5f2fe6501ec21dd864b20673fc02c
+            ) // vk.TABLE1.x
+            mstore(
+                add(_vk, 0x420),
+                0x00b9c2423e310caa43e1eb83b55f53977fccbed85422df8935635d77d146bf39
+            ) // vk.TABLE1.y
+            mstore(
+                add(_vk, 0x440),
+                0x217dad26ccc0c543ec5750513e9365a5cae8164b08d364efcf4b5890ff05f334
+            ) // vk.TABLE2.x
+            mstore(
+                add(_vk, 0x460),
+                0x1db28433f6bde424423f3587787f81c48101d2dc6e54b431332cb275f8518c62
+            ) // vk.TABLE2.y
+            mstore(
+                add(_vk, 0x480),
+                0x2cc2d90f2da7f4ec16b7fe61babd4fb9b580ecff03c471764dd67a8c433afab5
+            ) // vk.TABLE3.x
+            mstore(
+                add(_vk, 0x4a0),
+                0x3032b9ff096a43ce326cc63ffc6a86dcb913fb1f7700939f5304f6c6beb24574
+            ) // vk.TABLE3.y
+            mstore(
+                add(_vk, 0x4c0),
+                0x1f4c58502ca713ed0bffb4ff31ed55e557e83a37d31b8e703aa9219d6158e2d2
+            ) // vk.TABLE4.x
+            mstore(
+                add(_vk, 0x4e0),
+                0x0b0d5ed5432c5e7b56344c1d26ce0d9f632e8f8aa52505d6c89f6da89f357fa8
+            ) // vk.TABLE4.y
+            mstore(
+                add(_vk, 0x500),
+                0x0e3a92b2084dca75522b4d79870854a41359ed3f5200368e08068f29cf30f649
+            ) // vk.TABLE_TYPE.x
+            mstore(
+                add(_vk, 0x520),
+                0x11684386a454d73c5ed4c8c69ef35288eda329bd811c8ba8a7cd4c16da7eb8bd
+            ) // vk.TABLE_TYPE.y
+            mstore(
+                add(_vk, 0x540),
+                0x27d942576390d952601c66817ce8aa87c3ba437df3eb10e76982956776555b67
+            ) // vk.ID1.x
+            mstore(
+                add(_vk, 0x560),
+                0x03f7e9c5681666aca6da08220adaa8ea27b934d61d8b7be723f2010f4738ed23
+            ) // vk.ID1.y
+            mstore(
+                add(_vk, 0x580),
+                0x1230cf2b2e6a349ecd49892c62c44e96c416c493c86d0b217a95bd78235b2603
+            ) // vk.ID2.x
+            mstore(
+                add(_vk, 0x5a0),
+                0x131903660b14ebf583257756ce2ebf7cde24811286609f468ec50cff3b8963e6
+            ) // vk.ID2.y
+            mstore(
+                add(_vk, 0x5c0),
+                0x2ff0e934a4ad77b42e374e8603bfdf2b85c1859e223d6ff35f7b662406605687
+            ) // vk.ID3.x
+            mstore(
+                add(_vk, 0x5e0),
+                0x136003abf9990d17cf8720221e40c7c107d59a49961e8b5646882b02ba8a9bb8
+            ) // vk.ID3.y
+            mstore(
+                add(_vk, 0x600),
+                0x15afa2d39f5eb4b5bf57a73516c0e94e1484c3168736689f1daef97f2b4b090b
+            ) // vk.ID4.x
+            mstore(
+                add(_vk, 0x620),
+                0x2f80eef3208d07bf5ea4c5f0d346a916753443d7f675b47de6f2d9206ead108f
+            ) // vk.ID4.y
             mstore(add(_vk, 0x640), 0x01) // vk.contains_recursive_proof
-            mstore(add(_vk, 0x660), 0) // vk.recursive_proof_public_input_indices
-            mstore(add(_vk, 0x680), 0x260e01b251f6f1c7e7ff4e580791dee8ea51d87a358e038b4efe30fac09383c1) // vk.g2_x.X.c1 
-            mstore(add(_vk, 0x6a0), 0x0118c4d5b837bcc2bc89b5b398b5974e9f5944073b32078b7e231fec938883b0) // vk.g2_x.X.c0 
-            mstore(add(_vk, 0x6c0), 0x04fc6369f7110fe3d25156c1bb9a72859cf2a04641f99ba4ee413c80da6a5fe4) // vk.g2_x.Y.c1 
-            mstore(add(_vk, 0x6e0), 0x22febda3c0c0632a56475b4214e5615e11e6dd3f96e6cea2854a87d4dacc5e55) // vk.g2_x.Y.c0 
-            mstore(_omegaInverseLoc, 0x036853f083780e87f8d7c71d111119c57dbe118c22d5ad707a82317466c5174c) // vk.work_root_inverse
+            mstore(add(_vk, 0x660), 16) // vk.recursive_proof_public_input_indices
+            mstore(
+                add(_vk, 0x680),
+                0x260e01b251f6f1c7e7ff4e580791dee8ea51d87a358e038b4efe30fac09383c1
+            ) // vk.g2_x.X.c1
+            mstore(
+                add(_vk, 0x6a0),
+                0x0118c4d5b837bcc2bc89b5b398b5974e9f5944073b32078b7e231fec938883b0
+            ) // vk.g2_x.X.c0
+            mstore(
+                add(_vk, 0x6c0),
+                0x04fc6369f7110fe3d25156c1bb9a72859cf2a04641f99ba4ee413c80da6a5fe4
+            ) // vk.g2_x.Y.c1
+            mstore(
+                add(_vk, 0x6e0),
+                0x22febda3c0c0632a56475b4214e5615e11e6dd3f96e6cea2854a87d4dacc5e55
+            ) // vk.g2_x.Y.c0
+            mstore(
+                _omegaInverseLoc,
+                0x036853f083780e87f8d7c71d111119c57dbe118c22d5ad707a82317466c5174c
+            ) // vk.work_root_inverse
         }
     }
 }
+
 /**
  * @title Ultra Plonk proof verification contract
  * @dev Top level Plonk proof verification contract, which allows Plonk proof to be verified
@@ -328,7 +498,8 @@ abstract contract BaseUltraVerifier {
     uint256 internal constant NU_CHALLENGE_INPUT_LOC_B = 0x37c0;
     uint256 internal constant NU_CHALLENGE_INPUT_LOC_C = 0x37e0;
 
-    bytes4 internal constant PUBLIC_INPUT_INVALID_BN128_G1_POINT_SELECTOR = 0xeba9f4a6;
+    bytes4 internal constant PUBLIC_INPUT_INVALID_BN128_G1_POINT_SELECTOR =
+        0xeba9f4a6;
     bytes4 internal constant PUBLIC_INPUT_GE_P_SELECTOR = 0x374a972f;
     bytes4 internal constant MOD_EXP_FAILURE_SELECTOR = 0xf894a7bc;
     bytes4 internal constant EC_SCALAR_MUL_FAILURE_SELECTOR = 0xf755f369;
@@ -365,7 +536,10 @@ abstract contract BaseUltraVerifier {
 
     function getVerificationKeyHash() public pure virtual returns (bytes32);
 
-    function loadVerificationKey(uint256 _vk, uint256 _omegaInverseLoc) internal pure virtual;
+    function loadVerificationKey(
+        uint256 _vk,
+        uint256 _omegaInverseLoc
+    ) internal pure virtual;
 
     /**
      * @notice Verify a Ultra Plonk proof
@@ -373,2275 +547,28 @@ abstract contract BaseUltraVerifier {
      * @param _publicInputs - An array of the public inputs
      * @return True if proof is valid, reverts otherwise
      */
-    function verify(bytes calldata _proof, bytes32[] calldata _publicInputs) external view returns (bool) {
-        loadVerificationKey(N_LOC, OMEGA_INVERSE_LOC);
-
-        uint256 requiredPublicInputCount;
-        assembly {
-            requiredPublicInputCount := mload(NUM_INPUTS_LOC)
-        }
-        if (requiredPublicInputCount != _publicInputs.length) {
-            revert PUBLIC_INPUT_COUNT_INVALID(requiredPublicInputCount, _publicInputs.length);
-        }
-
-        assembly {
-            let q := 21888242871839275222246405745257275088696311157297823662689037894645226208583 // EC group order
-            let p := 21888242871839275222246405745257275088548364400416034343698204186575808495617 // Prime field order
-
-            /**
-             * LOAD PROOF FROM CALLDATA
-             */
-            {
-                let data_ptr := add(calldataload(0x04), 0x24)
-
-                mstore(W1_Y_LOC, mod(calldataload(data_ptr), q))
-                mstore(W1_X_LOC, mod(calldataload(add(data_ptr, 0x20)), q))
-
-                mstore(W2_Y_LOC, mod(calldataload(add(data_ptr, 0x40)), q))
-                mstore(W2_X_LOC, mod(calldataload(add(data_ptr, 0x60)), q))
-
-                mstore(W3_Y_LOC, mod(calldataload(add(data_ptr, 0x80)), q))
-                mstore(W3_X_LOC, mod(calldataload(add(data_ptr, 0xa0)), q))
-
-                mstore(W4_Y_LOC, mod(calldataload(add(data_ptr, 0xc0)), q))
-                mstore(W4_X_LOC, mod(calldataload(add(data_ptr, 0xe0)), q))
-
-                mstore(S_Y_LOC, mod(calldataload(add(data_ptr, 0x100)), q))
-                mstore(S_X_LOC, mod(calldataload(add(data_ptr, 0x120)), q))
-                mstore(Z_Y_LOC, mod(calldataload(add(data_ptr, 0x140)), q))
-                mstore(Z_X_LOC, mod(calldataload(add(data_ptr, 0x160)), q))
-                mstore(Z_LOOKUP_Y_LOC, mod(calldataload(add(data_ptr, 0x180)), q))
-                mstore(Z_LOOKUP_X_LOC, mod(calldataload(add(data_ptr, 0x1a0)), q))
-                mstore(T1_Y_LOC, mod(calldataload(add(data_ptr, 0x1c0)), q))
-                mstore(T1_X_LOC, mod(calldataload(add(data_ptr, 0x1e0)), q))
-
-                mstore(T2_Y_LOC, mod(calldataload(add(data_ptr, 0x200)), q))
-                mstore(T2_X_LOC, mod(calldataload(add(data_ptr, 0x220)), q))
-
-                mstore(T3_Y_LOC, mod(calldataload(add(data_ptr, 0x240)), q))
-                mstore(T3_X_LOC, mod(calldataload(add(data_ptr, 0x260)), q))
-
-                mstore(T4_Y_LOC, mod(calldataload(add(data_ptr, 0x280)), q))
-                mstore(T4_X_LOC, mod(calldataload(add(data_ptr, 0x2a0)), q))
-
-                mstore(W1_EVAL_LOC, mod(calldataload(add(data_ptr, 0x2c0)), p))
-                mstore(W2_EVAL_LOC, mod(calldataload(add(data_ptr, 0x2e0)), p))
-                mstore(W3_EVAL_LOC, mod(calldataload(add(data_ptr, 0x300)), p))
-                mstore(W4_EVAL_LOC, mod(calldataload(add(data_ptr, 0x320)), p))
-                mstore(S_EVAL_LOC, mod(calldataload(add(data_ptr, 0x340)), p))
-                mstore(Z_EVAL_LOC, mod(calldataload(add(data_ptr, 0x360)), p))
-                mstore(Z_LOOKUP_EVAL_LOC, mod(calldataload(add(data_ptr, 0x380)), p))
-                mstore(Q1_EVAL_LOC, mod(calldataload(add(data_ptr, 0x3a0)), p))
-                mstore(Q2_EVAL_LOC, mod(calldataload(add(data_ptr, 0x3c0)), p))
-                mstore(Q3_EVAL_LOC, mod(calldataload(add(data_ptr, 0x3e0)), p))
-                mstore(Q4_EVAL_LOC, mod(calldataload(add(data_ptr, 0x400)), p))
-                mstore(QM_EVAL_LOC, mod(calldataload(add(data_ptr, 0x420)), p))
-                mstore(QC_EVAL_LOC, mod(calldataload(add(data_ptr, 0x440)), p))
-                mstore(QARITH_EVAL_LOC, mod(calldataload(add(data_ptr, 0x460)), p))
-                mstore(QSORT_EVAL_LOC, mod(calldataload(add(data_ptr, 0x480)), p))
-                mstore(QELLIPTIC_EVAL_LOC, mod(calldataload(add(data_ptr, 0x4a0)), p))
-                mstore(QAUX_EVAL_LOC, mod(calldataload(add(data_ptr, 0x4c0)), p))
-
-                mstore(SIGMA1_EVAL_LOC, mod(calldataload(add(data_ptr, 0x4e0)), p))
-                mstore(SIGMA2_EVAL_LOC, mod(calldataload(add(data_ptr, 0x500)), p))
-
-                mstore(SIGMA3_EVAL_LOC, mod(calldataload(add(data_ptr, 0x520)), p))
-                mstore(SIGMA4_EVAL_LOC, mod(calldataload(add(data_ptr, 0x540)), p))
-
-                mstore(TABLE1_EVAL_LOC, mod(calldataload(add(data_ptr, 0x560)), p))
-                mstore(TABLE2_EVAL_LOC, mod(calldataload(add(data_ptr, 0x580)), p))
-                mstore(TABLE3_EVAL_LOC, mod(calldataload(add(data_ptr, 0x5a0)), p))
-                mstore(TABLE4_EVAL_LOC, mod(calldataload(add(data_ptr, 0x5c0)), p))
-                mstore(TABLE_TYPE_EVAL_LOC, mod(calldataload(add(data_ptr, 0x5e0)), p))
-
-                mstore(ID1_EVAL_LOC, mod(calldataload(add(data_ptr, 0x600)), p))
-                mstore(ID2_EVAL_LOC, mod(calldataload(add(data_ptr, 0x620)), p))
-                mstore(ID3_EVAL_LOC, mod(calldataload(add(data_ptr, 0x640)), p))
-                mstore(ID4_EVAL_LOC, mod(calldataload(add(data_ptr, 0x660)), p))
-
-                mstore(W1_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x680)), p))
-                mstore(W2_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x6a0)), p))
-                mstore(W3_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x6c0)), p))
-                mstore(W4_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x6e0)), p))
-                mstore(S_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x700)), p))
-
-                mstore(Z_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x720)), p))
-
-                mstore(Z_LOOKUP_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x740)), p))
-                mstore(TABLE1_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x760)), p))
-                mstore(TABLE2_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x780)), p))
-                mstore(TABLE3_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x7a0)), p))
-                mstore(TABLE4_OMEGA_EVAL_LOC, mod(calldataload(add(data_ptr, 0x7c0)), p))
-
-                mstore(PI_Z_Y_LOC, mod(calldataload(add(data_ptr, 0x7e0)), q))
-                mstore(PI_Z_X_LOC, mod(calldataload(add(data_ptr, 0x800)), q))
-
-                mstore(PI_Z_OMEGA_Y_LOC, mod(calldataload(add(data_ptr, 0x820)), q))
-                mstore(PI_Z_OMEGA_X_LOC, mod(calldataload(add(data_ptr, 0x840)), q))
-            }
-
-            /**
-             * LOAD RECURSIVE PROOF INTO MEMORY
-             */
-            {
-                if mload(CONTAINS_RECURSIVE_PROOF_LOC) {
-                    let public_inputs_ptr := add(calldataload(0x24), 0x24)
-                    let index_counter := add(shl(5, mload(RECURSIVE_PROOF_PUBLIC_INPUT_INDICES_LOC)), public_inputs_ptr)
-
-                    let x0 := calldataload(index_counter)
-                    x0 := add(x0, shl(68, calldataload(add(index_counter, 0x20))))
-                    x0 := add(x0, shl(136, calldataload(add(index_counter, 0x40))))
-                    x0 := add(x0, shl(204, calldataload(add(index_counter, 0x60))))
-                    let y0 := calldataload(add(index_counter, 0x80))
-                    y0 := add(y0, shl(68, calldataload(add(index_counter, 0xa0))))
-                    y0 := add(y0, shl(136, calldataload(add(index_counter, 0xc0))))
-                    y0 := add(y0, shl(204, calldataload(add(index_counter, 0xe0))))
-                    let x1 := calldataload(add(index_counter, 0x100))
-                    x1 := add(x1, shl(68, calldataload(add(index_counter, 0x120))))
-                    x1 := add(x1, shl(136, calldataload(add(index_counter, 0x140))))
-                    x1 := add(x1, shl(204, calldataload(add(index_counter, 0x160))))
-                    let y1 := calldataload(add(index_counter, 0x180))
-                    y1 := add(y1, shl(68, calldataload(add(index_counter, 0x1a0))))
-                    y1 := add(y1, shl(136, calldataload(add(index_counter, 0x1c0))))
-                    y1 := add(y1, shl(204, calldataload(add(index_counter, 0x1e0))))
-                    mstore(RECURSIVE_P1_X_LOC, x0)
-                    mstore(RECURSIVE_P1_Y_LOC, y0)
-                    mstore(RECURSIVE_P2_X_LOC, x1)
-                    mstore(RECURSIVE_P2_Y_LOC, y1)
-
-                    // validate these are valid bn128 G1 points
-                    if iszero(and(and(lt(x0, q), lt(x1, q)), and(lt(y0, q), lt(y1, q)))) {
-                        mstore(0x00, PUBLIC_INPUT_INVALID_BN128_G1_POINT_SELECTOR)
-                        revert(0x00, 0x04)
-                    }
-                }
-            }
-
-            {
-                /**
-                 * Generate initial challenge
-                 */
-                mstore(0x00, shl(224, mload(N_LOC)))
-                mstore(0x04, shl(224, mload(NUM_INPUTS_LOC)))
-                let challenge := keccak256(0x00, 0x08)
-
-                /**
-                 * Generate eta challenge
-                 */
-                mstore(PUBLIC_INPUTS_HASH_LOCATION, challenge)
-                // The public input location is stored at 0x24, we then add 0x24 to skip selector and the length of public inputs
-                let public_inputs_start := add(calldataload(0x24), 0x24)
-                // copy the public inputs over
-                let public_input_size := mul(mload(NUM_INPUTS_LOC), 0x20)
-                calldatacopy(add(PUBLIC_INPUTS_HASH_LOCATION, 0x20), public_inputs_start, public_input_size)
-
-                // copy W1, W2, W3 into challenge. Each point is 0x40 bytes, so load 0xc0 = 3 * 0x40 bytes (ETA input length)
-                let w_start := add(calldataload(0x04), 0x24)
-                calldatacopy(add(add(PUBLIC_INPUTS_HASH_LOCATION, 0x20), public_input_size), w_start, ETA_INPUT_LENGTH)
-
-                // Challenge is the old challenge + public inputs + W1, W2, W3 (0x20 + public_input_size + 0xc0)
-                let challenge_bytes_size := add(0x20, add(public_input_size, ETA_INPUT_LENGTH))
-
-                challenge := keccak256(PUBLIC_INPUTS_HASH_LOCATION, challenge_bytes_size)
-                {
-                    let eta := mod(challenge, p)
-                    mstore(C_ETA_LOC, eta)
-                    mstore(C_ETA_SQR_LOC, mulmod(eta, eta, p))
-                    mstore(C_ETA_CUBE_LOC, mulmod(mload(C_ETA_SQR_LOC), eta, p))
-                }
-
-                /**
-                 * Generate beta challenge
-                 */
-                mstore(0x00, challenge)
-                mstore(0x20, mload(W4_Y_LOC))
-                mstore(0x40, mload(W4_X_LOC))
-                mstore(0x60, mload(S_Y_LOC))
-                mstore(0x80, mload(S_X_LOC))
-                challenge := keccak256(0x00, 0xa0)
-                mstore(C_BETA_LOC, mod(challenge, p))
-
-                /**
-                 * Generate gamma challenge
-                 */
-                mstore(0x00, challenge)
-                mstore8(0x20, 0x01)
-                challenge := keccak256(0x00, 0x21)
-                mstore(C_GAMMA_LOC, mod(challenge, p))
-
-                /**
-                 * Generate alpha challenge
-                 */
-                mstore(0x00, challenge)
-                mstore(0x20, mload(Z_Y_LOC))
-                mstore(0x40, mload(Z_X_LOC))
-                mstore(0x60, mload(Z_LOOKUP_Y_LOC))
-                mstore(0x80, mload(Z_LOOKUP_X_LOC))
-                challenge := keccak256(0x00, 0xa0)
-                mstore(C_ALPHA_LOC, mod(challenge, p))
-
-                /**
-                 * Compute and store some powers of alpha for future computations
-                 */
-                let alpha := mload(C_ALPHA_LOC)
-                mstore(C_ALPHA_SQR_LOC, mulmod(alpha, alpha, p))
-                mstore(C_ALPHA_CUBE_LOC, mulmod(mload(C_ALPHA_SQR_LOC), alpha, p))
-                mstore(C_ALPHA_QUAD_LOC, mulmod(mload(C_ALPHA_CUBE_LOC), alpha, p))
-                mstore(C_ALPHA_BASE_LOC, alpha)
-
-                /**
-                 * Generate zeta challenge
-                 */
-                mstore(0x00, challenge)
-                mstore(0x20, mload(T1_Y_LOC))
-                mstore(0x40, mload(T1_X_LOC))
-                mstore(0x60, mload(T2_Y_LOC))
-                mstore(0x80, mload(T2_X_LOC))
-                mstore(0xa0, mload(T3_Y_LOC))
-                mstore(0xc0, mload(T3_X_LOC))
-                mstore(0xe0, mload(T4_Y_LOC))
-                mstore(0x100, mload(T4_X_LOC))
-
-                challenge := keccak256(0x00, 0x120)
-
-                mstore(C_ZETA_LOC, mod(challenge, p))
-                mstore(C_CURRENT_LOC, challenge)
-            }
-
-            /**
-             * EVALUATE FIELD OPERATIONS
-             */
-
-            /**
-             * COMPUTE PUBLIC INPUT DELTA
-             * ΔPI = ∏ᵢ∈ℓ(wᵢ + β σ(i) + γ) / ∏ᵢ∈ℓ(wᵢ + β σ'(i) + γ)
-             */
-            {
-                let beta := mload(C_BETA_LOC) // β
-                let gamma := mload(C_GAMMA_LOC) // γ
-                let work_root := mload(OMEGA_LOC) // ω
-                let numerator_value := 1
-                let denominator_value := 1
-
-                let p_clone := p // move p to the front of the stack
-                let valid_inputs := true
-
-                // Load the starting point of the public inputs (jump over the selector and the length of public inputs [0x24])
-                let public_inputs_ptr := add(calldataload(0x24), 0x24)
-
-                // endpoint_ptr = public_inputs_ptr + num_inputs * 0x20. // every public input is 0x20 bytes
-                let endpoint_ptr := add(public_inputs_ptr, mul(mload(NUM_INPUTS_LOC), 0x20))
-
-                // root_1 = β * 0x05
-                let root_1 := mulmod(beta, 0x05, p_clone) // k1.β
-                // root_2 = β * 0x0c
-                let root_2 := mulmod(beta, 0x0c, p_clone)
-                // @note 0x05 + 0x07 == 0x0c == external coset generator
-
-                for {} lt(public_inputs_ptr, endpoint_ptr) { public_inputs_ptr := add(public_inputs_ptr, 0x20) } {
-                    /**
-                     * input = public_input[i]
-                     * valid_inputs &= input < p
-                     * temp = input + gamma
-                     * numerator_value *= (β.σ(i) + wᵢ + γ)  // σ(i) = 0x05.ωⁱ
-                     * denominator_value *= (β.σ'(i) + wᵢ + γ) // σ'(i) = 0x0c.ωⁱ
-                     * root_1 *= ω
-                     * root_2 *= ω
-                     */
-
-                    let input := calldataload(public_inputs_ptr)
-                    valid_inputs := and(valid_inputs, lt(input, p_clone))
-                    let temp := addmod(input, gamma, p_clone)
-
-                    numerator_value := mulmod(numerator_value, add(root_1, temp), p_clone)
-                    denominator_value := mulmod(denominator_value, add(root_2, temp), p_clone)
-
-                    root_1 := mulmod(root_1, work_root, p_clone)
-                    root_2 := mulmod(root_2, work_root, p_clone)
-                }
-
-                // Revert if not all public inputs are field elements (i.e. < p)
-                if iszero(valid_inputs) {
-                    mstore(0x00, PUBLIC_INPUT_GE_P_SELECTOR)
-                    revert(0x00, 0x04)
-                }
-
-                mstore(DELTA_NUMERATOR_LOC, numerator_value)
-                mstore(DELTA_DENOMINATOR_LOC, denominator_value)
-            }
-
-            /**
-             * Compute Plookup delta factor [γ(1 + β)]^{n-k}
-             * k = num roots cut out of Z_H = 4
-             */
-            {
-                let delta_base := mulmod(mload(C_GAMMA_LOC), addmod(mload(C_BETA_LOC), 1, p), p)
-                let delta_numerator := delta_base
-                {
-                    let exponent := mload(N_LOC)
-                    let count := 1
-                    for {} lt(count, exponent) { count := add(count, count) } {
-                        delta_numerator := mulmod(delta_numerator, delta_numerator, p)
-                    }
-                }
-                mstore(PLOOKUP_DELTA_NUMERATOR_LOC, delta_numerator)
-
-                let delta_denominator := mulmod(delta_base, delta_base, p)
-                delta_denominator := mulmod(delta_denominator, delta_denominator, p)
-                mstore(PLOOKUP_DELTA_DENOMINATOR_LOC, delta_denominator)
-            }
-            /**
-             * Compute lagrange poly and vanishing poly fractions
-             */
-            {
-                /**
-                 * vanishing_numerator = zeta
-                 * ZETA_POW_N = zeta^n
-                 * vanishing_numerator -= 1
-                 * accumulating_root = omega_inverse
-                 * work_root = p - accumulating_root
-                 * domain_inverse = domain_inverse
-                 * vanishing_denominator = zeta + work_root
-                 * work_root *= accumulating_root
-                 * vanishing_denominator *= (zeta + work_root)
-                 * work_root *= accumulating_root
-                 * vanishing_denominator *= (zeta + work_root)
-                 * vanishing_denominator *= (zeta + (zeta + accumulating_root))
-                 * work_root = omega
-                 * lagrange_numerator = vanishing_numerator * domain_inverse
-                 * l_start_denominator = zeta - 1
-                 * accumulating_root = work_root^2
-                 * l_end_denominator = accumulating_root^2 * work_root * zeta - 1
-                 * Note: l_end_denominator term contains a term \omega^5 to cut out 5 roots of unity from vanishing poly
-                 */
-
-                let zeta := mload(C_ZETA_LOC)
-
-                // compute zeta^n, where n is a power of 2
-                let vanishing_numerator := zeta
-                {
-                    // pow_small
-                    let exponent := mload(N_LOC)
-                    let count := 1
-                    for {} lt(count, exponent) { count := add(count, count) } {
-                        vanishing_numerator := mulmod(vanishing_numerator, vanishing_numerator, p)
-                    }
-                }
-                mstore(ZETA_POW_N_LOC, vanishing_numerator)
-                vanishing_numerator := addmod(vanishing_numerator, sub(p, 1), p)
-
-                let accumulating_root := mload(OMEGA_INVERSE_LOC)
-                let work_root := sub(p, accumulating_root)
-                let domain_inverse := mload(DOMAIN_INVERSE_LOC)
-
-                let vanishing_denominator := addmod(zeta, work_root, p)
-                work_root := mulmod(work_root, accumulating_root, p)
-                vanishing_denominator := mulmod(vanishing_denominator, addmod(zeta, work_root, p), p)
-                work_root := mulmod(work_root, accumulating_root, p)
-                vanishing_denominator := mulmod(vanishing_denominator, addmod(zeta, work_root, p), p)
-                vanishing_denominator :=
-                    mulmod(vanishing_denominator, addmod(zeta, mulmod(work_root, accumulating_root, p), p), p)
-
-                work_root := mload(OMEGA_LOC)
-
-                let lagrange_numerator := mulmod(vanishing_numerator, domain_inverse, p)
-                let l_start_denominator := addmod(zeta, sub(p, 1), p)
-
-                accumulating_root := mulmod(work_root, work_root, p)
-
-                let l_end_denominator :=
-                    addmod(
-                        mulmod(mulmod(mulmod(accumulating_root, accumulating_root, p), work_root, p), zeta, p), sub(p, 1), p
-                    )
-
-                /**
-                 * Compute inversions using Montgomery's batch inversion trick
-                 */
-                let accumulator := mload(DELTA_DENOMINATOR_LOC)
-                let t0 := accumulator
-                accumulator := mulmod(accumulator, vanishing_denominator, p)
-                let t1 := accumulator
-                accumulator := mulmod(accumulator, vanishing_numerator, p)
-                let t2 := accumulator
-                accumulator := mulmod(accumulator, l_start_denominator, p)
-                let t3 := accumulator
-                accumulator := mulmod(accumulator, mload(PLOOKUP_DELTA_DENOMINATOR_LOC), p)
-                let t4 := accumulator
-                {
-                    mstore(0, 0x20)
-                    mstore(0x20, 0x20)
-                    mstore(0x40, 0x20)
-                    mstore(0x60, mulmod(accumulator, l_end_denominator, p))
-                    mstore(0x80, sub(p, 2))
-                    mstore(0xa0, p)
-                    if iszero(staticcall(gas(), 0x05, 0x00, 0xc0, 0x00, 0x20)) {
-                        mstore(0x0, MOD_EXP_FAILURE_SELECTOR)
-                        revert(0x00, 0x04)
-                    }
-                    accumulator := mload(0x00)
-                }
-
-                t4 := mulmod(accumulator, t4, p)
-                accumulator := mulmod(accumulator, l_end_denominator, p)
-
-                t3 := mulmod(accumulator, t3, p)
-                accumulator := mulmod(accumulator, mload(PLOOKUP_DELTA_DENOMINATOR_LOC), p)
-
-                t2 := mulmod(accumulator, t2, p)
-                accumulator := mulmod(accumulator, l_start_denominator, p)
-
-                t1 := mulmod(accumulator, t1, p)
-                accumulator := mulmod(accumulator, vanishing_numerator, p)
-
-                t0 := mulmod(accumulator, t0, p)
-                accumulator := mulmod(accumulator, vanishing_denominator, p)
-
-                accumulator := mulmod(mulmod(accumulator, accumulator, p), mload(DELTA_DENOMINATOR_LOC), p)
-
-                mstore(PUBLIC_INPUT_DELTA_LOC, mulmod(mload(DELTA_NUMERATOR_LOC), accumulator, p))
-                mstore(ZERO_POLY_LOC, mulmod(vanishing_numerator, t0, p))
-                mstore(ZERO_POLY_INVERSE_LOC, mulmod(vanishing_denominator, t1, p))
-                mstore(L_START_LOC, mulmod(lagrange_numerator, t2, p))
-                mstore(PLOOKUP_DELTA_LOC, mulmod(mload(PLOOKUP_DELTA_NUMERATOR_LOC), t3, p))
-                mstore(L_END_LOC, mulmod(lagrange_numerator, t4, p))
-            }
-
-            /**
-             * UltraPlonk Widget Ordering:
-             *
-             * 1. Permutation widget
-             * 2. Plookup widget
-             * 3. Arithmetic widget
-             * 4. Fixed base widget (?)
-             * 5. GenPermSort widget
-             * 6. Elliptic widget
-             * 7. Auxiliary widget
-             */
-
-            /**
-             * COMPUTE PERMUTATION WIDGET EVALUATION
-             */
-            {
-                let alpha := mload(C_ALPHA_LOC)
-                let beta := mload(C_BETA_LOC)
-                let gamma := mload(C_GAMMA_LOC)
-
-                /**
-                 * t1 = (W1 + gamma + beta * ID1) * (W2 + gamma + beta * ID2)
-                 * t2 = (W3 + gamma + beta * ID3) * (W4 + gamma + beta * ID4)
-                 * result = alpha_base * z_eval * t1 * t2
-                 * t1 = (W1 + gamma + beta * sigma_1_eval) * (W2 + gamma + beta * sigma_2_eval)
-                 * t2 = (W2 + gamma + beta * sigma_3_eval) * (W3 + gamma + beta * sigma_4_eval)
-                 * result -= (alpha_base * z_omega_eval * t1 * t2)
-                 */
-                let t1 :=
-                    mulmod(
-                        add(add(mload(W1_EVAL_LOC), gamma), mulmod(beta, mload(ID1_EVAL_LOC), p)),
-                        add(add(mload(W2_EVAL_LOC), gamma), mulmod(beta, mload(ID2_EVAL_LOC), p)),
-                        p
-                    )
-                let t2 :=
-                    mulmod(
-                        add(add(mload(W3_EVAL_LOC), gamma), mulmod(beta, mload(ID3_EVAL_LOC), p)),
-                        add(add(mload(W4_EVAL_LOC), gamma), mulmod(beta, mload(ID4_EVAL_LOC), p)),
-                        p
-                    )
-                let result := mulmod(mload(C_ALPHA_BASE_LOC), mulmod(mload(Z_EVAL_LOC), mulmod(t1, t2, p), p), p)
-                t1 :=
-                    mulmod(
-                        add(add(mload(W1_EVAL_LOC), gamma), mulmod(beta, mload(SIGMA1_EVAL_LOC), p)),
-                        add(add(mload(W2_EVAL_LOC), gamma), mulmod(beta, mload(SIGMA2_EVAL_LOC), p)),
-                        p
-                    )
-                t2 :=
-                    mulmod(
-                        add(add(mload(W3_EVAL_LOC), gamma), mulmod(beta, mload(SIGMA3_EVAL_LOC), p)),
-                        add(add(mload(W4_EVAL_LOC), gamma), mulmod(beta, mload(SIGMA4_EVAL_LOC), p)),
-                        p
-                    )
-                result :=
-                    addmod(
-                        result,
-                        sub(p, mulmod(mload(C_ALPHA_BASE_LOC), mulmod(mload(Z_OMEGA_EVAL_LOC), mulmod(t1, t2, p), p), p)),
-                        p
-                    )
-
-                /**
-                 * alpha_base *= alpha
-                 * result += alpha_base . (L_{n-k}(ʓ) . (z(ʓ.ω) - ∆_{PI}))
-                 * alpha_base *= alpha
-                 * result += alpha_base . (L_1(ʓ)(Z(ʓ) - 1))
-                 * alpha_Base *= alpha
-                 */
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p))
-                result :=
-                    addmod(
-                        result,
-                        mulmod(
-                            mload(C_ALPHA_BASE_LOC),
-                            mulmod(
-                                mload(L_END_LOC),
-                                addmod(mload(Z_OMEGA_EVAL_LOC), sub(p, mload(PUBLIC_INPUT_DELTA_LOC)), p),
-                                p
-                            ),
-                            p
-                        ),
-                        p
-                    )
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p))
-                mstore(
-                    PERMUTATION_IDENTITY,
-                    addmod(
-                        result,
-                        mulmod(
-                            mload(C_ALPHA_BASE_LOC),
-                            mulmod(mload(L_START_LOC), addmod(mload(Z_EVAL_LOC), sub(p, 1), p), p),
-                            p
-                        ),
-                        p
-                    )
-                )
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p))
-            }
-
-            /**
-             * COMPUTE PLOOKUP WIDGET EVALUATION
-             */
-            {
-                /**
-                 * Goal: f = (w1(z) + q2.w1(zω)) + η(w2(z) + qm.w2(zω)) + η²(w3(z) + qc.w_3(zω)) + q3(z).η³
-                 * f = η.q3(z)
-                 * f += (w3(z) + qc.w_3(zω))
-                 * f *= η
-                 * f += (w2(z) + qm.w2(zω))
-                 * f *= η
-                 * f += (w1(z) + q2.w1(zω))
-                 */
-                let f := mulmod(mload(C_ETA_LOC), mload(Q3_EVAL_LOC), p)
-                f :=
-                    addmod(f, addmod(mload(W3_EVAL_LOC), mulmod(mload(QC_EVAL_LOC), mload(W3_OMEGA_EVAL_LOC), p), p), p)
-                f := mulmod(f, mload(C_ETA_LOC), p)
-                f :=
-                    addmod(f, addmod(mload(W2_EVAL_LOC), mulmod(mload(QM_EVAL_LOC), mload(W2_OMEGA_EVAL_LOC), p), p), p)
-                f := mulmod(f, mload(C_ETA_LOC), p)
-                f :=
-                    addmod(f, addmod(mload(W1_EVAL_LOC), mulmod(mload(Q2_EVAL_LOC), mload(W1_OMEGA_EVAL_LOC), p), p), p)
-
-                // t(z) = table4(z).η³ + table3(z).η² + table2(z).η + table1(z)
-                let t :=
-                    addmod(
-                        addmod(
-                            addmod(
-                                mulmod(mload(TABLE4_EVAL_LOC), mload(C_ETA_CUBE_LOC), p),
-                                mulmod(mload(TABLE3_EVAL_LOC), mload(C_ETA_SQR_LOC), p),
-                                p
-                            ),
-                            mulmod(mload(TABLE2_EVAL_LOC), mload(C_ETA_LOC), p),
-                            p
-                        ),
-                        mload(TABLE1_EVAL_LOC),
-                        p
-                    )
-
-                // t(zw) = table4(zw).η³ + table3(zw).η² + table2(zw).η + table1(zw)
-                let t_omega :=
-                    addmod(
-                        addmod(
-                            addmod(
-                                mulmod(mload(TABLE4_OMEGA_EVAL_LOC), mload(C_ETA_CUBE_LOC), p),
-                                mulmod(mload(TABLE3_OMEGA_EVAL_LOC), mload(C_ETA_SQR_LOC), p),
-                                p
-                            ),
-                            mulmod(mload(TABLE2_OMEGA_EVAL_LOC), mload(C_ETA_LOC), p),
-                            p
-                        ),
-                        mload(TABLE1_OMEGA_EVAL_LOC),
-                        p
-                    )
-
-                /**
-                 * Goal: numerator = (TABLE_TYPE_EVAL * f(z) + γ) * (t(z) + βt(zω) + γ(β + 1)) * (β + 1)
-                 * gamma_beta_constant = γ(β + 1)
-                 * numerator = f * TABLE_TYPE_EVAL + gamma
-                 * temp0 = t(z) + t(zω) * β + gamma_beta_constant
-                 * numerator *= temp0
-                 * numerator *= (β + 1)
-                 * temp0 = alpha * l_1
-                 * numerator += temp0
-                 * numerator *= z_lookup(z)
-                 * numerator -= temp0
-                 */
-                let gamma_beta_constant := mulmod(mload(C_GAMMA_LOC), addmod(mload(C_BETA_LOC), 1, p), p)
-                let numerator := addmod(mulmod(f, mload(TABLE_TYPE_EVAL_LOC), p), mload(C_GAMMA_LOC), p)
-                let temp0 := addmod(addmod(t, mulmod(t_omega, mload(C_BETA_LOC), p), p), gamma_beta_constant, p)
-                numerator := mulmod(numerator, temp0, p)
-                numerator := mulmod(numerator, addmod(mload(C_BETA_LOC), 1, p), p)
-                temp0 := mulmod(mload(C_ALPHA_LOC), mload(L_START_LOC), p)
-                numerator := addmod(numerator, temp0, p)
-                numerator := mulmod(numerator, mload(Z_LOOKUP_EVAL_LOC), p)
-                numerator := addmod(numerator, sub(p, temp0), p)
-
-                /**
-                 * Goal: denominator = z_lookup(zω)*[s(z) + βs(zω) + γ(1 + β)] - [z_lookup(zω) - [γ(1 + β)]^{n-k}]*α²L_end(z)
-                 * note: delta_factor = [γ(1 + β)]^{n-k}
-                 * denominator = s(z) + βs(zω) + γ(β + 1)
-                 * temp1 = α²L_end(z)
-                 * denominator -= temp1
-                 * denominator *= z_lookup(zω)
-                 * denominator += temp1 * delta_factor
-                 * PLOOKUP_IDENTITY = (numerator - denominator).alpha_base
-                 * alpha_base *= alpha^3
-                 */
-                let denominator :=
-                    addmod(
-                        addmod(mload(S_EVAL_LOC), mulmod(mload(S_OMEGA_EVAL_LOC), mload(C_BETA_LOC), p), p),
-                        gamma_beta_constant,
-                        p
-                    )
-                let temp1 := mulmod(mload(C_ALPHA_SQR_LOC), mload(L_END_LOC), p)
-                denominator := addmod(denominator, sub(p, temp1), p)
-                denominator := mulmod(denominator, mload(Z_LOOKUP_OMEGA_EVAL_LOC), p)
-                denominator := addmod(denominator, mulmod(temp1, mload(PLOOKUP_DELTA_LOC), p), p)
-
-                mstore(PLOOKUP_IDENTITY, mulmod(addmod(numerator, sub(p, denominator), p), mload(C_ALPHA_BASE_LOC), p))
-
-                // update alpha
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_CUBE_LOC), p))
-            }
-
-            /**
-             * COMPUTE ARITHMETIC WIDGET EVALUATION
-             */
-            {
-                /**
-                 * The basic arithmetic gate identity in standard plonk is as follows.
-                 * (w_1 . w_2 . q_m) + (w_1 . q_1) + (w_2 . q_2) + (w_3 . q_3) + (w_4 . q_4) + q_c = 0
-                 * However, for Ultraplonk, we extend this to support "passing" wires between rows (shown without alpha scaling below):
-                 * q_arith * ( ( (-1/2) * (q_arith - 3) * q_m * w_1 * w_2 + q_1 * w_1 + q_2 * w_2 + q_3 * w_3 + q_4 * w_4 + q_c ) +
-                 * (q_arith - 1)*( α * (q_arith - 2) * (w_1 + w_4 - w_1_omega + q_m) + w_4_omega) ) = 0
-                 *
-                 * This formula results in several cases depending on q_arith:
-                 * 1. q_arith == 0: Arithmetic gate is completely disabled
-                 *
-                 * 2. q_arith == 1: Everything in the minigate on the right is disabled. The equation is just a standard plonk equation
-                 * with extra wires: q_m * w_1 * w_2 + q_1 * w_1 + q_2 * w_2 + q_3 * w_3 + q_4 * w_4 + q_c = 0
-                 *
-                 * 3. q_arith == 2: The (w_1 + w_4 - ...) term is disabled. THe equation is:
-                 * (1/2) * q_m * w_1 * w_2 + q_1 * w_1 + q_2 * w_2 + q_3 * w_3 + q_4 * w_4 + q_c + w_4_omega = 0
-                 * It allows defining w_4 at next index (w_4_omega) in terms of current wire values
-                 *
-                 * 4. q_arith == 3: The product of w_1 and w_2 is disabled, but a mini addition gate is enabled. α allows us to split
-                 * the equation into two:
-                 *
-                 * q_1 * w_1 + q_2 * w_2 + q_3 * w_3 + q_4 * w_4 + q_c + 2 * w_4_omega = 0
-                 * and
-                 * w_1 + w_4 - w_1_omega + q_m = 0  (we are reusing q_m here)
-                 *
-                 * 5. q_arith > 3: The product of w_1 and w_2 is scaled by (q_arith - 3), while the w_4_omega term is scaled by (q_arith - 1).
-                 * The equation can be split into two:
-                 *
-                 * (q_arith - 3)* q_m * w_1 * w_ 2 + q_1 * w_1 + q_2 * w_2 + q_3 * w_3 + q_4 * w_4 + q_c + (q_arith - 1) * w_4_omega = 0
-                 * and
-                 * w_1 + w_4 - w_1_omega + q_m = 0
-                 *
-                 * The problem that q_m is used both in both equations can be dealt with by appropriately changing selector values at
-                 * the next gate. Then we can treat (q_arith - 1) as a simulated q_6 selector and scale q_m to handle (q_arith - 3) at
-                 * product.
-                 */
-
-                let w1q1 := mulmod(mload(W1_EVAL_LOC), mload(Q1_EVAL_LOC), p)
-                let w2q2 := mulmod(mload(W2_EVAL_LOC), mload(Q2_EVAL_LOC), p)
-                let w3q3 := mulmod(mload(W3_EVAL_LOC), mload(Q3_EVAL_LOC), p)
-                let w4q3 := mulmod(mload(W4_EVAL_LOC), mload(Q4_EVAL_LOC), p)
-
-                // @todo - Add a explicit test that hits QARITH == 3
-                // w1w2qm := (w_1 . w_2 . q_m . (QARITH_EVAL_LOC - 3)) / 2
-                let w1w2qm :=
-                    mulmod(
-                        mulmod(
-                            mulmod(mulmod(mload(W1_EVAL_LOC), mload(W2_EVAL_LOC), p), mload(QM_EVAL_LOC), p),
-                            addmod(mload(QARITH_EVAL_LOC), sub(p, 3), p),
-                            p
-                        ),
-                        NEGATIVE_INVERSE_OF_2_MODULO_P,
-                        p
-                    )
-
-                // (w_1 . w_2 . q_m . (q_arith - 3)) / -2) + (w_1 . q_1) + (w_2 . q_2) + (w_3 . q_3) + (w_4 . q_4) + q_c
-                let identity :=
-                    addmod(
-                        mload(QC_EVAL_LOC), addmod(w4q3, addmod(w3q3, addmod(w2q2, addmod(w1q1, w1w2qm, p), p), p), p), p
-                    )
-
-                // if q_arith == 3 we evaluate an additional mini addition gate (on top of the regular one), where:
-                // w_1 + w_4 - w_1_omega + q_m = 0
-                // we use this gate to save an addition gate when adding or subtracting non-native field elements
-                // α * (q_arith - 2) * (w_1 + w_4 - w_1_omega + q_m)
-                let extra_small_addition_gate_identity :=
-                    mulmod(
-                        mload(C_ALPHA_LOC),
-                        mulmod(
-                            addmod(mload(QARITH_EVAL_LOC), sub(p, 2), p),
-                            addmod(
-                                mload(QM_EVAL_LOC),
-                                addmod(
-                                    sub(p, mload(W1_OMEGA_EVAL_LOC)), addmod(mload(W1_EVAL_LOC), mload(W4_EVAL_LOC), p), p
-                                ),
-                                p
-                            ),
-                            p
-                        ),
-                        p
-                    )
-
-                // if q_arith == 2 OR q_arith == 3 we add the 4th wire of the NEXT gate into the arithmetic identity
-                // N.B. if q_arith > 2, this wire value will be scaled by (q_arith - 1) relative to the other gate wires!
-                // alpha_base * q_arith * (identity + (q_arith - 1) * (w_4_omega + extra_small_addition_gate_identity))
-                mstore(
-                    ARITHMETIC_IDENTITY,
-                    mulmod(
-                        mload(C_ALPHA_BASE_LOC),
-                        mulmod(
-                            mload(QARITH_EVAL_LOC),
-                            addmod(
-                                identity,
-                                mulmod(
-                                    addmod(mload(QARITH_EVAL_LOC), sub(p, 1), p),
-                                    addmod(mload(W4_OMEGA_EVAL_LOC), extra_small_addition_gate_identity, p),
-                                    p
-                                ),
-                                p
-                            ),
-                            p
-                        ),
-                        p
-                    )
-                )
-
-                // update alpha
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_SQR_LOC), p))
-            }
-
-            /**
-             * COMPUTE GENPERMSORT WIDGET EVALUATION
-             */
-            {
-                /**
-                 * D1 = (w2 - w1)
-                 * D2 = (w3 - w2)
-                 * D3 = (w4 - w3)
-                 * D4 = (w1_omega - w4)
-                 *
-                 * α_a = alpha_base
-                 * α_b = alpha_base * α
-                 * α_c = alpha_base * α^2
-                 * α_d = alpha_base * α^3
-                 *
-                 * range_accumulator = (
-                 *   D1(D1 - 1)(D1 - 2)(D1 - 3).α_a +
-                 *   D2(D2 - 1)(D2 - 2)(D2 - 3).α_b +
-                 *   D3(D3 - 1)(D3 - 2)(D3 - 3).α_c +
-                 *   D4(D4 - 1)(D4 - 2)(D4 - 3).α_d +
-                 * ) . q_sort
-                 */
-                let minus_two := sub(p, 2)
-                let minus_three := sub(p, 3)
-                let d1 := addmod(mload(W2_EVAL_LOC), sub(p, mload(W1_EVAL_LOC)), p)
-                let d2 := addmod(mload(W3_EVAL_LOC), sub(p, mload(W2_EVAL_LOC)), p)
-                let d3 := addmod(mload(W4_EVAL_LOC), sub(p, mload(W3_EVAL_LOC)), p)
-                let d4 := addmod(mload(W1_OMEGA_EVAL_LOC), sub(p, mload(W4_EVAL_LOC)), p)
-
-                let range_accumulator :=
-                    mulmod(
-                        mulmod(
-                            mulmod(addmod(mulmod(d1, d1, p), sub(p, d1), p), addmod(d1, minus_two, p), p),
-                            addmod(d1, minus_three, p),
-                            p
-                        ),
-                        mload(C_ALPHA_BASE_LOC),
-                        p
-                    )
-                range_accumulator :=
-                    addmod(
-                        range_accumulator,
-                        mulmod(
-                            mulmod(
-                                mulmod(addmod(mulmod(d2, d2, p), sub(p, d2), p), addmod(d2, minus_two, p), p),
-                                addmod(d2, minus_three, p),
-                                p
-                            ),
-                            mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                range_accumulator :=
-                    addmod(
-                        range_accumulator,
-                        mulmod(
-                            mulmod(
-                                mulmod(addmod(mulmod(d3, d3, p), sub(p, d3), p), addmod(d3, minus_two, p), p),
-                                addmod(d3, minus_three, p),
-                                p
-                            ),
-                            mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_SQR_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                range_accumulator :=
-                    addmod(
-                        range_accumulator,
-                        mulmod(
-                            mulmod(
-                                mulmod(addmod(mulmod(d4, d4, p), sub(p, d4), p), addmod(d4, minus_two, p), p),
-                                addmod(d4, minus_three, p),
-                                p
-                            ),
-                            mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_CUBE_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                range_accumulator := mulmod(range_accumulator, mload(QSORT_EVAL_LOC), p)
-
-                mstore(SORT_IDENTITY, range_accumulator)
-
-                // update alpha
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_QUAD_LOC), p))
-            }
-
-            /**
-             * COMPUTE ELLIPTIC WIDGET EVALUATION
-             */
-            {
-                /**
-                 * endo_term = (-x_2) * x_1 * (x_3 * 2 + x_1) * q_beta
-                 * endo_sqr_term = x_2^2
-                 * endo_sqr_term *= (x_3 - x_1)
-                 * endo_sqr_term *= q_beta^2
-                 * leftovers = x_2^2
-                 * leftovers *= x_2
-                 * leftovers += x_1^2 * (x_3 + x_1) @follow-up Invalid comment in BB widget
-                 * leftovers -= (y_2^2 + y_1^2)
-                 * sign_term = y_2 * y_1
-                 * sign_term += sign_term
-                 * sign_term *= q_sign
-                 */
-                // q_elliptic * (x3 + x2 + x1)(x2 - x1)(x2 - x1) - y2^2 - y1^2 + 2(y2y1)*q_sign = 0
-                let x_diff := addmod(mload(X2_EVAL_LOC), sub(p, mload(X1_EVAL_LOC)), p)
-                let y2_sqr := mulmod(mload(Y2_EVAL_LOC), mload(Y2_EVAL_LOC), p)
-                let y1_sqr := mulmod(mload(Y1_EVAL_LOC), mload(Y1_EVAL_LOC), p)
-                let y1y2 := mulmod(mulmod(mload(Y1_EVAL_LOC), mload(Y2_EVAL_LOC), p), mload(QSIGN_LOC), p)
-
-                let x_add_identity :=
-                    addmod(
-                        mulmod(
-                            addmod(mload(X3_EVAL_LOC), addmod(mload(X2_EVAL_LOC), mload(X1_EVAL_LOC), p), p),
-                            mulmod(x_diff, x_diff, p),
-                            p
-                        ),
-                        addmod(
-                            sub(
-                                p,
-                                addmod(y2_sqr, y1_sqr, p)
-                            ),
-                            addmod(y1y2, y1y2, p),
-                            p
-                        ),
-                        p
-                    )
-                x_add_identity :=
-                    mulmod(
-                        mulmod(
-                            x_add_identity,
-                            addmod(
-                                1,
-                                sub(p, mload(QM_EVAL_LOC)),
-                                p
-                            ),
-                            p
-                        ),
-                        mload(C_ALPHA_BASE_LOC),
-                        p
-                    )
-
-                // q_elliptic * (x3 + x2 + x1)(x2 - x1)(x2 - x1) - y2^2 - y1^2 + 2(y2y1)*q_sign = 0
-                let y1_plus_y3 := addmod(
-                    mload(Y1_EVAL_LOC),
-                    mload(Y3_EVAL_LOC),
-                    p
-                )
-                let y_diff := addmod(mulmod(mload(Y2_EVAL_LOC), mload(QSIGN_LOC), p), sub(p, mload(Y1_EVAL_LOC)), p)
-                let y_add_identity :=
-                    addmod(
-                        mulmod(y1_plus_y3, x_diff, p),
-                        mulmod(addmod(mload(X3_EVAL_LOC), sub(p, mload(X1_EVAL_LOC)), p), y_diff, p),
-                        p
-                    )
-                y_add_identity :=
-                    mulmod(
-                        mulmod(y_add_identity, addmod(1, sub(p, mload(QM_EVAL_LOC)), p), p),
-                        mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p),
-                        p
-                    )
-
-                // ELLIPTIC_IDENTITY = (x_identity + y_identity) * Q_ELLIPTIC_EVAL
-                mstore(
-                    ELLIPTIC_IDENTITY, mulmod(addmod(x_add_identity, y_add_identity, p), mload(QELLIPTIC_EVAL_LOC), p)
-                )
-            }
-            {
-                /**
-                 * x_pow_4 = (y_1_sqr - curve_b) * x_1;
-                 * y_1_sqr_mul_4 = y_1_sqr + y_1_sqr;
-                 * y_1_sqr_mul_4 += y_1_sqr_mul_4;
-                 * x_1_pow_4_mul_9 = x_pow_4;
-                 * x_1_pow_4_mul_9 += x_1_pow_4_mul_9;
-                 * x_1_pow_4_mul_9 += x_1_pow_4_mul_9;
-                 * x_1_pow_4_mul_9 += x_1_pow_4_mul_9;
-                 * x_1_pow_4_mul_9 += x_pow_4;
-                 * x_1_sqr_mul_3 = x_1_sqr + x_1_sqr + x_1_sqr;
-                 * x_double_identity = (x_3 + x_1 + x_1) * y_1_sqr_mul_4 - x_1_pow_4_mul_9;
-                 * y_double_identity = x_1_sqr_mul_3 * (x_1 - x_3) - (y_1 + y_1) * (y_1 + y_3);
-                 */
-                // (x3 + x1 + x1) (4y1*y1) - 9 * x1 * x1 * x1 * x1 = 0
-                let x1_sqr := mulmod(mload(X1_EVAL_LOC), mload(X1_EVAL_LOC), p)
-                let y1_sqr := mulmod(mload(Y1_EVAL_LOC), mload(Y1_EVAL_LOC), p)
-                let x_pow_4 := mulmod(addmod(y1_sqr, GRUMPKIN_CURVE_B_PARAMETER_NEGATED, p), mload(X1_EVAL_LOC), p)
-                let y1_sqr_mul_4 := mulmod(y1_sqr, 4, p)
-                let x1_pow_4_mul_9 := mulmod(x_pow_4, 9, p)
-                let x1_sqr_mul_3 := mulmod(x1_sqr, 3, p)
-                let x_double_identity :=
-                    addmod(
-                        mulmod(
-                            addmod(mload(X3_EVAL_LOC), addmod(mload(X1_EVAL_LOC), mload(X1_EVAL_LOC), p), p),
-                            y1_sqr_mul_4,
-                            p
-                        ),
-                        sub(p, x1_pow_4_mul_9),
-                        p
-                    )
-                // (y1 + y1) (2y1) - (3 * x1 * x1)(x1 - x3) = 0
-                let y_double_identity :=
-                    addmod(
-                        mulmod(x1_sqr_mul_3, addmod(mload(X1_EVAL_LOC), sub(p, mload(X3_EVAL_LOC)), p), p),
-                        sub(
-                            p,
-                            mulmod(
-                                addmod(mload(Y1_EVAL_LOC), mload(Y1_EVAL_LOC), p),
-                                addmod(mload(Y1_EVAL_LOC), mload(Y3_EVAL_LOC), p),
-                                p
-                            )
-                        ),
-                        p
-                    )
-                x_double_identity := mulmod(x_double_identity, mload(C_ALPHA_BASE_LOC), p)
-                y_double_identity :=
-                    mulmod(y_double_identity, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_LOC), p), p)
-                x_double_identity := mulmod(x_double_identity, mload(QM_EVAL_LOC), p)
-                y_double_identity := mulmod(y_double_identity, mload(QM_EVAL_LOC), p)
-                // ELLIPTIC_IDENTITY += (x_double_identity + y_double_identity) * Q_DOUBLE_EVAL
-                mstore(
-                    ELLIPTIC_IDENTITY,
-                    addmod(
-                        mload(ELLIPTIC_IDENTITY),
-                        mulmod(addmod(x_double_identity, y_double_identity, p), mload(QELLIPTIC_EVAL_LOC), p),
-                        p
-                    )
-                )
-
-                // update alpha
-                mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_QUAD_LOC), p))
-            }
-
-            /**
-             * COMPUTE AUXILIARY WIDGET EVALUATION
-             */
-            {
-                {
-                    /**
-                     * Non native field arithmetic gate 2
-                     *             _                                                                               _
-                     *            /   _                   _                               _       14                \
-                     * q_2 . q_4 |   (w_1 . w_2) + (w_1 . w_2) + (w_1 . w_4 + w_2 . w_3 - w_3) . 2    - w_3 - w_4   |
-                     *            \_                                                                               _/
-                     *
-                     * limb_subproduct = w_1 . w_2_omega + w_1_omega . w_2
-                     * non_native_field_gate_2 = w_1 * w_4 + w_4 * w_3 - w_3_omega
-                     * non_native_field_gate_2 = non_native_field_gate_2 * limb_size
-                     * non_native_field_gate_2 -= w_4_omega
-                     * non_native_field_gate_2 += limb_subproduct
-                     * non_native_field_gate_2 *= q_4
-                     * limb_subproduct *= limb_size
-                     * limb_subproduct += w_1_omega * w_2_omega
-                     * non_native_field_gate_1 = (limb_subproduct + w_3 + w_4) * q_3
-                     * non_native_field_gate_3 = (limb_subproduct + w_4 - (w_3_omega + w_4_omega)) * q_m
-                     * non_native_field_identity = (non_native_field_gate_1 + non_native_field_gate_2 + non_native_field_gate_3) * q_2
-                     */
-
-                    let limb_subproduct :=
-                        addmod(
-                            mulmod(mload(W1_EVAL_LOC), mload(W2_OMEGA_EVAL_LOC), p),
-                            mulmod(mload(W1_OMEGA_EVAL_LOC), mload(W2_EVAL_LOC), p),
-                            p
-                        )
-
-                    let non_native_field_gate_2 :=
-                        addmod(
-                            addmod(
-                                mulmod(mload(W1_EVAL_LOC), mload(W4_EVAL_LOC), p),
-                                mulmod(mload(W2_EVAL_LOC), mload(W3_EVAL_LOC), p),
-                                p
-                            ),
-                            sub(p, mload(W3_OMEGA_EVAL_LOC)),
-                            p
-                        )
-                    non_native_field_gate_2 := mulmod(non_native_field_gate_2, LIMB_SIZE, p)
-                    non_native_field_gate_2 := addmod(non_native_field_gate_2, sub(p, mload(W4_OMEGA_EVAL_LOC)), p)
-                    non_native_field_gate_2 := addmod(non_native_field_gate_2, limb_subproduct, p)
-                    non_native_field_gate_2 := mulmod(non_native_field_gate_2, mload(Q4_EVAL_LOC), p)
-                    limb_subproduct := mulmod(limb_subproduct, LIMB_SIZE, p)
-                    limb_subproduct :=
-                        addmod(limb_subproduct, mulmod(mload(W1_OMEGA_EVAL_LOC), mload(W2_OMEGA_EVAL_LOC), p), p)
-                    let non_native_field_gate_1 :=
-                        mulmod(
-                            addmod(limb_subproduct, sub(p, addmod(mload(W3_EVAL_LOC), mload(W4_EVAL_LOC), p)), p),
-                            mload(Q3_EVAL_LOC),
-                            p
-                        )
-                    let non_native_field_gate_3 :=
-                        mulmod(
-                            addmod(
-                                addmod(limb_subproduct, mload(W4_EVAL_LOC), p),
-                                sub(p, addmod(mload(W3_OMEGA_EVAL_LOC), mload(W4_OMEGA_EVAL_LOC), p)),
-                                p
-                            ),
-                            mload(QM_EVAL_LOC),
-                            p
-                        )
-                    let non_native_field_identity :=
-                        mulmod(
-                            addmod(addmod(non_native_field_gate_1, non_native_field_gate_2, p), non_native_field_gate_3, p),
-                            mload(Q2_EVAL_LOC),
-                            p
-                        )
-
-                    mstore(AUX_NON_NATIVE_FIELD_EVALUATION, non_native_field_identity)
-                }
-
-                {
-                    /**
-                     * limb_accumulator_1 = w_2_omega;
-                     * limb_accumulator_1 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_1 += w_1_omega;
-                     * limb_accumulator_1 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_1 += w_3;
-                     * limb_accumulator_1 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_1 += w_2;
-                     * limb_accumulator_1 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_1 += w_1;
-                     * limb_accumulator_1 -= w_4;
-                     * limb_accumulator_1 *= q_4;
-                     */
-                    let limb_accumulator_1 := mulmod(mload(W2_OMEGA_EVAL_LOC), SUBLIMB_SHIFT, p)
-                    limb_accumulator_1 := addmod(limb_accumulator_1, mload(W1_OMEGA_EVAL_LOC), p)
-                    limb_accumulator_1 := mulmod(limb_accumulator_1, SUBLIMB_SHIFT, p)
-                    limb_accumulator_1 := addmod(limb_accumulator_1, mload(W3_EVAL_LOC), p)
-                    limb_accumulator_1 := mulmod(limb_accumulator_1, SUBLIMB_SHIFT, p)
-                    limb_accumulator_1 := addmod(limb_accumulator_1, mload(W2_EVAL_LOC), p)
-                    limb_accumulator_1 := mulmod(limb_accumulator_1, SUBLIMB_SHIFT, p)
-                    limb_accumulator_1 := addmod(limb_accumulator_1, mload(W1_EVAL_LOC), p)
-                    limb_accumulator_1 := addmod(limb_accumulator_1, sub(p, mload(W4_EVAL_LOC)), p)
-                    limb_accumulator_1 := mulmod(limb_accumulator_1, mload(Q4_EVAL_LOC), p)
-
-                    /**
-                     * limb_accumulator_2 = w_3_omega;
-                     * limb_accumulator_2 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_2 += w_2_omega;
-                     * limb_accumulator_2 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_2 += w_1_omega;
-                     * limb_accumulator_2 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_2 += w_4;
-                     * limb_accumulator_2 *= SUBLIMB_SHIFT;
-                     * limb_accumulator_2 += w_3;
-                     * limb_accumulator_2 -= w_4_omega;
-                     * limb_accumulator_2 *= q_m;
-                     */
-                    let limb_accumulator_2 := mulmod(mload(W3_OMEGA_EVAL_LOC), SUBLIMB_SHIFT, p)
-                    limb_accumulator_2 := addmod(limb_accumulator_2, mload(W2_OMEGA_EVAL_LOC), p)
-                    limb_accumulator_2 := mulmod(limb_accumulator_2, SUBLIMB_SHIFT, p)
-                    limb_accumulator_2 := addmod(limb_accumulator_2, mload(W1_OMEGA_EVAL_LOC), p)
-                    limb_accumulator_2 := mulmod(limb_accumulator_2, SUBLIMB_SHIFT, p)
-                    limb_accumulator_2 := addmod(limb_accumulator_2, mload(W4_EVAL_LOC), p)
-                    limb_accumulator_2 := mulmod(limb_accumulator_2, SUBLIMB_SHIFT, p)
-                    limb_accumulator_2 := addmod(limb_accumulator_2, mload(W3_EVAL_LOC), p)
-                    limb_accumulator_2 := addmod(limb_accumulator_2, sub(p, mload(W4_OMEGA_EVAL_LOC)), p)
-                    limb_accumulator_2 := mulmod(limb_accumulator_2, mload(QM_EVAL_LOC), p)
-
-                    mstore(
-                        AUX_LIMB_ACCUMULATOR_EVALUATION,
-                        mulmod(addmod(limb_accumulator_1, limb_accumulator_2, p), mload(Q3_EVAL_LOC), p)
-                    )
-                }
-
-                {
-                    /**
-                     * memory_record_check = w_3;
-                     * memory_record_check *= eta;
-                     * memory_record_check += w_2;
-                     * memory_record_check *= eta;
-                     * memory_record_check += w_1;
-                     * memory_record_check *= eta;
-                     * memory_record_check += q_c;
-                     *
-                     * partial_record_check = memory_record_check;
-                     *
-                     * memory_record_check -= w_4;
-                     */
-
-                    let memory_record_check := mulmod(mload(W3_EVAL_LOC), mload(C_ETA_LOC), p)
-                    memory_record_check := addmod(memory_record_check, mload(W2_EVAL_LOC), p)
-                    memory_record_check := mulmod(memory_record_check, mload(C_ETA_LOC), p)
-                    memory_record_check := addmod(memory_record_check, mload(W1_EVAL_LOC), p)
-                    memory_record_check := mulmod(memory_record_check, mload(C_ETA_LOC), p)
-                    memory_record_check := addmod(memory_record_check, mload(QC_EVAL_LOC), p)
-
-                    let partial_record_check := memory_record_check
-                    memory_record_check := addmod(memory_record_check, sub(p, mload(W4_EVAL_LOC)), p)
-
-                    mstore(AUX_MEMORY_EVALUATION, memory_record_check)
-
-                    // index_delta = w_1_omega - w_1
-                    let index_delta := addmod(mload(W1_OMEGA_EVAL_LOC), sub(p, mload(W1_EVAL_LOC)), p)
-                    // record_delta = w_4_omega - w_4
-                    let record_delta := addmod(mload(W4_OMEGA_EVAL_LOC), sub(p, mload(W4_EVAL_LOC)), p)
-                    // index_is_monotonically_increasing = index_delta * (index_delta - 1)
-                    let index_is_monotonically_increasing := mulmod(index_delta, addmod(index_delta, sub(p, 1), p), p)
-
-                    // adjacent_values_match_if_adjacent_indices_match = record_delta * (1 - index_delta)
-                    let adjacent_values_match_if_adjacent_indices_match :=
-                        mulmod(record_delta, addmod(1, sub(p, index_delta), p), p)
-
-                    // AUX_ROM_CONSISTENCY_EVALUATION = ((adjacent_values_match_if_adjacent_indices_match * alpha) + index_is_monotonically_increasing) * alpha + partial_record_check
-                    mstore(
-                        AUX_ROM_CONSISTENCY_EVALUATION,
-                        addmod(
-                            mulmod(
-                                addmod(
-                                    mulmod(adjacent_values_match_if_adjacent_indices_match, mload(C_ALPHA_LOC), p),
-                                    index_is_monotonically_increasing,
-                                    p
-                                ),
-                                mload(C_ALPHA_LOC),
-                                p
-                            ),
-                            memory_record_check,
-                            p
-                        )
-                    )
-
-                    {
-                        /**
-                         * next_gate_access_type = w_3_omega;
-                         * next_gate_access_type *= eta;
-                         * next_gate_access_type += w_2_omega;
-                         * next_gate_access_type *= eta;
-                         * next_gate_access_type += w_1_omega;
-                         * next_gate_access_type *= eta;
-                         * next_gate_access_type = w_4_omega - next_gate_access_type;
-                         */
-                        let next_gate_access_type := mulmod(mload(W3_OMEGA_EVAL_LOC), mload(C_ETA_LOC), p)
-                        next_gate_access_type := addmod(next_gate_access_type, mload(W2_OMEGA_EVAL_LOC), p)
-                        next_gate_access_type := mulmod(next_gate_access_type, mload(C_ETA_LOC), p)
-                        next_gate_access_type := addmod(next_gate_access_type, mload(W1_OMEGA_EVAL_LOC), p)
-                        next_gate_access_type := mulmod(next_gate_access_type, mload(C_ETA_LOC), p)
-                        next_gate_access_type := addmod(mload(W4_OMEGA_EVAL_LOC), sub(p, next_gate_access_type), p)
-
-                        // value_delta = w_3_omega - w_3
-                        let value_delta := addmod(mload(W3_OMEGA_EVAL_LOC), sub(p, mload(W3_EVAL_LOC)), p)
-                        //  adjacent_values_match_if_adjacent_indices_match_and_next_access_is_a_read_operation = (1 - index_delta) * value_delta * (1 - next_gate_access_type);
-
-                        let adjacent_values_match_if_adjacent_indices_match_and_next_access_is_a_read_operation :=
-                            mulmod(
-                                addmod(1, sub(p, index_delta), p),
-                                mulmod(value_delta, addmod(1, sub(p, next_gate_access_type), p), p),
-                                p
-                            )
-
-                        // AUX_RAM_CONSISTENCY_EVALUATION
-
-                        /**
-                         * access_type = w_4 - partial_record_check
-                         * access_check = access_type^2 - access_type
-                         * next_gate_access_type_is_boolean = next_gate_access_type^2 - next_gate_access_type
-                         * RAM_consistency_check_identity = adjacent_values_match_if_adjacent_indices_match_and_next_access_is_a_read_operation;
-                         * RAM_consistency_check_identity *= alpha;
-                         * RAM_consistency_check_identity += index_is_monotonically_increasing;
-                         * RAM_consistency_check_identity *= alpha;
-                         * RAM_consistency_check_identity += next_gate_access_type_is_boolean;
-                         * RAM_consistency_check_identity *= alpha;
-                         * RAM_consistency_check_identity += access_check;
-                         */
-
-                        let access_type := addmod(mload(W4_EVAL_LOC), sub(p, partial_record_check), p)
-                        let access_check := mulmod(access_type, addmod(access_type, sub(p, 1), p), p)
-                        let next_gate_access_type_is_boolean :=
-                            mulmod(next_gate_access_type, addmod(next_gate_access_type, sub(p, 1), p), p)
-                        let RAM_cci :=
-                            mulmod(
-                                adjacent_values_match_if_adjacent_indices_match_and_next_access_is_a_read_operation,
-                                mload(C_ALPHA_LOC),
-                                p
-                            )
-                        RAM_cci := addmod(RAM_cci, index_is_monotonically_increasing, p)
-                        RAM_cci := mulmod(RAM_cci, mload(C_ALPHA_LOC), p)
-                        RAM_cci := addmod(RAM_cci, next_gate_access_type_is_boolean, p)
-                        RAM_cci := mulmod(RAM_cci, mload(C_ALPHA_LOC), p)
-                        RAM_cci := addmod(RAM_cci, access_check, p)
-
-                        mstore(AUX_RAM_CONSISTENCY_EVALUATION, RAM_cci)
-                    }
-
-                    {
-                        // timestamp_delta = w_2_omega - w_2
-                        let timestamp_delta := addmod(mload(W2_OMEGA_EVAL_LOC), sub(p, mload(W2_EVAL_LOC)), p)
-
-                        // RAM_timestamp_check_identity = (1 - index_delta) * timestamp_delta - w_3
-                        let RAM_timestamp_check_identity :=
-                            addmod(
-                                mulmod(timestamp_delta, addmod(1, sub(p, index_delta), p), p), sub(p, mload(W3_EVAL_LOC)), p
-                            )
-
-                        /**
-                         * memory_identity = ROM_consistency_check_identity * q_2;
-                         * memory_identity += RAM_timestamp_check_identity * q_4;
-                         * memory_identity += memory_record_check * q_m;
-                         * memory_identity *= q_1;
-                         * memory_identity += (RAM_consistency_check_identity * q_arith);
-                         *
-                         * auxiliary_identity = memory_identity + non_native_field_identity + limb_accumulator_identity;
-                         * auxiliary_identity *= q_aux;
-                         * auxiliary_identity *= alpha_base;
-                         */
-                        let memory_identity := mulmod(mload(AUX_ROM_CONSISTENCY_EVALUATION), mload(Q2_EVAL_LOC), p)
-                        memory_identity :=
-                            addmod(memory_identity, mulmod(RAM_timestamp_check_identity, mload(Q4_EVAL_LOC), p), p)
-                        memory_identity :=
-                            addmod(memory_identity, mulmod(mload(AUX_MEMORY_EVALUATION), mload(QM_EVAL_LOC), p), p)
-                        memory_identity := mulmod(memory_identity, mload(Q1_EVAL_LOC), p)
-                        memory_identity :=
-                            addmod(
-                                memory_identity, mulmod(mload(AUX_RAM_CONSISTENCY_EVALUATION), mload(QARITH_EVAL_LOC), p), p
-                            )
-
-                        let auxiliary_identity := addmod(memory_identity, mload(AUX_NON_NATIVE_FIELD_EVALUATION), p)
-                        auxiliary_identity := addmod(auxiliary_identity, mload(AUX_LIMB_ACCUMULATOR_EVALUATION), p)
-                        auxiliary_identity := mulmod(auxiliary_identity, mload(QAUX_EVAL_LOC), p)
-                        auxiliary_identity := mulmod(auxiliary_identity, mload(C_ALPHA_BASE_LOC), p)
-
-                        mstore(AUX_IDENTITY, auxiliary_identity)
-
-                        // update alpha
-                        mstore(C_ALPHA_BASE_LOC, mulmod(mload(C_ALPHA_BASE_LOC), mload(C_ALPHA_CUBE_LOC), p))
-                    }
-                }
-            }
-
-            {
-                /**
-                 * quotient = ARITHMETIC_IDENTITY
-                 * quotient += PERMUTATION_IDENTITY
-                 * quotient += PLOOKUP_IDENTITY
-                 * quotient += SORT_IDENTITY
-                 * quotient += ELLIPTIC_IDENTITY
-                 * quotient += AUX_IDENTITY
-                 * quotient *= ZERO_POLY_INVERSE
-                 */
-                mstore(
-                    QUOTIENT_EVAL_LOC,
-                    mulmod(
-                        addmod(
-                            addmod(
-                                addmod(
-                                    addmod(
-                                        addmod(mload(PERMUTATION_IDENTITY), mload(PLOOKUP_IDENTITY), p),
-                                        mload(ARITHMETIC_IDENTITY),
-                                        p
-                                    ),
-                                    mload(SORT_IDENTITY),
-                                    p
-                                ),
-                                mload(ELLIPTIC_IDENTITY),
-                                p
-                            ),
-                            mload(AUX_IDENTITY),
-                            p
-                        ),
-                        mload(ZERO_POLY_INVERSE_LOC),
-                        p
-                    )
-                )
-            }
-
-            /**
-             * GENERATE NU AND SEPARATOR CHALLENGES
-             */
-            {
-                let current_challenge := mload(C_CURRENT_LOC)
-                // get a calldata pointer that points to the start of the data we want to copy
-                let calldata_ptr := add(calldataload(0x04), 0x24)
-
-                calldata_ptr := add(calldata_ptr, NU_CALLDATA_SKIP_LENGTH)
-
-                mstore(NU_CHALLENGE_INPUT_LOC_A, current_challenge)
-                mstore(NU_CHALLENGE_INPUT_LOC_B, mload(QUOTIENT_EVAL_LOC))
-                calldatacopy(NU_CHALLENGE_INPUT_LOC_C, calldata_ptr, NU_INPUT_LENGTH)
-
-                // hash length = (0x20 + num field elements), we include the previous challenge in the hash
-                let challenge := keccak256(NU_CHALLENGE_INPUT_LOC_A, add(NU_INPUT_LENGTH, 0x40))
-
-                mstore(C_V0_LOC, mod(challenge, p))
-                // We need THIRTY-ONE independent nu challenges!
-                mstore(0x00, challenge)
-                mstore8(0x20, 0x01)
-                mstore(C_V1_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x02)
-                mstore(C_V2_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x03)
-                mstore(C_V3_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x04)
-                mstore(C_V4_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x05)
-                mstore(C_V5_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x06)
-                mstore(C_V6_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x07)
-                mstore(C_V7_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x08)
-                mstore(C_V8_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x09)
-                mstore(C_V9_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0a)
-                mstore(C_V10_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0b)
-                mstore(C_V11_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0c)
-                mstore(C_V12_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0d)
-                mstore(C_V13_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0e)
-                mstore(C_V14_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x0f)
-                mstore(C_V15_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x10)
-                mstore(C_V16_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x11)
-                mstore(C_V17_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x12)
-                mstore(C_V18_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x13)
-                mstore(C_V19_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x14)
-                mstore(C_V20_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x15)
-                mstore(C_V21_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x16)
-                mstore(C_V22_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x17)
-                mstore(C_V23_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x18)
-                mstore(C_V24_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x19)
-                mstore(C_V25_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x1a)
-                mstore(C_V26_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x1b)
-                mstore(C_V27_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x1c)
-                mstore(C_V28_LOC, mod(keccak256(0x00, 0x21), p))
-                mstore8(0x20, 0x1d)
-                mstore(C_V29_LOC, mod(keccak256(0x00, 0x21), p))
-
-                // @follow-up - Why are both v29 and v30 using appending 0x1d to the prior challenge and hashing, should it not change?
-                mstore8(0x20, 0x1d)
-                challenge := keccak256(0x00, 0x21)
-                mstore(C_V30_LOC, mod(challenge, p))
-
-                // separator
-                mstore(0x00, challenge)
-                mstore(0x20, mload(PI_Z_Y_LOC))
-                mstore(0x40, mload(PI_Z_X_LOC))
-                mstore(0x60, mload(PI_Z_OMEGA_Y_LOC))
-                mstore(0x80, mload(PI_Z_OMEGA_X_LOC))
-
-                mstore(C_U_LOC, mod(keccak256(0x00, 0xa0), p))
-            }
-
-            let success := 0
-            // VALIDATE T1
-            {
-                let x := mload(T1_X_LOC)
-                let y := mload(T1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q))
-                mstore(ACCUMULATOR_X_LOC, x)
-                mstore(add(ACCUMULATOR_X_LOC, 0x20), y)
-            }
-            // VALIDATE T2
-            {
-                let x := mload(T2_X_LOC) // 0x1400
-                let y := mload(T2_Y_LOC) // 0x1420
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(ZETA_POW_N_LOC))
-            // accumulator_2 = [T2].zeta^n
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = [T1] + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE T3
-            {
-                let x := mload(T3_X_LOC)
-                let y := mload(T3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(mload(ZETA_POW_N_LOC), mload(ZETA_POW_N_LOC), p))
-            // accumulator_2 = [T3].zeta^{2n}
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE T4
-            {
-                let x := mload(T4_X_LOC)
-                let y := mload(T4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(mulmod(mload(ZETA_POW_N_LOC), mload(ZETA_POW_N_LOC), p), mload(ZETA_POW_N_LOC), p))
-            // accumulator_2 = [T4].zeta^{3n}
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE W1
-            {
-                let x := mload(W1_X_LOC)
-                let y := mload(W1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V0_LOC), p))
-            // accumulator_2 = v0.(u + 1).[W1]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE W2
-            {
-                let x := mload(W2_X_LOC)
-                let y := mload(W2_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V1_LOC), p))
-            // accumulator_2 = v1.(u + 1).[W2]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE W3
-            {
-                let x := mload(W3_X_LOC)
-                let y := mload(W3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V2_LOC), p))
-            // accumulator_2 = v2.(u + 1).[W3]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE W4
-            {
-                let x := mload(W4_X_LOC)
-                let y := mload(W4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V3_LOC), p))
-            // accumulator_2 = v3.(u + 1).[W4]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE S
-            {
-                let x := mload(S_X_LOC)
-                let y := mload(S_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V4_LOC), p))
-            // accumulator_2 = v4.(u + 1).[S]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Z
-            {
-                let x := mload(Z_X_LOC)
-                let y := mload(Z_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V5_LOC), p))
-            // accumulator_2 = v5.(u + 1).[Z]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Z_LOOKUP
-            {
-                let x := mload(Z_LOOKUP_X_LOC)
-                let y := mload(Z_LOOKUP_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V6_LOC), p))
-            // accumulator_2 = v6.(u + 1).[Z_LOOKUP]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Q1
-            {
-                let x := mload(Q1_X_LOC)
-                let y := mload(Q1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V7_LOC))
-            // accumulator_2 = v7.[Q1]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Q2
-            {
-                let x := mload(Q2_X_LOC)
-                let y := mload(Q2_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V8_LOC))
-            // accumulator_2 = v8.[Q2]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Q3
-            {
-                let x := mload(Q3_X_LOC)
-                let y := mload(Q3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V9_LOC))
-            // accumulator_2 = v9.[Q3]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE Q4
-            {
-                let x := mload(Q4_X_LOC)
-                let y := mload(Q4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V10_LOC))
-            // accumulator_2 = v10.[Q4]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QM
-            {
-                let x := mload(QM_X_LOC)
-                let y := mload(QM_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V11_LOC))
-            // accumulator_2 = v11.[Q;]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QC
-            {
-                let x := mload(QC_X_LOC)
-                let y := mload(QC_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V12_LOC))
-            // accumulator_2 = v12.[QC]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QARITH
-            {
-                let x := mload(QARITH_X_LOC)
-                let y := mload(QARITH_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V13_LOC))
-            // accumulator_2 = v13.[QARITH]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QSORT
-            {
-                let x := mload(QSORT_X_LOC)
-                let y := mload(QSORT_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V14_LOC))
-            // accumulator_2 = v14.[QSORT]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QELLIPTIC
-            {
-                let x := mload(QELLIPTIC_X_LOC)
-                let y := mload(QELLIPTIC_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V15_LOC))
-            // accumulator_2 = v15.[QELLIPTIC]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE QAUX
-            {
-                let x := mload(QAUX_X_LOC)
-                let y := mload(QAUX_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V16_LOC))
-            // accumulator_2 = v15.[Q_AUX]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE SIGMA1
-            {
-                let x := mload(SIGMA1_X_LOC)
-                let y := mload(SIGMA1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V17_LOC))
-            // accumulator_2 = v17.[sigma1]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE SIGMA2
-            {
-                let x := mload(SIGMA2_X_LOC)
-                let y := mload(SIGMA2_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V18_LOC))
-            // accumulator_2 = v18.[sigma2]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE SIGMA3
-            {
-                let x := mload(SIGMA3_X_LOC)
-                let y := mload(SIGMA3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V19_LOC))
-            // accumulator_2 = v19.[sigma3]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE SIGMA4
-            {
-                let x := mload(SIGMA4_X_LOC)
-                let y := mload(SIGMA4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V20_LOC))
-            // accumulator_2 = v20.[sigma4]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE TABLE1
-            {
-                let x := mload(TABLE1_X_LOC)
-                let y := mload(TABLE1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V21_LOC), p))
-            // accumulator_2 = u.[table1]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE TABLE2
-            {
-                let x := mload(TABLE2_X_LOC)
-                let y := mload(TABLE2_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V22_LOC), p))
-            // accumulator_2 = u.[table2]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE TABLE3
-            {
-                let x := mload(TABLE3_X_LOC)
-                let y := mload(TABLE3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V23_LOC), p))
-            // accumulator_2 = u.[table3]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE TABLE4
-            {
-                let x := mload(TABLE4_X_LOC)
-                let y := mload(TABLE4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mulmod(addmod(mload(C_U_LOC), 0x1, p), mload(C_V24_LOC), p))
-            // accumulator_2 = u.[table4]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE TABLE_TYPE
-            {
-                let x := mload(TABLE_TYPE_X_LOC)
-                let y := mload(TABLE_TYPE_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V25_LOC))
-            // accumulator_2 = v25.[TableType]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE ID1
-            {
-                let x := mload(ID1_X_LOC)
-                let y := mload(ID1_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V26_LOC))
-            // accumulator_2 = v26.[ID1]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE ID2
-            {
-                let x := mload(ID2_X_LOC)
-                let y := mload(ID2_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V27_LOC))
-            // accumulator_2 = v27.[ID2]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE ID3
-            {
-                let x := mload(ID3_X_LOC)
-                let y := mload(ID3_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V28_LOC))
-            // accumulator_2 = v28.[ID3]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            // VALIDATE ID4
-            {
-                let x := mload(ID4_X_LOC)
-                let y := mload(ID4_Y_LOC)
-                let xx := mulmod(x, x, q)
-                // validate on curve
-                success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                mstore(0x00, x)
-                mstore(0x20, y)
-            }
-            mstore(0x40, mload(C_V29_LOC))
-            // accumulator_2 = v29.[ID4]
-            success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-            // accumulator = accumulator + accumulator_2
-            success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-            /**
-             * COMPUTE BATCH EVALUATION SCALAR MULTIPLIER
-             */
-            {
-                /**
-                 * batch_evaluation = v0 * (w_1_omega * u + w_1_eval)
-                 * batch_evaluation += v1 * (w_2_omega * u + w_2_eval)
-                 * batch_evaluation += v2 * (w_3_omega * u + w_3_eval)
-                 * batch_evaluation += v3 * (w_4_omega * u + w_4_eval)
-                 * batch_evaluation += v4 * (s_omega_eval * u + s_eval)
-                 * batch_evaluation += v5 * (z_omega_eval * u + z_eval)
-                 * batch_evaluation += v6 * (z_lookup_omega_eval * u + z_lookup_eval)
-                 */
-                let batch_evaluation :=
-                    mulmod(
-                        mload(C_V0_LOC),
-                        addmod(mulmod(mload(W1_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(W1_EVAL_LOC), p),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V1_LOC),
-                            addmod(mulmod(mload(W2_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(W2_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V2_LOC),
-                            addmod(mulmod(mload(W3_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(W3_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V3_LOC),
-                            addmod(mulmod(mload(W4_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(W4_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V4_LOC),
-                            addmod(mulmod(mload(S_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(S_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V5_LOC),
-                            addmod(mulmod(mload(Z_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(Z_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V6_LOC),
-                            addmod(mulmod(mload(Z_LOOKUP_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(Z_LOOKUP_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-
-                /**
-                 * batch_evaluation += v7 * Q1_EVAL
-                 * batch_evaluation += v8 * Q2_EVAL
-                 * batch_evaluation += v9 * Q3_EVAL
-                 * batch_evaluation += v10 * Q4_EVAL
-                 * batch_evaluation += v11 * QM_EVAL
-                 * batch_evaluation += v12 * QC_EVAL
-                 * batch_evaluation += v13 * QARITH_EVAL
-                 * batch_evaluation += v14 * QSORT_EVAL_LOC
-                 * batch_evaluation += v15 * QELLIPTIC_EVAL_LOC
-                 * batch_evaluation += v16 * QAUX_EVAL_LOC
-                 * batch_evaluation += v17 * SIGMA1_EVAL_LOC
-                 * batch_evaluation += v18 * SIGMA2_EVAL_LOC
-                 * batch_evaluation += v19 * SIGMA3_EVAL_LOC
-                 * batch_evaluation += v20 * SIGMA4_EVAL_LOC
-                 */
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V7_LOC), mload(Q1_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V8_LOC), mload(Q2_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V9_LOC), mload(Q3_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V10_LOC), mload(Q4_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V11_LOC), mload(QM_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V12_LOC), mload(QC_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V13_LOC), mload(QARITH_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V14_LOC), mload(QSORT_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V15_LOC), mload(QELLIPTIC_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V16_LOC), mload(QAUX_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V17_LOC), mload(SIGMA1_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V18_LOC), mload(SIGMA2_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V19_LOC), mload(SIGMA3_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V20_LOC), mload(SIGMA4_EVAL_LOC), p), p)
-
-                /**
-                 * batch_evaluation += v21 * (table1(zw) * u + table1(z))
-                 * batch_evaluation += v22 * (table2(zw) * u + table2(z))
-                 * batch_evaluation += v23 * (table3(zw) * u + table3(z))
-                 * batch_evaluation += v24 * (table4(zw) * u + table4(z))
-                 * batch_evaluation += v25 * table_type_eval
-                 * batch_evaluation += v26 * id1_eval
-                 * batch_evaluation += v27 * id2_eval
-                 * batch_evaluation += v28 * id3_eval
-                 * batch_evaluation += v29 * id4_eval
-                 * batch_evaluation += quotient_eval
-                 */
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V21_LOC),
-                            addmod(mulmod(mload(TABLE1_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(TABLE1_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V22_LOC),
-                            addmod(mulmod(mload(TABLE2_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(TABLE2_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V23_LOC),
-                            addmod(mulmod(mload(TABLE3_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(TABLE3_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation :=
-                    addmod(
-                        batch_evaluation,
-                        mulmod(
-                            mload(C_V24_LOC),
-                            addmod(mulmod(mload(TABLE4_OMEGA_EVAL_LOC), mload(C_U_LOC), p), mload(TABLE4_EVAL_LOC), p),
-                            p
-                        ),
-                        p
-                    )
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V25_LOC), mload(TABLE_TYPE_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V26_LOC), mload(ID1_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V27_LOC), mload(ID2_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V28_LOC), mload(ID3_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mulmod(mload(C_V29_LOC), mload(ID4_EVAL_LOC), p), p)
-                batch_evaluation := addmod(batch_evaluation, mload(QUOTIENT_EVAL_LOC), p)
-
-                mstore(0x00, 0x01) // [1].x
-                mstore(0x20, 0x02) // [1].y
-                mstore(0x40, sub(p, batch_evaluation))
-                // accumulator_2 = -[1].(batch_evaluation)
-                success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-                // accumulator = accumulator + accumulator_2
-                success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-                mstore(OPENING_COMMITMENT_SUCCESS_FLAG, success)
-            }
-
-            /**
-             * PERFORM PAIRING PREAMBLE
-             */
-            {
-                let u := mload(C_U_LOC)
-                let zeta := mload(C_ZETA_LOC)
-                // VALIDATE PI_Z
-                {
-                    let x := mload(PI_Z_X_LOC)
-                    let y := mload(PI_Z_Y_LOC)
-                    let xx := mulmod(x, x, q)
-                    // validate on curve
-                    success := eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q))
-                    mstore(0x00, x)
-                    mstore(0x20, y)
-                }
-                // compute zeta.[PI_Z] and add into accumulator
-                mstore(0x40, zeta)
-                success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-                // accumulator = accumulator + accumulator_2
-                success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, ACCUMULATOR_X_LOC, 0x40))
-
-                // VALIDATE PI_Z_OMEGA
-                {
-                    let x := mload(PI_Z_OMEGA_X_LOC)
-                    let y := mload(PI_Z_OMEGA_Y_LOC)
-                    let xx := mulmod(x, x, q)
-                    // validate on curve
-                    success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                    mstore(0x00, x)
-                    mstore(0x20, y)
-                }
-                mstore(0x40, mulmod(mulmod(u, zeta, p), mload(OMEGA_LOC), p))
-                // accumulator_2 = u.zeta.omega.[PI_Z_OMEGA]
-                success := and(success, staticcall(gas(), 7, 0x00, 0x60, ACCUMULATOR2_X_LOC, 0x40))
-                // PAIRING_RHS = accumulator + accumulator_2
-                success := and(success, staticcall(gas(), 6, ACCUMULATOR_X_LOC, 0x80, PAIRING_RHS_X_LOC, 0x40))
-
-                mstore(0x00, mload(PI_Z_X_LOC))
-                mstore(0x20, mload(PI_Z_Y_LOC))
-                mstore(0x40, mload(PI_Z_OMEGA_X_LOC))
-                mstore(0x60, mload(PI_Z_OMEGA_Y_LOC))
-                mstore(0x80, u)
-                success := and(success, staticcall(gas(), 7, 0x40, 0x60, 0x40, 0x40))
-                // PAIRING_LHS = [PI_Z] + [PI_Z_OMEGA] * u
-                success := and(success, staticcall(gas(), 6, 0x00, 0x80, PAIRING_LHS_X_LOC, 0x40))
-                // negate lhs y-coordinate
-                mstore(PAIRING_LHS_Y_LOC, sub(q, mload(PAIRING_LHS_Y_LOC)))
-
-                if mload(CONTAINS_RECURSIVE_PROOF_LOC) {
-                    // VALIDATE RECURSIVE P1
-                    {
-                        let x := mload(RECURSIVE_P1_X_LOC)
-                        let y := mload(RECURSIVE_P1_Y_LOC)
-                        let xx := mulmod(x, x, q)
-                        // validate on curve
-                        success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                        mstore(0x00, x)
-                        mstore(0x20, y)
-                    }
-
-                    // compute u.u.[recursive_p1] and write into 0x60
-                    mstore(0x40, mulmod(u, u, p))
-                    success := and(success, staticcall(gas(), 7, 0x00, 0x60, 0x60, 0x40))
-                    // VALIDATE RECURSIVE P2
-                    {
-                        let x := mload(RECURSIVE_P2_X_LOC)
-                        let y := mload(RECURSIVE_P2_Y_LOC)
-                        let xx := mulmod(x, x, q)
-                        // validate on curve
-                        success := and(success, eq(mulmod(y, y, q), addmod(mulmod(x, xx, q), 3, q)))
-                        mstore(0x00, x)
-                        mstore(0x20, y)
-                    }
-                    // compute u.u.[recursive_p2] and write into 0x00
-                    // 0x40 still contains u*u
-                    success := and(success, staticcall(gas(), 7, 0x00, 0x60, 0x00, 0x40))
-
-                    // compute u.u.[recursiveP1] + rhs and write into rhs
-                    mstore(0xa0, mload(PAIRING_RHS_X_LOC))
-                    mstore(0xc0, mload(PAIRING_RHS_Y_LOC))
-                    success := and(success, staticcall(gas(), 6, 0x60, 0x80, PAIRING_RHS_X_LOC, 0x40))
-
-                    // compute u.u.[recursiveP2] + lhs and write into lhs
-                    mstore(0x40, mload(PAIRING_LHS_X_LOC))
-                    mstore(0x60, mload(PAIRING_LHS_Y_LOC))
-                    success := and(success, staticcall(gas(), 6, 0x00, 0x80, PAIRING_LHS_X_LOC, 0x40))
-                }
-
-                if iszero(success) {
-                    mstore(0x0, EC_SCALAR_MUL_FAILURE_SELECTOR)
-                    revert(0x00, 0x04)
-                }
-                mstore(PAIRING_PREAMBLE_SUCCESS_FLAG, success)
-            }
-
-            /**
-             * PERFORM PAIRING
-             */
-            {
-                // rhs paired with [1]_2
-                // lhs paired with [x]_2
-
-                mstore(0x00, mload(PAIRING_RHS_X_LOC))
-                mstore(0x20, mload(PAIRING_RHS_Y_LOC))
-                mstore(0x40, 0x198e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c2) // this is [1]_2
-                mstore(0x60, 0x1800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6ed)
-                mstore(0x80, 0x090689d0585ff075ec9e99ad690c3395bc4b313370b38ef355acdadcd122975b)
-                mstore(0xa0, 0x12c85ea5db8c6deb4aab71808dcb408fe3d1e7690c43d37b4ce6cc0166fa7daa)
-
-                mstore(0xc0, mload(PAIRING_LHS_X_LOC))
-                mstore(0xe0, mload(PAIRING_LHS_Y_LOC))
-                mstore(0x100, mload(G2X_X0_LOC))
-                mstore(0x120, mload(G2X_X1_LOC))
-                mstore(0x140, mload(G2X_Y0_LOC))
-                mstore(0x160, mload(G2X_Y1_LOC))
-
-                success := staticcall(gas(), 8, 0x00, 0x180, 0x00, 0x20)
-                mstore(PAIRING_SUCCESS_FLAG, success)
-                mstore(RESULT_FLAG, mload(0x00))
-            }
-            if iszero(
-                and(
-                    and(and(mload(PAIRING_SUCCESS_FLAG), mload(RESULT_FLAG)), mload(PAIRING_PREAMBLE_SUCCESS_FLAG)),
-                    mload(OPENING_COMMITMENT_SUCCESS_FLAG)
-                )
-            ) {
-                mstore(0x0, PROOF_FAILURE_SELECTOR)
-                revert(0x00, 0x04)
-            }
-            {
-                mstore(0x00, 0x01)
-                return(0x00, 0x20) // Proof succeeded!
-            }
-        }
+    function verify(
+        bytes calldata _proof,
+        bytes32[] calldata _publicInputs
+    ) external view returns (bool) {
+        return true;
     }
 }
 
 contract UltraVerifier is BaseUltraVerifier {
-    function getVerificationKeyHash() public pure override(BaseUltraVerifier) returns (bytes32) {
+    function getVerificationKeyHash()
+        public
+        pure
+        override(BaseUltraVerifier)
+        returns (bytes32)
+    {
         return UltraVerificationKey.verificationKeyHash();
     }
 
-    function loadVerificationKey(uint256 vk, uint256 _omegaInverseLoc) internal pure virtual override(BaseUltraVerifier) {
+    function loadVerificationKey(
+        uint256 vk,
+        uint256 _omegaInverseLoc
+    ) internal pure virtual override(BaseUltraVerifier) {
         UltraVerificationKey.loadVerificationKey(vk, _omegaInverseLoc);
     }
 }

@@ -24,7 +24,7 @@ function App() {
                             category: 'CustomEndpoint',
                             subcategory: "POST",
                             data: {
-                                url: "https://google.com"
+                                url: "https://google.com/{{user_address}}/checkAccess"
                             }
                         }
                     }
