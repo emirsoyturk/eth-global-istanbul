@@ -1,7 +1,11 @@
 const { ethers } = require("ethers");
-const { fromHex, hashMessage, recoverPublicKey } = require("viem");
+const { fromHex, hashMessage, toHex, recoverPublicKey } = require("viem");
 
-let message = "0x0".padEnd(66, "0");
+// let message = "0x0".padEnd(66, "0");
+let message = toHex([
+  1, 5, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0,
+]);
 
 async function getInfos() {
   const sender = new ethers.Wallet(

@@ -2,10 +2,13 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const cors = require("cors");
-
+const noir = require("./src/routes/noir.route");
 const app = express();
 const port = process.env.PORT || 4000;
+var bodyParser = require("body-parser");
+var jsonParser = bodyParser.json();
 
+app.use(jsonParser);
 app.use(cors());
 
 const server = http.createServer(app);
@@ -30,6 +33,6 @@ io.on("connection", (socket) => {
   });
 });
 
-/* app.use("/noir", noir); */
+app.use("/noir", noir);
 
 server.listen(port, () => console.log("Server running on port 4000"));

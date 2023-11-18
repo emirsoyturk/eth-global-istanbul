@@ -1,26 +1,31 @@
 const noirService = require("../services/noir.service");
 const path = require("path");
-const { fromHex, hashMessage, recoverPublicKey } = require("viem");
+const { toHex, fromHex, hashMessage, recoverPublicKey } = require("viem");
 
 const { Noir } = require("@noir-lang/noir_js");
 const { BarretenbergBackend } = require("@noir-lang/backend_barretenberg");
 const { compile } = require("@noir-lang/noir_wasm");
+const { time } = require("console");
 
 const getCircuit = async (name) => {
   const compiled = compile(path.resolve(`../noir/${name}`, "src", `main.nr`));
   return compiled;
 };
 
+const jsonToArray = (json) => {
+  return Object.keys(json).map((key) => json[key]);
+};
+
 const mainInput = {
   message: [
-    3, 57, 199, 96, 145, 58, 183, 241, 206, 140, 36, 34, 165, 163, 17, 210, 97,
-    254, 154, 79, 91, 223, 149, 18, 3, 210, 111, 56, 246, 219, 19, 104,
+    1, 5, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0,
   ],
   signature: [
-    80, 175, 247, 73, 49, 117, 182, 241, 44, 14, 8, 232, 200, 151, 29, 144, 235,
-    114, 111, 204, 224, 132, 126, 169, 28, 65, 195, 240, 99, 32, 116, 109, 126,
-    8, 224, 102, 48, 32, 76, 155, 235, 81, 176, 240, 165, 46, 94, 174, 241, 244,
-    104, 108, 107, 11, 178, 44, 52, 243, 150, 63, 170, 89, 114, 88,
+    69, 38, 142, 41, 186, 79, 110, 187, 245, 133, 124, 6, 123, 184, 140, 178,
+    179, 110, 132, 56, 239, 201, 11, 175, 168, 225, 101, 247, 118, 158, 58, 14,
+    40, 172, 196, 33, 196, 203, 66, 5, 74, 26, 130, 178, 12, 153, 69, 234, 97,
+    74, 84, 141, 80, 4, 182, 2, 43, 187, 190, 3, 152, 67, 142, 228,
   ],
 };
 
@@ -66,8 +71,6 @@ async function main() {
   const { proof, publicInputs } =
     await backends.proof_of_location.generateIntermediateProof(witness);
 
-  console.log("proof successful");
-
   const numPublicInputs = 64;
   const { proofAsFields, vkAsFields, vkHash } =
     await backends.proof_of_location.generateIntermediateProofArtifacts(
@@ -78,12 +81,6 @@ async function main() {
   const aggregationObject = Array(16).fill(
     "0x0000000000000000000000000000000000000000000000000000000000000000"
   );
-
-  console.log(proof.length);
-  console.log(proofAsFields.length);
-  console.log(publicInputs.length);
-  console.log(vkAsFields.length);
-  console.log(vkHash);
 
   recursiveInputs = {
     verification_key: vkAsFields,
@@ -122,10 +119,87 @@ async function main() {
 
 main();
 
-async function artifacts(req, res) {
-  getCircuit();
+async function proveLocation(req, res) {
+  const { signature, lat, long, timestamp } = req.body;
+
+  console.log(signature);
+
+  message = new Uint8Array(32);
+  message[0] = lat;
+  message[1] = long;
+  message[2] = timestamp;
+
+  const inputMap = {
+    signature: signature,
+    message: [...message],
+  };
+
+  const { noirs, backends } = await setup();
+  const { witness, returnValue } = await noirs.proof_of_location.execute(
+    inputMap
+  );
+
+  const { proof, publicInputs } =
+    await backends.proof_of_location.generateIntermediateProof(witness);
+
+  res.json({
+    proof: proof,
+    publicInputs: publicInputs,
+  });
+}
+
+main();
+
+async function proveInside(req, res) {
+  const { publicInputs, proof, location, borders } = req.body;
+  const { circuits, backends, noirs } = await setup();
+  const numPublicInputs = 64;
+
+  console.log(jsonToArray(publicInputs).length);
+  console.log(jsonToArray(proof).length);
+
+  const { proofAsFields, vkAsFields, vkHash } =
+    await backends.proof_of_location.generateIntermediateProofArtifacts(
+      {
+        publicInputs: jsonToArray(publicInputs),
+        proof: jsonToArray(proof),
+      },
+      numPublicInputs
+    );
+
+  // const aggregationObject = Array(16).fill(
+  //   "0x0000000000000000000000000000000000000000000000000000000000000000"
+  // );
+
+  // recursiveInputs = {
+  //   verification_key: vkAsFields,
+  //   proof: proofAsFields,
+  //   public_inputs: publicInputs,
+  //   key_hash: vkHash,
+  //   input_aggregation_object: aggregationObject,
+  //   location: {
+  //     latitude: { integer: location.latitude.x, fraction: 0 },
+  //     longitude: { integer: location.longitude.x, fraction: 0 },
+  //   },
+  //   borders: borders.map((border) =>
+  //     JSON.parse(
+  //       `{latitude:{integer: ${border.latitude.x},fraction:0},longitude:{integer:${border.longitude.x},fraction:0}}`
+  //     )
+  //   ),
+  // };
+
+  // console.log(recursiveInputs);
+
+  // recursiveProof = await noirs.proof_of_inside.generateFinalProof(
+  //   recursiveInputs
+  // );
+
+  res.json({
+    proof: "a",
+  });
 }
 
 module.exports = {
-  artifacts,
+  proveLocation,
+  proveInside,
 };
