@@ -2,31 +2,54 @@ pragma solidity ^0.8.0;
 
 import "./plonk_vk.sol";
 
-
 contract Map {
-
-    struct Point {
-        uint latitude;
-        uint longitude;
-    }
-
     struct Location {
-        bytes32[] _publicInputs;        
+        uint[] latitudes;
+        uint[] longitudes;
     }
 
-    UltraVerifier public baseUltraVerifier;
+    BaseUltraVerifier public baseUltraVerifier;
 
     constructor(address verifier) {
-        baseUltraVerifier = UltraVerifier(verifier);
+        baseUltraVerifier = BaseUltraVerifier(verifier);
     }
 
-    mapping(address => bytes32[]) public locationHistory;
+    mapping(address => Location[]) locationHistory;
 
+    event LocationAdded(Location location, uint timestamp);
 
-    event LocationAdded(Point[] borders, uint timestamp);
+    function addLocation(
+        bytes calldata _proof,
+        bytes32[] calldata _publicInputs
+    ) public {
+        // require(baseUltraVerifier.verify(_proof, _publicInputs), "Wrong proof");
 
-       function addLocation(bytes calldata _proof, bytes32[] calldata _publicInputs) public {
-            require(baseUltraVerifier.verify(_proof, _publicInputs), "Wrong proof");
-            locationHistory[msg.sender] = _publicInputs;
+        uint locationCount = 4;
+
+        Location memory newLocation = Location(
+            new uint[](locationCount),
+            new uint[](locationCount)
+        );
+
+        for (uint i = 0; i < locationCount * 4; i += 4) {
+            // Parse the latitude and longitude
+            uint latitude = uint256(_publicInputs[i]); // Convert hex to uint
+            uint longitude = uint256(_publicInputs[i + 2]); // Convert hex to uint
+
+            // Add the latitude and longitude to their respective arrays
+            newLocation.latitudes[i / 4] = latitude;
+            newLocation.longitudes[i / 4] = longitude;
         }
+
+        // Add the new location to the sender's location history
+        locationHistory[msg.sender].push(newLocation);
     }
+
+    function addressLocationCount() public view returns (uint) {
+        return locationHistory[msg.sender].length;
+    }
+
+    function addressLocation(uint index) public view returns (Location memory) {
+        return locationHistory[msg.sender][index];
+    }
+}

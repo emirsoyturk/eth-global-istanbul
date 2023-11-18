@@ -1,0 +1,50 @@
+message = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+signature = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
+[[borders]]
+
+[borders.latitude]
+fraction = ""
+integer = ""
+
+[borders.longitude]
+fraction = ""
+integer = ""
+
+[[borders]]
+
+[borders.latitude]
+fraction = ""
+integer = ""
+
+[borders.longitude]
+fraction = ""
+integer = ""
+
+[[borders]]
+
+[borders.latitude]
+fraction = ""
+integer = ""
+
+[borders.longitude]
+fraction = ""
+integer = ""
+
+[[borders]]
+
+[borders.latitude]
+fraction = ""
+integer = ""
+
+[borders.longitude]
+fraction = ""
+integer = ""
+
+[location.latitude]
+fraction = ""
+integer = ""
+
+[location.longitude]
+fraction = ""
+integer = ""
