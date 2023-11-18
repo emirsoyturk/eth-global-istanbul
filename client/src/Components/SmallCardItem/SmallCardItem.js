@@ -1,6 +1,4 @@
 import React from 'react';
-import CardItemBG from '../../Images/card_bg.svg'; // Import your image
-import { FaArrowRight } from 'react-icons/fa';
 
 const SmallCardItem = ({ subtitle, imageSrc, bgColor }) => {
     console.log(bgColor)

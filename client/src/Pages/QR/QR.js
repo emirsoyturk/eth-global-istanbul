@@ -7,7 +7,6 @@ const socket = io(`${process.env.BACKEND_URL || 'http://localhost:4000'}` , { tr
 // useeffect socket
 
 const QrCodeScanner = () => {
-    const [uid, setUid] = useState("");
     const [qrScanned, setQrScanned] = useState(false);
 
     const sendMessage = (uid, message) => {
@@ -15,14 +14,12 @@ const QrCodeScanner = () => {
     };
 
     const handleScan = (scannedUid) => {
-        setUid(scannedUid);
         sendMessage(scannedUid, "Hello from Phone A!");
 
         setQrScanned(true);
     };
 
     function handleBack(e){
-        setUid("");
         setQrScanned(false);
     }
     function handleConfirm(e){
