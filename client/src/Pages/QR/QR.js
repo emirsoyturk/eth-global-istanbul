@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import io from "socket.io-client";
 
-const socket = io(`${process.env.BACKEND_URL || 'http://localhost:4000'}` , { transports: ['websocket'] });
+const socket = io(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000'}` , { transports: ['websocket'] });
 
 // useeffect socket
 
