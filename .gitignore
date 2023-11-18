@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/reactnative,node,solidity
 # Edit at https://www.toptal.com/developers/gitignore?templates=reactnative,node,solidity
 
+demo/*
+
 ### Node ###
 # Logs
 logs

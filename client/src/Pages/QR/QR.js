@@ -15,8 +15,16 @@ const QrCodeScanner = () => {
         socket.emit("message", { uid, message });
     };
 
+    const randomJsonData = () => {
+        return {
+            uid: Math.random().toString(36).substring(7),
+            latitude: Math.floor(Math.random() * 90),
+            longitude: Math.floor(Math.random() * 180),
+        };
+    }
+
     const handleScan = (scannedUid) => {
-        sendMessage(scannedUid, "Hello from Phone A!");
+        sendMessage(scannedUid, randomJsonData());
 
         setQrScanned(true);
 

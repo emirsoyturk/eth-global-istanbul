@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import clamp from 'lodash/clamp';
 import range from 'lodash/range';
 import './Landing.css';
 import LandItem from './LandItem';
@@ -38,7 +37,7 @@ const LandingSlider = () => {
   const landItems = [
     {
       title: "Title 1Title 1Title 1Title ",
-      description: "Description Text There",
+      description: "Description Text ThereDescription Text ThereDescription Text ThereDescription Text There",
       image: App1,
     },
     {
@@ -64,7 +63,15 @@ const LandingSlider = () => {
     const offset = info.offset.x;
     if (Math.abs(offset) > 20) {
       const direction = offset < 0 ? 1 : -1;
-      setActive((prevActive) => clamp(prevActive + direction, 0, landItems.length - 1));
+      setActive((prevActive) => {
+        let newActive = (prevActive + direction) % landItems.length;
+
+        if (newActive < 0) {
+          newActive += landItems.length;
+        }
+  
+        return newActive;
+      });
     }
   };
 

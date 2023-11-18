@@ -3,6 +3,7 @@ import { MdSettings } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { SiGoogleanalytics } from "react-icons/si";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
+import { RiLandscapeFill } from "react-icons/ri"
 
 import { Link } from "react-router-dom";
 
@@ -16,19 +17,21 @@ const Footer = () => {
       />
       <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
         <div>
-          <Link to={"./landingPage"}>
+          <Link to={"./"}>
             {" "}
             <FaHome size={"40"} className="cursor-pointer text-pink" />{" "}
           </Link>
         </div>
         <div>
-          <FaHome size={"40"} className="cursor-pointer text-pink" />
+        <Link to={"./landingPage"}>
+          <RiLandscapeFill size={"40"} className="cursor-pointer text-pink" />
+          </Link>
         </div>
       </div>
 
       <div className="cursor-pointer">
         <Link to={"./qr"}>
-          <div className="flex justify-center items-center bg-[#55389B] rounded-full p-1 mb-[14vw]">
+          <div className="flex justify-center items-center bg-darkPurple rounded-full p-1 mb-[14vw]">
             <MdOutlineQrCodeScanner
               size={"80"}
               strokeWidth={0.01}
@@ -46,7 +49,7 @@ const Footer = () => {
           <MdSettings size={"40"} className="cursor-pointer text-pink" />
         </div>
       </div>
-      <div className="absolute -bottom-2 w-full h-[13vw] z-[-1] bg-[#2C2868]"></div>
+      <div className="absolute -bottom-2 w-full h-[13vw] z-[-1] bg-darkPurple"></div>
     </div>
   );
 };

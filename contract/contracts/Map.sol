@@ -1,22 +1,17 @@
 pragma solidity ^0.8.0;
 
-import "./plonk_vk.sol";
+// import "./plonk_vk.sol";
 
 contract Map {
     struct Location {
         uint[] latitudes;
         uint[] longitudes;
-    }
-
-    BaseUltraVerifier public baseUltraVerifier;
-
-    constructor(address verifier) {
-        baseUltraVerifier = BaseUltraVerifier(verifier);
+        uint timestamp;
     }
 
     mapping(address => Location[]) locationHistory;
 
-    event LocationAdded(Location location, uint timestamp);
+    event LocationAdded(Location location);
 
     function addLocation(
         bytes calldata _proof,
@@ -28,7 +23,8 @@ contract Map {
 
         Location memory newLocation = Location(
             new uint[](locationCount),
-            new uint[](locationCount)
+            new uint[](locationCount),
+            block.timestamp
         );
 
         for (uint i = 0; i < locationCount * 4; i += 4) {
@@ -43,6 +39,7 @@ contract Map {
 
         // Add the new location to the sender's location history
         locationHistory[msg.sender].push(newLocation);
+        emit LocationAdded(newLocation);
     }
 
     function addressLocationCount() public view returns (uint) {
