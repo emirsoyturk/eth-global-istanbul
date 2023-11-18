@@ -1,7 +1,16 @@
 use dep::std::{ecdsa_secp256k1};
 
 
-fn main(signature : pub [u8;64], message: [u8;32]) {
+fn main(trusted_x: [u8; 32], trusted_y: [u8; 32], signature : pub [u8;64], message: [u8;32]) {
+  
+    let valid_signature = ecdsa_secp256k1::verify_signature(trusted_x, trusted_y, signature, message);
+
+    assert(valid_signature);
+}
+
+#[test]
+fn test_main() {
+
     let TRUSTED_PUBLIC_KEY_X : [u8; 32] = [
         32, 211,  47,  51,  81, 118, 194, 213,
         129,  17, 147, 200,  82,  44, 199, 233,
@@ -16,13 +25,6 @@ fn main(signature : pub [u8;64], message: [u8;32]) {
         208,  51, 106, 162,  38,  31, 159, 189
     ];
 
-    let valid_signature = ecdsa_secp256k1::verify_signature(TRUSTED_PUBLIC_KEY_X, TRUSTED_PUBLIC_KEY_Y, signature, message);
-
-    assert(valid_signature);
-}
-
-#[test]
-fn test_main() {
 
     let signature: [u8;64] = [
         80, 175, 247,  73,  49, 117, 182, 241,  44,  14,   8,
@@ -40,5 +42,5 @@ fn test_main() {
         3, 210, 111, 56, 246, 219,  19, 104
     ];
 
-    main(signature, position); 
+    main(TRUSTED_PUBLIC_KEY_X, TRUSTED_PUBLIC_KEY_Y, signature, position); 
 }

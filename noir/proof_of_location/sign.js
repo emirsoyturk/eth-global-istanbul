@@ -2,12 +2,14 @@ const { ethers } = require("ethers");
 const { fromHex, hashMessage, toHex, recoverPublicKey } = require("viem");
 
 // let message = "0x0".padEnd(66, "0");
-let message = toHex([
-  1, 5, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0,
-]);
+let location =
+  "0x" +
+  toHex(2897843).slice(2).padStart(16, "0") +
+  toHex(4112022).slice(2).padStart(16, "0");
 
+console.log(location);
 async function getInfos() {
+  const message = location;
   const sender = new ethers.Wallet(
     "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
   );

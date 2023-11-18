@@ -7,10 +7,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Map = await hre.ethers.getContractFactory("Map");
-  const map = await Map.deploy();
+  const Verifier = await hre.ethers.getContractFactory("UltraVerifier");
+  const verifier = await Verifier.deploy();
 
-  await map.deployed();
+  const map = await hre.ethers.deployContract("Map", [verifier.address]);
 
   console.log(`Map deployed to ${map.address}`);
 }

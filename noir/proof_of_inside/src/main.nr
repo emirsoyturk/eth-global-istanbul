@@ -1,13 +1,8 @@
 use dep::std::verify_proof;
 
-struct GeoPoint {
-    integer: i64,
-    fraction: i64
-}
-
 struct GeoLocation {
-    latitude: GeoPoint,
-    longitude: GeoPoint
+    latitude: i64,
+    longitude: i64
 }
 
 fn is_point_in_polygon(location: GeoLocation, borders: [GeoLocation; 4]) -> bool {
@@ -15,13 +10,13 @@ fn is_point_in_polygon(location: GeoLocation, borders: [GeoLocation; 4]) -> bool
     let mut inside = false;
 
     for i in 0..4 {
-        let x_i = borders[i].latitude.integer;
-        let y_i = borders[i].longitude.integer;
-        let x_j = borders[j].latitude.integer;
-        let y_j = borders[j].longitude.integer;
+        let x_i = borders[i].latitude;
+        let y_i = borders[i].longitude;
+        let x_j = borders[j].latitude;
+        let y_j = borders[j].longitude;
 
-        let intersect1 = (y_i > location.longitude.integer) != (y_j > location.longitude.integer);
-        let intersect2 = location.latitude.integer < (x_j - x_i) * (location.longitude.integer - y_i) / (y_j - y_i) + x_i;
+        let intersect1 = (y_i > location.longitude) != (y_j > location.longitude);
+        let intersect2 = location.latitude < (x_j - x_i) * (location.longitude - y_i) / (y_j - y_i) + x_i;
 
         if intersect1 {
             if intersect2 {

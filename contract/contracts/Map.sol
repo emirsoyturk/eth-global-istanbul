@@ -33,14 +33,14 @@ contract Map {
             block.timestamp
         );
 
-        for (uint i = 0; i < locationCount * 4; i += 4) {
+        for (uint i = 0; i < locationCount; i += 1) {
             // Parse the latitude and longitude
-            uint latitude = uint256(_publicInputs[i]); // Convert hex to uint
-            uint longitude = uint256(_publicInputs[i + 2]); // Convert hex to uint
+            uint latitude = uint256(_publicInputs[i * 2]); // Convert hex to uint
+            uint longitude = uint256(_publicInputs[i * 2 + 1]); // Convert hex to uint
 
             // Add the latitude and longitude to their respective arrays
-            newLocation.latitudes[i / 4] = latitude;
-            newLocation.longitudes[i / 4] = longitude;
+            newLocation.latitudes[i] = latitude;
+            newLocation.longitudes[i] = longitude;
         }
 
         // Add the new location to the sender's location history
