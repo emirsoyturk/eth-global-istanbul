@@ -116,21 +116,22 @@ const QrCodeScanner = () => {
     const centers_1 = calculateCenters(polygons_1)
 
     const handleScan = async (scannedText) => {
+        setQrScanned(true);
+
         try {
             const pairs = scannedText.split(' ');
 
-            // Her iki sayıyı içeren alt dizileri oluşturur
             const polygons_scanned = [];
             for (let i = 0; i < pairs.length; i += 2) {
-                polygons_scanned.push([parseFloat(pairs[i] / 100000), parseFloat(pairs[i + 1]/100000)]);
+                polygons_scanned.push([parseFloat(pairs[i] / 100000), parseFloat(pairs[i + 1] / 100000)]);
             }
             const centers_scanned = calculateCenters([polygons_scanned]);
 
             setMap2_polygons([polygons_scanned]);
             setMap2_centers(centers_scanned);
-        } catch {
+        } catch { console.error('Error during polygon parse.'); }
 
-        }
+        console.log("gps read: ")
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
@@ -138,9 +139,6 @@ const QrCodeScanner = () => {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 };
-
-                setQrScanned(true);
-
                 if (qrReaderRef.current) {
                     qrReaderRef.current.stop();
                 }
