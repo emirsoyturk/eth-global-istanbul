@@ -13,9 +13,6 @@ const Footer = () => {
     const { isConnected } = useAccount()
 
     return (
-        <>
-            {isConnected &&
-
                 <div className="w-full sticky bottom-0 flex justify-center items-end p-4">
                     <img
                         className="absolute w-full z-[-1] bottom-0"
@@ -37,7 +34,7 @@ const Footer = () => {
                     </div>
 
                     <div className="cursor-pointer">
-                        <Link to={"./qr"}>
+                        {isConnected ?  <Link to={"./qr"}> 
                             <div className="flex justify-center items-center bg-darkPurple rounded-full p-1 mb-[14vw]">
                                 <MdOutlineQrCodeScanner
                                     size={"80"}
@@ -45,7 +42,13 @@ const Footer = () => {
                                     className="text-white p-3"
                                 />
                             </div>
-                        </Link>
+                        </Link> :                            <div className="flex justify-center items-center bg-darkPurple rounded-full p-1 mb-[14vw]">
+                                <MdOutlineQrCodeScanner
+                                    size={"80"}
+                                    strokeWidth={0.01}
+                                    className="text-white p-3"
+                                />
+                            </div>}
                     </div>
 
                     <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
@@ -60,8 +63,6 @@ const Footer = () => {
                     </div>
                     <div className="absolute -bottom-2 w-full h-[13vw] z-[-1] bg-darkPurple"></div>
                 </div>
-            }
-        </>
     );
 };
 
