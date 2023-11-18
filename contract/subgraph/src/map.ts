@@ -29,12 +29,12 @@ export function handleLocationAdded(event: LocationAddedEvent): void {
         user.totalDistance = 0;
     } else {
         const distance = calculateDistance(latAvg, lngAvg, user.lastBorderAvgLat, user.lastBorderAvgLng);
-        user.totalDistance += i32(distance);
+        user.totalDistance  + i32(distance);
     }
 
     user.lastBorderAvgLat = latAvg;
     user.lastBorderAvgLng = lngAvg;
-    user.save();
+    user.save()
 }
 
 function toRad(value: number) : number {

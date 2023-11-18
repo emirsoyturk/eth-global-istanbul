@@ -10,6 +10,7 @@ import { QRCodeSVG } from "qrcode.react";
 import Svgdef from "./images/app_2.svg";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoMdArrowBack } from "react-icons/io";
+import CustomMap from "./components/Map";
 
 function App() {
   const [createGroupModal, setCreateGroupModal] = useState(false);
@@ -31,6 +32,20 @@ function App() {
 
   // CreateGroup Page 2 values
   const [isPrivate, setIsPrivate] = useState(false);
+
+  let selectedCoordinates = null
+
+  function setPolygonCoordinates(inputCoords) {
+    const temp = JSON.stringify(inputCoords);
+    selectedCoordinates = JSON.parse(temp);
+    console.log(selectedCoordinates);
+  }
+
+  function createAccessURL() {
+    let c = selectedCoordinates;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/push/${c[0][1]}/${c[1][1]}/${c[2][1]}/${c[3][1]}/${c[0][0]}/${c[1][0]}/${c[2][0]}/${c[3][0]}/{{user_address}}/checkAccess`;
+    return url;
+  }
 
   async function createGroup() {
     console.log(alice);
@@ -198,7 +213,7 @@ function App() {
               }`}
             >
               <span className="text-md font-semibold">Public</span>
-              <span className="font-light">
+              <span className="font-light px-2 py-1">
                 Anyone can view chats, even without joining
               </span>
             </div>
@@ -211,14 +226,17 @@ function App() {
               }`}
             >
               <span className="text-md font-semibold">Private</span>
-              <span className="font-light">
+              <span className="font-light px-2 py-1">
                 Encrypted Chats, Users must join group to view
               </span>
             </div>
           </div>
 
+          <CustomMap setPolygonCoordinates={setPolygonCoordinates} />
+
           <button
-            className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] mt-4 text-[#ffffff] hover:opacity-50"
+            className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] text-[#ffffff] hover:opacity-50"
+            style={{ marginTop: "-14px" }}
             onClick={createGroup}
           >
             Create Group
@@ -238,13 +256,13 @@ function App() {
         >
           <div
             className={
-              "flex flex-col items-center justify-center mx-auto mt-40 bg-gray-300 w-1/2 h-1/2 px-10 py-10"
+              "flex flex-col items-center justify-center mx-auto mt-40 rounded-2xl bg-gray-300 w-fit h-1/2 px-32 py-10"
             }
           >
-            <QRCodeSVG value={qrValue} className={""} />
+            <QRCodeSVG value={qrValue} className={""} size={150}/>
             <span
               className={
-                "border border-gray-600 px-4 py-2 rounded-lg mt-2 w-1/2"
+                "border border-gray-600 px-4 py-2 rounded-lg mt-6 w-1/2 min-w-fit flex justify-center"
               }
             >
               {" "}
@@ -256,7 +274,7 @@ function App() {
                 joinGroup(groupIdOfQR);
               }}
               className={
-                "border border-gray-600 px-4 py-2 rounded-xl mt-2 w-1/2"
+                "border border-gray-600 px-4 py-2 rounded-xl mt-2 w-full"
               }
             >
               {" "}
@@ -265,7 +283,7 @@ function App() {
             <button
               onClick={() => setShowQR(false)}
               className={
-                "border border-gray-600 px-4 py-2 rounded-xl mt-2 w-1/2"
+                "border border-gray-600 px-4 py-2 rounded-xl mt-2 w-full"
               }
             >
               {" "}

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mapboxgl-ctrl-bottom-right {
+    display: none !important;
+}

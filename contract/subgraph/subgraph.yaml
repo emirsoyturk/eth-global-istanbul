@@ -6,7 +6,7 @@ dataSources:
     name: Map
     network: sepolia
     source:
-      address: "0xd82453e58148e713690af8f6af59bdbbd86a478d"
+      address: "0xdf0a76716934802181ea808812fc54bfa11c6dba"
       abi: Map
       startBlock: 4716381
     mapping:

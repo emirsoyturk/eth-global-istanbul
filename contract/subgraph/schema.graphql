@@ -8,7 +8,7 @@ type Border @entity(immutable: true) {
   user: User!
 }
 
-type User @entity(immutable: true) {
+type User @entity(immutable: false) {
   id: ID!
   totalDistance: Int!
   lastBorderAvgLat: Int!
