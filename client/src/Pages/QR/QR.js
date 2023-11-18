@@ -93,36 +93,42 @@ const QrCodeScanner = () => {
     }, []);
     const calculateCenters = (polygons) => {
         const centers = [];
-      
-        polygons.forEach(polygon => {
-          let centerX = 0;
-          let centerY = 0;
-      
-          polygon.forEach(point => {
-            centerX += point[0];
-            centerY += point[1];
-          });
-      
-          centerX /= polygon.length;
-          centerY /= polygon.length;
-      
-          centers.push([centerX, centerY]);
-        });
-      
-        return centers;
-      };
 
-    const polygons_1 = [[[0,0],[5,10],[10,0]],[[10,10],[15,20],[20,10]]]
+        polygons.forEach(polygon => {
+            let centerX = 0;
+            let centerY = 0;
+
+            polygon.forEach(point => {
+                centerX += point[0];
+                centerY += point[1];
+            });
+
+            centerX /= polygon.length;
+            centerY /= polygon.length;
+
+            centers.push([centerX, centerY]);
+        });
+
+        return centers;
+    };
+
+    const polygons_1 = [[[0, 0], [5, 10], [10, 0]], [[10, 10], [15, 20], [20, 10]]]
     const centers_1 = calculateCenters(polygons_1)
 
     const handleScan = async (scannedText) => {
         try {
-             let polygons_scanned = JSON.parse(scannedText);
-            const centers_scanned = calculateCenters(polygons_scanned);
+            const pairs = scannedText.split(' ');
 
-            setMap2_polygons(polygons_scanned);
-            setMap2_centers(centers_scanned); 
-        }catch{
+            // Her iki sayıyı içeren alt dizileri oluşturur
+            const polygons_scanned = [];
+            for (let i = 0; i < pairs.length; i += 2) {
+                polygons_scanned.push([parseFloat(pairs[i] / 100000), parseFloat(pairs[i + 1]/100000)]);
+            }
+            const centers_scanned = calculateCenters([polygons_scanned]);
+
+            setMap2_polygons([polygons_scanned]);
+            setMap2_centers(centers_scanned);
+        } catch {
 
         }
 
@@ -132,11 +138,6 @@ const QrCodeScanner = () => {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 };
-
-/*                 console.log(scannedText);
-                console.log(gpsData.latitude);
-                console.log(gpsData.longitude); */
-
 
                 setQrScanned(true);
 

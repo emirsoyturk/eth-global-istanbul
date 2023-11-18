@@ -44,6 +44,8 @@ const Map2 = ({ polygons, centers, timestamps }) => {
   return (
     <div className="h-[50vh]">
       <Map
+        center={centers[0]}
+        zoom={[6]}
         style="mapbox://styles/mapbox/streets-v9"
         containerStyle={{
           height: "100vh",
