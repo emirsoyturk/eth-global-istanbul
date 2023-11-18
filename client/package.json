@@ -11,7 +11,7 @@
     "@wagmi/core": "^1.4.7",
     "@web3modal/ethers5": "^3.3.2",
     "@web3modal/wagmi": "^3.3.2",
-    "ethers": "^6.8.1",
+    "ethers": "^5.6.7",
     "framer-motion": "^10.16.5",
     "graphql": "^16.8.1",
     "mapbox-gl": "^2.15.0",
