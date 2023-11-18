@@ -25,7 +25,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className={`w-[12vw] h-[12vw] rounded-lg flex justify-center items-center mr-7 text-darkPurple ${isConnected && 'bg-softPurple'}`}>
+            <div className={`w-[12vw] h-[12vw] rounded-lg flex justify-center items-center mr-7 text-white ${isConnected && 'bg-darkPurple'}`}>
                 {isConnected ? <button onClick={HandleDisconnect}><IoLogOutOutline size={32} /></button> : <w3m-button label='Connect'/>}
             </div>
 

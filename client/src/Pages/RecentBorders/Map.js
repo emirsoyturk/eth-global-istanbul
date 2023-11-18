@@ -8,7 +8,9 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const Map2 = ({ polygons, centers, timestamps }) => {
+const Map2 = ({ polygons, centers, realLocation }) => {
+    console.log(realLocation)
+    console.log(centers[0])
   const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_MAP_APIKEY,
   });
@@ -31,6 +33,15 @@ const Map2 = ({ polygons, centers, timestamps }) => {
     "circle-opacity": 0.7,
   };
 
+  const realLocPaint = {
+    "circle-radius": 6,
+    "circle-color": "#7056B2",
+    // 'circle-stroke-color': 'white',
+    // 'circle-stroke-width': 1,
+    "circle-opacity": 0.7,
+  };
+
+
   const ExamplePolygonCoordinates = [
     [
       [32.34375, 40.3130432],
@@ -52,14 +63,14 @@ const Map2 = ({ polygons, centers, timestamps }) => {
           width: "100vw",
         }}
       >
-        <ZoomControl />
+        <ZoomControl/>
         <RotationControl style={{ top: 80 }} />
         {polygons.map((polygon, i) => (
           <div key={i + 1}>
             <Layer type="fill" paint={multiPolygonPaint}>
               <Feature coordinates={[polygon]} />
             </Layer>
-            <Layer type="circle" paint={circlePaint}>
+            <Layer type="dot" paint={circlePaint}>
               <Feature
                 coordinates={centers[i]}
                 onClick={(x) => {
@@ -75,16 +86,22 @@ const Map2 = ({ polygons, centers, timestamps }) => {
                 }}
               />
             </Layer>
-            {/* <Popup
-                            coordinates={centers[i]}
-                            // offset={{
-                            //     "bottom-left": [12, -38],
-                            //     bottom: [0, -38],
-                            //     "bottom-right": [-12, -38],
-                            // }}
-                        >
-                            <h1>You were here at {new Date(timestamps[i] * 1000).toLocaleDateString()}</h1>
-                        </Popup> */}
+            <Layer type="circle" paint={realLocPaint}>
+              <Feature
+                coordinates={realLocation}
+                onClick={(x) => {
+                  x.map.flyTo({
+                    center: centers[i],
+                    zoom: 6,
+                    speed: 5,
+                    curve: 1,
+                    easing(t) {
+                      return t;
+                    },
+                  });
+                }}
+              />
+            </Layer>
           </div>
         ))}
       </Map>

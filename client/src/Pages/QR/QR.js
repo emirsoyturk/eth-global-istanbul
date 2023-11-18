@@ -56,6 +56,7 @@ const QrCodeScanner = () => {
 
   const [map2_polygons, setMap2_polygons] = useState([]);
   const [map2_centers, setMap2_centers] = useState([]);
+  const [gps, setGps] = useState([[]]);
   useEffect(() => {
     const client = new ApolloClient({
       uri: SUBGRAPH_URL,
@@ -170,7 +171,8 @@ const QrCodeScanner = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-        console.log(gpsData);
+        setGps([gpsData.longitude, gpsData.latitude]);
+        console.log("gps" + gps)
         if (qrReaderRef.current) {
           qrReaderRef.current.stop();
         }
@@ -413,7 +415,7 @@ const QrCodeScanner = () => {
             <Map2
               polygons={map2_polygons}
               centers={map2_centers}
-              timestamps={[]}
+              realLocation={gps}
             />
           )}
         </div>
