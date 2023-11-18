@@ -17,22 +17,20 @@ const io = socketIo(server);
 const sessions = {}; // To keep track of sessions and UIDs
 
 io.on("connection", (socket) => {
-  socket.on("register", (uid) => {
-    console.log("Registered UID: " + uid + " Socket Id: " + socket.id);
-    sessions[uid] = socket.id;
-  });
+    socket.on("register", (uid) => {
+        console.log("Registered UID: " + uid + " Socket Id: " + socket.id);
+        sessions[uid] = socket.id;
+    });
 
-  socket.on("message", ({ uid, message }) => {
-    console.log("Got Message! UID: " + uid + " Message: " + message);
-    const targetSocketId = sessions[uid];
-    console.log("Target Socket Id: " + targetSocketId);
-    if (uid) {
-      console.log("Sending message to: " + uid);
-      io.to(uid).emit("message", message);
-    }
-  });
+    socket.on("message", ({ uid, message }) => {
+        console.log("Got Message! UID: " + uid + " Message: " + message + " Target Message: " + sessions[uid])
+        const targetSocketId = sessions[uid];
+        if (targetSocketId) {
+            io.to(targetSocketId).emit("message", message);     
+        }
+    });
 });
 
 app.use("/noir", noir);
 
-server.listen(port, () => console.log("Server running on port 4000"));
+server.listen(port, () => console.log(`Server running on port ${port}`));

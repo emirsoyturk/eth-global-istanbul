@@ -6,10 +6,10 @@ import Header from '../../Components/Header/Header';
 
 function MainPage() {
     return (
-            <div className="flex flex-col min-h-screen text-purple font-bold flex-grow mx-auto max-w-screen-xl">
+            <div className="flex flex-col h-full text-purple font-bold flex-grow mx-auto max-w-screen-xl">
                 <Header />
                 <div className="flex-grow mx-auto max-w-screen-xl">
-                    <CardItem title={"Baslik There"} subtitle={"Subtitle There"} imageSrc={DefaultImage} />
+                    <CardItem title={"2.70% Today"} subtitle={"$12,670.90"} imageSrc={DefaultImage} />
                     <SmallCards />
                 </div>
             </div>
