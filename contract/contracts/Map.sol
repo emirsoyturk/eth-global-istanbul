@@ -11,7 +11,7 @@ contract Map {
 
     mapping(address => Location[]) locationHistory;
 
-    event LocationAdded(Location location, uint timestamp);
+    event LocationAdded(Location location);
 
     function addLocation(
         bytes calldata _proof,
@@ -39,6 +39,7 @@ contract Map {
 
         // Add the new location to the sender's location history
         locationHistory[msg.sender].push(newLocation);
+        emit LocationAdded(newLocation);
     }
 
     function addressLocationCount() public view returns (uint) {

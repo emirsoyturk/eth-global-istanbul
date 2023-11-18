@@ -6,7 +6,7 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { BigInt } from "@graphprotocol/graph-ts"
+import {} from "@graphprotocol/graph-ts"
 import { LocationAdded } from "../generated/schema"
 import { LocationAdded as LocationAddedEvent } from "../generated/Map/Map"
 import { handleLocationAdded } from "../src/map"
@@ -18,8 +18,7 @@ import { createLocationAddedEvent } from "./map-utils"
 describe("Describe entity assertions", () => {
   beforeAll(() => {
     let location = "ethereum.Tuple Not implemented"
-    let timestamp = BigInt.fromI32(234)
-    let newLocationAddedEvent = createLocationAddedEvent(location, timestamp)
+    let newLocationAddedEvent = createLocationAddedEvent(location)
     handleLocationAdded(newLocationAddedEvent)
   })
 
@@ -39,12 +38,6 @@ describe("Describe entity assertions", () => {
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
       "location",
       "ethereum.Tuple Not implemented"
-    )
-    assert.fieldEquals(
-      "LocationAdded",
-      "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "timestamp",
-      "234"
     )
 
     // More assert options:

@@ -6,9 +6,9 @@ dataSources:
     name: Map
     network: sepolia
     source:
-      address: "0xbec359315e757ca1cfeb0b814e20d71fa24bf2c3"
+      address: "0xd82453e58148e713690af8f6af59bdbbd86a478d"
       abi: Map
-      startBlock: 4716355
+      startBlock: 4716381
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -19,6 +19,6 @@ dataSources:
         - name: Map
           file: ./abis/Map.json
       eventHandlers:
-        - event: LocationAdded((uint256[],uint256[],uint256),uint256)
+        - event: LocationAdded((uint256[],uint256[],uint256))
           handler: handleLocationAdded
       file: ./src/map.ts

@@ -1,10 +1,9 @@
 import { newMockEvent } from "matchstick-as"
-import { ethereum, BigInt } from "@graphprotocol/graph-ts"
+import { ethereum } from "@graphprotocol/graph-ts"
 import { LocationAdded } from "../generated/Map/Map"
 
 export function createLocationAddedEvent(
-  location: ethereum.Tuple,
-  timestamp: BigInt
+  location: ethereum.Tuple
 ): LocationAdded {
   let locationAddedEvent = changetype<LocationAdded>(newMockEvent())
 
@@ -12,12 +11,6 @@ export function createLocationAddedEvent(
 
   locationAddedEvent.parameters.push(
     new ethereum.EventParam("location", ethereum.Value.fromTuple(location))
-  )
-  locationAddedEvent.parameters.push(
-    new ethereum.EventParam(
-      "timestamp",
-      ethereum.Value.fromUnsignedBigInt(timestamp)
-    )
   )
 
   return locationAddedEvent

@@ -8,7 +8,6 @@ export function handleLocationAdded(event: LocationAddedEvent): void {
   entity.location_latitudes = event.params.location.latitudes
   entity.location_longitudes = event.params.location.longitudes
   entity.location_timestamp = event.params.location.timestamp
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
