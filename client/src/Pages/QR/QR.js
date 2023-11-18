@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { QrReader } from "react-qr-reader";
 import io from "socket.io-client";
 
-const socket = io(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000'}` , { transports: ['websocket'] });
+const socket = io(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000'}`, { transports: ['websocket'] });
 
 // useeffect socket
 
@@ -63,13 +63,13 @@ const QrCodeScanner = () => {
     return (
         <div className="flex justify-center items-center h-full p-2">
             {!qrScanned ?
-                <div className="w-full bg-purple p-4 rounded-xl">
-                    <span className="text-purpleBlack">Scan the QR There</span>
+                <div className="w-full p-4 rounded-xl">
+                    <span className="text-purpleBlack ">Scan the QR There</span>
                     <QrReader
                         constraints={{
                             facingMode: 'environment',
                             width: { max: 2000, min: 480 },
-                          }}
+                        }}
                         scanDelay={250}
                         ref={qrReaderRef}
                         onResult={(result, error) => {
@@ -78,7 +78,9 @@ const QrCodeScanner = () => {
                             }
                         }}
                         videoContainerStyle={{}}
-                        videoStyle={{}}
+                        videoStyle={{ width: '120%', height: '100%', padding: '10px',
+                            border: 'solid', borderStyle: 'dashed', borderWidth: '4px', borderColor: '#261863'
+                        }}
                     /> </div>
                 : <AfterScan />
             }

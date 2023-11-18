@@ -1,5 +1,5 @@
 import { ChatView, CreateGroupModal, MODAL_POSITION_TYPE } from "@pushprotocol/uiweb";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { PushAPI } from "@pushprotocol/restapi";
 import { ethers } from "ethers";
 import Svgdef from './images/app_2.svg'
@@ -16,6 +16,15 @@ function App() {
     const [alice, setAlice] = useState(null)
     const [name, setName] = useState('istanbul')
     const [description, setDescription] = useState('istanbul')
+
+    // CreateGroup Page 1 values
+    const groupNameRef = useRef(null);
+    const groupDescriptionRef = useRef(null);
+    const [groupName, setGroupName] = useState("");
+    const [groupDescription, setGroupDescription] = useState("");
+
+    // CreateGroup Page 2 values
+    const [isPrivate, setIsPrivate] = useState(false);
 
     async function createGroup() {
         const createdGroup = await alice.chat.group.create(name,
@@ -69,6 +78,8 @@ function App() {
         setCreateGroupModal(true);
     }
     function handleGroupLayout_page1_next(e) {
+        setGroupName(groupNameRef.current.value)
+        setGroupDescription(groupDescriptionRef.current.value)
         setCreateGroupModal(false);
         setCreateGroupModal_page2(true);
     }
@@ -88,7 +99,8 @@ function App() {
                             Group Name
                         </label>
                         <input type={"text"} placeholder={"Test Group"}
-                            className={"border border-gray-800 rounded-lg h-10 w-full placeholder:text-md px-4"} />
+                            className={"border border-gray-800 rounded-lg h-10 w-full placeholder:text-md px-4"} 
+                            ref={groupNameRef}/>
                     </div>
                     <div className="mt-4 h-[20vh] w-full">
                         <label className="block text-lg">
@@ -99,6 +111,7 @@ function App() {
                             cols={35}
                             placeholder={"Here is a gate group example"}
                             className="p-4 border border-gray-800 rounded-lg h-full placeholder:text-sm px-4 w-full"
+                            ref={groupDescriptionRef}
                         />
                     </div>
 
@@ -109,6 +122,7 @@ function App() {
     }
 
     function CreateGroupModal_page2() {
+        console.log(isPrivate)
         return (
             <div className={"fixed left-0 top-0 bg-opacity-50 h-screen w-[100vw] z-50 flex flex-col"}>
                 <div
@@ -118,11 +132,11 @@ function App() {
                     <button onClick={() => setCreateGroupModal_page2(false)} className="absolute right-0 top-0 p-2"><AiOutlineClose size={32} /></button>
 
                     <div className={"w-full h-[10vh] flex flex-row justify-center items-center text-sm"}>
-                        <div className="w-1/2 h-full text-center rounded-l-lg flex flex-col justify-center items-center border-solid border-2 hover:bg-gray-100 hover:cursor-pointer">
+                        <div onClick={() => setIsPrivate(false)} className={`w-1/2 h-full text-center rounded-l-lg flex flex-col justify-center items-center border-solid border-2 ${isPrivate && 'hover:bg-gray-100 hover:text-black '} hover:cursor-pointer ${!isPrivate ? 'bg-blue-500 text-white' : ''}`}>
                             <span className="text-md font-semibold">Public</span>
                             <span className="font-light">Anyone can view chats, even without joining</span>
                         </div>
-                        <div className="w-1/2 h-full text-center rounded-r-lg flex flex-col justify-center items-center border-solid border-2 hover:bg-gray-100 hover:cursor-pointer">
+                        <div onClick={() => setIsPrivate(true)} className={`w-1/2 h-full text-center rounded-r-lg flex flex-col justify-center items-center border-solid border-2 ${!isPrivate && 'hover:bg-gray-100 hover:text-black '} hover:cursor-pointer ${isPrivate ? 'bg-blue-500 text-white' : ''}`}>
                             <span className="text-md font-semibold">Private</span>
                             <span className="font-light">Encrypted Chats, Users must join group to view</span>
                         </div>
@@ -172,7 +186,6 @@ function App() {
                         <CreateGroupModal
                             onClose={() => setCreateGroupModal(false)}
                         />
-
                     </div>
                 }
                 {
@@ -181,7 +194,6 @@ function App() {
                         <CreateGroupModal_page2
                             onClose={() => setCreateGroupModal_page2(false)}
                         />
-
                     </div>
                 }
 
