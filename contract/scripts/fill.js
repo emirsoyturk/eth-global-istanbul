@@ -8,7 +8,7 @@ const hre = require("hardhat");
 
 async function main() {
   const Map = await hre.ethers.getContractFactory("Map");
-  const map = Map.attach("0x5402B89074dB3e386d697333A216C668A8ae09cb");
+  const map = Map.attach("0xd82453e58148e713690AF8f6af59bdbBD86A478d");
 
   const inputs = [
     "0x0000000000000000000000000000000000000000000000000000000000000052",
