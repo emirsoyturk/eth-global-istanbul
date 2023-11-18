@@ -7,8 +7,8 @@ import {
   afterAll
 } from "matchstick-as/assembly/index"
 import {} from "@graphprotocol/graph-ts"
-import { LocationAdded } from "../generated/schema"
-import { LocationAdded as LocationAddedEvent } from "../generated/Map/Map"
+import { LocationAdded } from "../old_generated/schema"
+import { LocationAdded as LocationAddedEvent } from "../old_generated/Map/Map"
 import { handleLocationAdded } from "../src/map"
 import { createLocationAddedEvent } from "./map-utils"
 

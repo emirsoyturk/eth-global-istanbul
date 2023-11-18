@@ -21,6 +21,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "web3": "^4.2.2"
   }
 }

@@ -1,9 +1,13 @@
-type LocationAdded @entity(immutable: true) {
-  id: Bytes!
+type Location @entity(immutable: true) {
+  id: ID!
   location_latitudes: [BigInt!]! # uint256[]
   location_longitudes: [BigInt!]! # uint256[]
   location_timestamp: BigInt! # uint256
-  blockNumber: BigInt!
   blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  user: User!
+}
+
+type User @entity(immutable: true) {
+  id: ID!
+  locationHistory: [Location!]! @derivedFrom(field: "user")
 }

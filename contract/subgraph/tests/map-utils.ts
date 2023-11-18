@@ -1,6 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum } from "@graphprotocol/graph-ts"
-import { LocationAdded } from "../generated/Map/Map"
+import { LocationAdded } from "../old_generated/Map/Map"
 
 export function createLocationAddedEvent(
   location: ethereum.Tuple
