@@ -7,7 +7,7 @@ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 
 import { WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet } from 'viem/chains'
-import RecentLocations from './Pages/RecentLocations/RecentLocations';
+import RecentBorders from './Pages/RecentBorders/RecentBorders';
 
 // 1. Get projectId
 const projectId = '6f3d6e0a432176df529426e6531f671b'
@@ -35,7 +35,7 @@ function App() {
                     <Route exact path="/homePage" element={<MainPage />} />
                     <Route exact path="/qr" element={<QrCodeScanner />} />
                     <Route exact path="/landingPage" element={<Landingpage />} />
-                    <Route exact path="/recentlocations" element={<RecentLocations />} />
+                    <Route exact path="/recentborders" element={<RecentBorders />} />
                 </Routes>
 
                 <Footer />

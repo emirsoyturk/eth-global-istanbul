@@ -52,7 +52,7 @@ const Footer = () => {
                     </div>
 
                     <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
-                        <Link to={"./recentlocations"}>
+                        <Link to={"./recentborders"}>
                             <div>
                                 <SiGoogleanalytics size={"40"} className="cursor-pointer text-pink" />
                             </div>

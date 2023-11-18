@@ -3,7 +3,7 @@ import React from "react";
 import ReactMapboxGl, { Layer, Feature, ZoomControl, RotationControl } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const Map = ({ polygons, centers, timestamps }) => {
+const Map2 = ({ polygons, centers, timestamps }) => {
     const Map = ReactMapboxGl({
         accessToken: process.env.REACT_APP_MAP_APIKEY,
     });
@@ -86,4 +86,4 @@ const Map = ({ polygons, centers, timestamps }) => {
     );
 };
 
-export default Map;
+export default Map2;

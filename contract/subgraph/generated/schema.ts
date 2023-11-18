@@ -11,34 +11,75 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Location extends Entity {
-  constructor(id: string) {
+export class Border extends Entity {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Location entity without an ID");
+    assert(id != null, "Cannot save Border entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type Location must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type Border must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Location", id.toString(), this);
+      store.set("Border", id.toBytes().toHexString(), this);
     }
   }
 
-  static loadInBlock(id: string): Location | null {
-    return changetype<Location | null>(store.get_in_block("Location", id));
+  static loadInBlock(id: Bytes): Border | null {
+    return changetype<Border | null>(
+      store.get_in_block("Border", id.toHexString())
+    );
   }
 
-  static load(id: string): Location | null {
-    return changetype<Location | null>(store.get("Location", id));
+  static load(id: Bytes): Border | null {
+    return changetype<Border | null>(store.get("Border", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get border_latitudes(): Array<BigInt> {
+    let value = this.get("border_latitudes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set border_latitudes(value: Array<BigInt>) {
+    this.set("border_latitudes", Value.fromBigIntArray(value));
+  }
+
+  get border_longitudes(): Array<BigInt> {
+    let value = this.get("border_longitudes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set border_longitudes(value: Array<BigInt>) {
+    this.set("border_longitudes", Value.fromBigIntArray(value));
+  }
+
+  get border_string(): string {
+    let value = this.get("border_string");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -46,38 +87,12 @@ export class Location extends Entity {
     }
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set border_string(value: string) {
+    this.set("border_string", Value.fromString(value));
   }
 
-  get location_latitudes(): Array<BigInt> {
-    let value = this.get("location_latitudes");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigIntArray();
-    }
-  }
-
-  set location_latitudes(value: Array<BigInt>) {
-    this.set("location_latitudes", Value.fromBigIntArray(value));
-  }
-
-  get location_longitudes(): Array<BigInt> {
-    let value = this.get("location_longitudes");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigIntArray();
-    }
-  }
-
-  set location_longitudes(value: Array<BigInt>) {
-    this.set("location_longitudes", Value.fromBigIntArray(value));
-  }
-
-  get location_timestamp(): BigInt {
-    let value = this.get("location_timestamp");
+  get border_timestamp(): BigInt {
+    let value = this.get("border_timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -85,8 +100,8 @@ export class Location extends Entity {
     }
   }
 
-  set location_timestamp(value: BigInt) {
-    this.set("location_timestamp", Value.fromBigInt(value));
+  set border_timestamp(value: BigInt) {
+    this.set("border_timestamp", Value.fromBigInt(value));
   }
 
   get blockTimestamp(): BigInt {
@@ -155,16 +170,55 @@ export class User extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get locationHistory(): LocationLoader {
-    return new LocationLoader(
+  get totalDistance(): i32 {
+    let value = this.get("totalDistance");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set totalDistance(value: i32) {
+    this.set("totalDistance", Value.fromI32(value));
+  }
+
+  get lastBorderAvgLat(): i32 {
+    let value = this.get("lastBorderAvgLat");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set lastBorderAvgLat(value: i32) {
+    this.set("lastBorderAvgLat", Value.fromI32(value));
+  }
+
+  get lastBorderAvgLng(): i32 {
+    let value = this.get("lastBorderAvgLng");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set lastBorderAvgLng(value: i32) {
+    this.set("lastBorderAvgLng", Value.fromI32(value));
+  }
+
+  get borderHistory(): BorderLoader {
+    return new BorderLoader(
       "User",
       this.get("id")!.toString(),
-      "locationHistory"
+      "borderHistory"
     );
   }
 }
 
-export class LocationLoader extends Entity {
+export class BorderLoader extends Entity {
   _entity: string;
   _field: string;
   _id: string;
@@ -176,8 +230,8 @@ export class LocationLoader extends Entity {
     this._field = field;
   }
 
-  load(): Location[] {
+  load(): Border[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Location[]>(value);
+    return changetype<Border[]>(value);
   }
 }

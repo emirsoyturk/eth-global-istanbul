@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
-import { useAccount, useDisconnect } from "wagmi";
-import Map from "./Map";
+import { useAccount } from "wagmi";
+import Map2 from "./Map";
 
 const SUBGRAPH_URL =
     process.env.REACT_APP_SUBGRAPH_URL ??
     "https://api.studio.thegraph.com/query/58684/ethglobal-istanbul/version/latest";
 
-const recentLocationsQuery = `
-    query GetUserLocations($userId: ID!) {
+const recentBordersQuery = `
+    query GetUserBorders($userId: ID!) {
         user(id: $userId) {
-        locationHistory(orderBy: blockTimestamp, orderDirection: desc, first: 10) {
+        borderHistory(orderBy: blockTimestamp, orderDirection: desc, first: 10) {
             id
-            location_latitudes
-            location_longitudes
-            location_timestamp
+            border_latitudes
+            border_longitudes
+            border_timestamp
             blockTimestamp
         }
         }
     }`;
 
-const RecentLocations = () => {
+const RecentBorders = () => {
     const { address } = useAccount();
-    const [recentLocations, setRecentLocations] = useState(null);
+    const [recentBorders, setRecentBorders] = useState(null);
     const [centers, setCenters] = useState([]);
     const [timestamps, setTimestamps] = useState([]);
 
@@ -35,37 +34,37 @@ const RecentLocations = () => {
 
         client
             .query({
-                query: gql(recentLocationsQuery),
+                query: gql(recentBordersQuery),
                 variables: {
                     userId: address?.toLowerCase() ?? "0x0",
                 },
             })
             .then((data) => {
                 if (!data.data.user) {
-                    setRecentLocations([]);
+                    setRecentBorders([]);
                     return;
                 }
                 let coordinates = [];
-                for (let i = 0; i < data.data.user.locationHistory.length; i++) {
+                for (let i = 0; i < data.data.user.borderHistory.length; i++) {
                     coordinates.push([]);
                     centers.push([0, 0]);
-                    for (let j = 0; j < data.data.user.locationHistory[i].location_latitudes.length; j++) {
+                    for (let j = 0; j < data.data.user.borderHistory[i].border_latitudes.length; j++) {
                         coordinates[i].push([
-                            Number(data.data.user.locationHistory[i].location_latitudes[j]),
-                            Number(data.data.user.locationHistory[i].location_longitudes[j]),
+                            Number(data.data.user.borderHistory[i].border_latitudes[j]),
+                            Number(data.data.user.borderHistory[i].border_longitudes[j]),
                         ]);
                         centers[i][0] += coordinates[i][j][0];
                         centers[i][1] += coordinates[i][j][1];
                     }
-                    timestamps[i] = data.data.user.locationHistory[i].location_timestamp;
-                    centers[i][0] /= data.data.user.locationHistory[i].location_latitudes.length;
-                    centers[i][1] /= data.data.user.locationHistory[i].location_longitudes.length;
+                    timestamps[i] = data.data.user.borderHistory[i].border_timestamp;
+                    centers[i][0] /= data.data.user.borderHistory[i].border_latitudes.length;
+                    centers[i][1] /= data.data.user.borderHistory[i].border_longitudes.length;
                     coordinates[i].push(coordinates[i][0]);
                 }
-                console.log(coordinates)
+                console.log(coordinates);
                 setCenters(centers);
                 setTimestamps(timestamps);
-                setRecentLocations(coordinates);
+                setRecentBorders(coordinates);
             })
             .catch((err) => {
                 console.log("Error fetching data: ", err);
@@ -74,9 +73,9 @@ const RecentLocations = () => {
 
     return (
         <div className="h-[100vh]">
-            {recentLocations && <Map polygons={recentLocations} centers={centers} timestamps={timestamps} />}
+            {recentBorders && <Map2 polygons={recentBorders} centers={centers} timestamps={timestamps} />}
         </div>
     );
 };
 
-export default RecentLocations;
+export default RecentBorders;
