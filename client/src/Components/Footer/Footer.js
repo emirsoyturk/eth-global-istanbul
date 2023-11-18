@@ -13,7 +13,7 @@ const Footer = () => {
     const { isConnected } = useAccount()
 
     return (
-                <div className="w-full sticky bottom-0 flex justify-center items-end p-4">
+                <div className="w-full sticky bottom-0 flex justify-center items-end p-4 z-10">
                     <img
                         className="absolute w-full z-[-1] bottom-0"
                         src={"/rectangle.svg"}
