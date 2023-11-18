@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 
 function App() {
     return (
-        <div className="flex flex-col min-h-screen text-purple font-bold flex-grow mx-auto max-w-screen-xl">
+        <div className="flex flex-col h-full text-purple font-bold flex-grow mx-auto max-w-screen-xl">
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
                 <Route exact path="/qr" element={<QrCodeScanner />} />

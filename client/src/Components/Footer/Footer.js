@@ -9,23 +9,34 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="relative w-full flex flex-row justify-around items-center text-softPurple sticky bottom-0 p-4">
-      <div className="flex-shrink-0 p-1 pt-4 text-pink">
-        <FaHome size={28} className="cursor-pointer" />
+    <div className="w-full sticky bottom-0 flex justify-center items-end p-4">
+      <img className='absolute w-full z-[-1] bottom-0' src={FooterBG} alt="Background" />
+      <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
+        <div>
+          <FaHome size={'11vw'} className="cursor-pointer text-pink" />
+        </div>
+        <div>
+          <FaHome size={'11vw'} className="cursor-pointer text-pink" />
+        </div>
       </div>
-      <div className="flex-shrink-0 p-2 pr-4 pt-4">
-        <FaHome size={28} className="cursor-pointer text-pink" />
+
+      <div className="cursor-pointer">
+        <Link to={'./qr'}>
+          <div className="flex justify-center items-center bg-purple rounded-full p-1 mb-[14vw]">
+            <MdOutlineQrCodeScanner size={'17vw'} className="text-purpleBlack p-2"/>
+          </div>
+        </Link>
       </div>
-      <div className="flex-shrink-0 p-2 bg-purple rounded-full p-2 cursor-pointer absolute bottom-12">
-        <Link to={'./qr'}> <MdOutlineQrCodeScanner size={48} className="text-purpleBlack"/> </Link>
+
+      <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
+        <div>
+          <SiGoogleanalytics size={'11vw'} className="cursor-pointer text-pink" />
+        </div>
+        <div>
+          <MdSettings size={'11vw'} className="cursor-pointer text-pink" />
+        </div>
       </div>
-      <div className="flex-shrink-0 p-2 pl-4 pt-4">
-        <SiGoogleanalytics size={28} className="cursor-pointer text-pink" />
-      </div>
-      <div className="flex-shrink-0 p-1 pt-4">
-        <MdSettings size={28} className="cursor-pointer text-pink" />
-      </div>
-      <div className="absolute inset-0 bg-cover bg-center z-[-1]" style={{ backgroundImage: `url(${FooterBG})`/* , height: '200px' */ }} />
+      <div className="absolute bottom-0 w-full h-[12vw] z-[-1] bg-purple"></div>
     </div>
   );
 };

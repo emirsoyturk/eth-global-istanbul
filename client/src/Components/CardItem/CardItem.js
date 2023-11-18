@@ -1,21 +1,34 @@
 import React from 'react';
 import { MdOutlineQrCodeScanner } from "react-icons/md";
+import HeaderBG from '../../Images/header_bg.svg'; // Import your image
+import HeaderCoin from '../../Images/header_coin.png'; // Import your image
+
+import { Link } from "react-router-dom";
+
+
 
 const CardItem = ({ title, subtitle, imageSrc }) => {
   return (
-    <div className="w-4/5 flex flex-row justify-center items-center p-1 md:flex-row mx-auto overflow-hidden bg-softPurple rounded-lg shadow-xl text-purpleBlack">
-      <div className="md:w-5/8">
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-base">{subtitle}</p>
+    <div className="flex justify-center items-center relative">
+      <img className='w-[90%] ml-3 h-auto' src={HeaderBG} alt="Background"/>
+      <div className="absolute inset-0 flex justify-around items-center flex-row">
+        <div className='relative ml-[15vw]'>
+          <p className="absolute text-[3.6vw] -top-[8vw] w-[50vw] text-pink">{title || 'Placeholder Subtitle'}</p>
+          <p className="text-[6vw] font-bold w-[50vw] text-white">{subtitle || 'Placeholder Title'}</p>
+          <div className="cursor-pointer absolute -bottom-[19vw] left-0 ml-[10vw] mt-[5vw]">
+            <Link to={'./qr'}>
+              <div className="flex justify-center items-center bg-yellow-500 rounded-full w-fit">
+                <MdOutlineQrCodeScanner size={'12vw'} className="text-purpleBlack p-2"/>
+              </div>
+            </Link>
+          </div>
         </div>
-      </div>
-
-      <div className="md:w-3/8 md:h-1/2 bg-purple rounded-lg flex justify-center items-center text-purpleBlack">
-        <MdOutlineQrCodeScanner size={48} className="cursor-pointer text-purpleBlack" />
+        <img className='w-[30vw] mr-[15vw] -ml-[1vw]' src={HeaderCoin} alt="Background"/>
       </div>
     </div>
   );
 };
 
 export default CardItem;
+
+
