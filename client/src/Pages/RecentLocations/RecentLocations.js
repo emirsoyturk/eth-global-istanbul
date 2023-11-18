@@ -41,6 +41,10 @@ const RecentLocations = () => {
                 },
             })
             .then((data) => {
+                if (!data.data.user) {
+                    setRecentLocations([]);
+                    return;
+                }
                 let coordinates = [];
                 for (let i = 0; i < data.data.user.locationHistory.length; i++) {
                     coordinates.push([]);

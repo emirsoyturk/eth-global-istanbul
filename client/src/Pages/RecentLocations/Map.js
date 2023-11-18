@@ -40,12 +40,12 @@ const Map = ({ polygons, centers, timestamps }) => {
                 <ZoomControl />
                 <RotationControl style={{ top: 80 }} />
                 {polygons.map((polygon, i) => (
-                    <>
-                        <Layer key={i} type="fill" paint={multiPolygonPaint}>
+                    <div key={i+ 1}>
+                        <Layer type="fill" paint={multiPolygonPaint}>
                             <Feature coordinates={[polygon]} />
                         </Layer>
                         <Popup
-                            coordinates={ centers[i] }
+                            coordinates={centers[i]}
                             // offset={{
                             //     "bottom-left": [12, -38],
                             //     bottom: [0, -38],
@@ -54,7 +54,7 @@ const Map = ({ polygons, centers, timestamps }) => {
                         >
                             <h1>You were here at {new Date(timestamps[i] * 1000).toLocaleDateString()}</h1>
                         </Popup>
-                    </>
+                    </div>
                 ))}
             </Map>
             ;
