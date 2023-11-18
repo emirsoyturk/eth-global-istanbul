@@ -4,10 +4,13 @@ import { PushAPI } from "@pushprotocol/restapi";
 import { ethers } from "ethers";
 import Svgdef from './images/app_2.svg'
 import { AiOutlineClose } from "react-icons/ai";
+import { IoMdArrowBack } from "react-icons/io";
+
 
 function App() {
 
     const [createGroupModal, setCreateGroupModal] = useState(false)
+    const [createGroupModal_page2, setCreateGroupModal_page2] = useState(false)
     const [chats, setChats] = useState([])
     const [selectedChat, setSelectedChat] = useState(null)
     const [alice, setAlice] = useState(null)
@@ -61,19 +64,28 @@ function App() {
         // fetchSigner()
     }, []);
 
+    function handleGroupLayout_page2_back(e) {
+        setCreateGroupModal_page2(false);
+        setCreateGroupModal(true);
+    }
+    function handleGroupLayout_page1_next(e) {
+        setCreateGroupModal(false);
+        setCreateGroupModal_page2(true);
+    }
+
     function CreateGroupModal() {
         return (
             <div className={"fixed left-0 top-0 bg-opacity-50 h-screen w-[100vw] z-50 flex flex-col"}>
                 <div
                     className={"relative flex flex-col justify-around items-center bg-[#ffffff] space-y-1 mx-auto my-auto h-[80vh] w-1/3 border border-gray-300 px-10 rounded-xl text-black"}>
                     <h1 className="text-3xl text-center">Create Group</h1>
-                    <button onClick={() => setCreateGroupModal(false)} className="absolute right-0 top-0 p-2"><AiOutlineClose size={32}/></button>
-                    <div className="w-[10vw] h-[10vh] rounded-xl">
+                    <button onClick={() => setCreateGroupModal(false)} className="absolute right-0 top-0 p-2"><AiOutlineClose size={32} /></button>
+                    <div className="w-[10vw] h-[10vh] rounded-xl flex justify-center">
                         <img src={Svgdef} alt="rounded-xl" />
                     </div>
                     <div className={"w-full"}>
                         <label className={"block text-lg"}>
-                            Group Name 
+                            Group Name
                         </label>
                         <input type={"text"} placeholder={"Test Group"}
                             className={"border border-gray-800 rounded-lg h-10 w-full placeholder:text-md px-4"} />
@@ -90,12 +102,37 @@ function App() {
                         />
                     </div>
 
-                    <button className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] mt-4 text-[#ffffff]">Next</button>
+                    <button className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] mt-4 text-[#ffffff] hover:opacity-50" onClick={handleGroupLayout_page1_next}>Next</button>
                 </div>
             </div>
         )
     }
 
+    function CreateGroupModal_page2() {
+        return (
+            <div className={"fixed left-0 top-0 bg-opacity-50 h-screen w-[100vw] z-50 flex flex-col"}>
+                <div
+                    className={"relative flex flex-col justify-around items-center bg-[#ffffff] space-y-1 mx-auto my-auto h-[80vh] w-1/3 border border-gray-300 px-10 rounded-xl text-black"}>
+                    <h1 className="text-3xl text-center">Create Group</h1>
+                    <button onClick={handleGroupLayout_page2_back} className="absolute left-0 top-0 p-2"><IoMdArrowBack size={32} /></button>
+                    <button onClick={() => setCreateGroupModal_page2(false)} className="absolute right-0 top-0 p-2"><AiOutlineClose size={32} /></button>
+
+                    <div className={"w-full h-[10vh] flex flex-row justify-center items-center text-sm"}>
+                        <div className="w-1/2 h-full text-center rounded-l-lg flex flex-col justify-center items-center border-solid border-2 hover:bg-gray-100 hover:cursor-pointer">
+                            <span className="text-md font-semibold">Public</span>
+                            <span className="font-light">Anyone can view chats, even without joining</span>
+                        </div>
+                        <div className="w-1/2 h-full text-center rounded-r-lg flex flex-col justify-center items-center border-solid border-2 hover:bg-gray-100 hover:cursor-pointer">
+                            <span className="text-md font-semibold">Private</span>
+                            <span className="font-light">Encrypted Chats, Users must join group to view</span>
+                        </div>
+                    </div>
+
+                    <button className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] mt-4 text-[#ffffff] hover:opacity-50">Create Group</button>
+                </div>
+            </div>
+        )
+    }
 
     console.log(chats)
 
@@ -135,8 +172,19 @@ function App() {
                         <CreateGroupModal
                             onClose={() => setCreateGroupModal(false)}
                         />
+
                     </div>
                 }
+                {
+                    createGroupModal_page2 &&
+                    <div className={"absolute "}>
+                        <CreateGroupModal_page2
+                            onClose={() => setCreateGroupModal_page2(false)}
+                        />
+
+                    </div>
+                }
+
                 <div className={"lg:col-span-4 h-[90vh]"}>
                     <ChatView
                         chatId={selectedChat}
