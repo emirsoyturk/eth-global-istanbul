@@ -1,17 +1,12 @@
 pragma solidity ^0.8.0;
 
-import "./plonk_vk.sol";
+// import "./plonk_vk.sol";
 
 contract Map {
     struct Location {
         uint[] latitudes;
         uint[] longitudes;
-    }
-
-    BaseUltraVerifier public baseUltraVerifier;
-
-    constructor(address verifier) {
-        baseUltraVerifier = BaseUltraVerifier(verifier);
+        uint timestamp;
     }
 
     mapping(address => Location[]) locationHistory;
@@ -28,7 +23,8 @@ contract Map {
 
         Location memory newLocation = Location(
             new uint[](locationCount),
-            new uint[](locationCount)
+            new uint[](locationCount),
+            block.timestamp
         );
 
         for (uint i = 0; i < locationCount * 4; i += 4) {

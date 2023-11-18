@@ -1,0 +1,24 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Map
+    network: sepolia
+    source:
+      address: "0xbec359315e757ca1cfeb0b814e20d71fa24bf2c3"
+      abi: Map
+      startBlock: 4716355
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LocationAdded
+      abis:
+        - name: Map
+          file: ./abis/Map.json
+      eventHandlers:
+        - event: LocationAdded((uint256[],uint256[],uint256),uint256)
+          handler: handleLocationAdded
+      file: ./src/map.ts
