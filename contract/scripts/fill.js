@@ -14,6 +14,14 @@ async function main() {
     2845383, 4142161, 2830003, 4105397, 2939042, 4075713, 2953599, 4117192,
   ];
 
+  const inputsLisbon = [
+    82397, 4089690, 79101, 4185728, 202697, 4230169, 216979, 4126129,
+  ];
+
+  const inputsItaly = [
+    1045531, 4338077, 1119963, 4354424, 1162261, 4298021, 1101287, 4266595,
+  ];
+
   await map.addLocation("0x00", [
     ...inputs.map((x) => ethers.utils.hexZeroPad(ethers.utils.hexlify(x), 32)),
   ]);
