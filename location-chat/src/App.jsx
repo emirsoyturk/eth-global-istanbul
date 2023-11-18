@@ -1,7 +1,9 @@
-import {ChatView, CreateGroupModal, MODAL_POSITION_TYPE} from "@pushprotocol/uiweb";
-import {useEffect, useState} from "react";
-import {PushAPI} from "@pushprotocol/restapi";
-import {ethers} from "ethers";
+import { ChatView, CreateGroupModal, MODAL_POSITION_TYPE } from "@pushprotocol/uiweb";
+import { useEffect, useState } from "react";
+import { PushAPI } from "@pushprotocol/restapi";
+import { ethers } from "ethers";
+import Svgdef from './images/app_2.svg'
+import { AiOutlineClose } from "react-icons/ai";
 
 function App() {
 
@@ -50,7 +52,7 @@ function App() {
             const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
             await provider.send("eth_requestAccounts", []);
             const signer = provider.getSigner();
-            const userAlice = await PushAPI.initialize(signer, {env: "prod"});
+            const userAlice = await PushAPI.initialize(signer, { env: "prod" });
 
             setAlice(userAlice)
 
@@ -61,23 +63,34 @@ function App() {
 
     function CreateGroupModal() {
         return (
-            <div className={"fixed left-0 top-0 bg-opacity-50 h-screen w-[100vw] z-50 bg-black flex flex-col"}>
+            <div className={"fixed left-0 top-0 bg-opacity-50 h-screen w-[100vw] z-50 flex flex-col"}>
                 <div
-                    className={"flex flex-col bg-black space-y-1 mx-auto my-auto h-60 w-1/3 border border-gray-300 px-10 py-10"}>
-                    <div className={""}>
-                        <label className={"block text-gray-500 text-md"}>
-                            Name
-                        </label>
-                        <input type={"text"} placeholder={"name"}
-                               className={"border border-gray-800 rounded-lg h-10 placeholder:text-lg px-4"}/>
+                    className={"relative flex flex-col justify-around items-center bg-[#ffffff] space-y-1 mx-auto my-auto h-[80vh] w-1/3 border border-gray-300 px-10 rounded-xl text-black"}>
+                    <h1 className="text-3xl text-center">Create Group</h1>
+                    <button onClick={() => setCreateGroupModal(false)} className="absolute right-0 top-0 p-2"><AiOutlineClose size={32}/></button>
+                    <div className="w-[10vw] h-[10vh] rounded-xl">
+                        <img src={Svgdef} alt="rounded-xl" />
                     </div>
-                    <div className={""}>
-                        <label className={"block text-gray-500 text-md"}>
-                            Name
+                    <div className={"w-full"}>
+                        <label className={"block text-lg"}>
+                            Group Name 
                         </label>
-                        <input type={"text"} placeholder={"name"}
-                               className={"border border-gray-800 rounded-lg h-10 placeholder:text-lg px-4"}/>
+                        <input type={"text"} placeholder={"Test Group"}
+                            className={"border border-gray-800 rounded-lg h-10 w-full placeholder:text-md px-4"} />
                     </div>
+                    <div className="mt-4 h-[20vh] w-full">
+                        <label className="block text-lg">
+                            Group Description
+                        </label>
+                        <textarea
+                            rows={5}
+                            cols={35}
+                            placeholder={"Here is a gate group example"}
+                            className="p-4 border border-gray-800 rounded-lg h-full placeholder:text-sm px-4 w-full"
+                        />
+                    </div>
+
+                    <button className="bg-[#D975BB] rounded-lg w-[15vw] h-[6vh] mt-4 text-[#ffffff]">Next</button>
                 </div>
             </div>
         )
@@ -91,7 +104,7 @@ function App() {
             <div className={"grid lg:grid-rows-2 lg:grid-cols-6 gap-10"}>
                 <div className={"lg:col-span-2 border border-gray-800 px-4 py-5 rounded-3xl"}>
                     <button className={"border border-gray-600 rounded-lg px-4 py-2"}
-                            onClick={() => setCreateGroupModal(true)}
+                        onClick={() => setCreateGroupModal(true)}
                     >
                         Create Group
                     </button>
@@ -100,8 +113,8 @@ function App() {
                             chats.filter(x => x.groupInformation).map(x => {
                                 return (
                                     <div key={x.chatId} onClick={() => setSelectedChat(x.chatId)}
-                                         className={"flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300  text-left rounded-3xl border-2 border-gray-600 w-full "}>
-                                        <img src={x.groupInformation.groupImage} width={40} height={40}/>
+                                        className={"flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300  text-left rounded-3xl border-2 border-gray-600 w-full "}>
+                                        <img src={x.groupInformation.groupImage} width={40} height={40} />
                                         <div className={"flex flex-col"}>
                                             <span>
                                                 {x.groupInformation?.groupName}
