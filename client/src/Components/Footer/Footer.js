@@ -13,7 +13,7 @@ const Footer = () => {
       <img className='absolute w-full z-[-1] bottom-0' src={FooterBG} alt="Background" />
       <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
         <div>
-          <FaHome size={'11vw'} className="cursor-pointer text-pink" />
+        <Link to={'./landingPage'}> <FaHome size={'11vw'} className="cursor-pointer text-pink" /> </Link >
         </div>
         <div>
           <FaHome size={'11vw'} className="cursor-pointer text-pink" />

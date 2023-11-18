@@ -1,7 +1,7 @@
 import React from "react";
 import SmallCardItem from "./SmallCardItem";
-import FirstCardIcon from '../../Images/SmallCardIcons/first.png'; // Import your image
-import SecondCardIcon from '../../Images/SmallCardIcons/second.png'; // Import your image
+import FirstCardIcon from '../../Images/SmallCardIcons/first.png';
+import SecondCardIcon from '../../Images/SmallCardIcons/second.png';
 import './SmallCards.css';
 
 const SmallCards = () => {

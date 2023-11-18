@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { QrReader } from "react-qr-reader";
 import io from "socket.io-client";
 
@@ -9,6 +9,8 @@ const socket = io(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000
 const QrCodeScanner = () => {
     const [qrScanned, setQrScanned] = useState(false);
 
+    const qrReaderRef = useRef(null);
+
     const sendMessage = (uid, message) => {
         socket.emit("message", { uid, message });
     };
@@ -17,13 +19,17 @@ const QrCodeScanner = () => {
         sendMessage(scannedUid, "Hello from Phone A!");
 
         setQrScanned(true);
+
+        if (qrReaderRef.current) {      // turn off camera after scan and navigate
+            qrReaderRef.current.stop();
+        }
     };
 
-    function handleBack(e){
+    function handleBack(e) {
         setQrScanned(false);
     }
-    function handleConfirm(e){
-        console.log("Confirmedd");
+    function handleConfirm(e) {
+        console.log("Confirmed");
     }
     const AfterScan = () => {
         return (
@@ -57,6 +63,7 @@ const QrCodeScanner = () => {
                             width: { max: 2000, min: 480 },
                           }}
                         scanDelay={250}
+                        ref={qrReaderRef}
                         onResult={(result, error) => {
                             if (!!result) {
                                 handleScan(result?.text);

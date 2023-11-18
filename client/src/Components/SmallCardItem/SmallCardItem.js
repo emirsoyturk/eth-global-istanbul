@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SmallCardItem = ({ subtitle, imageSrc, bgColor }) => {
-    console.log(bgColor)
   return (
     <div className="relative">
       {/* <img src={CardItemBG} className={`w-[90%] h-auto fill-blue-500`} alt="Background" style={{ fill: 'green' }}/> */}
