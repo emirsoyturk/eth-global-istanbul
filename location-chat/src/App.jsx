@@ -234,8 +234,10 @@ function App() {
             {
                 showQR &&
                 <div className={"fixed left-0 top-0 z-50 bg-opacity-60 bg-black w-full h-screen"}>
-                    <div className={"flex items-start justify-center mx-auto mt-40 bg-gray-300 w-1/2 h-1/2 px-10 py-10"}>
+                    <div className={"flex flex-col items-center justify-center mx-auto mt-40 bg-gray-300 w-1/2 h-1/2 px-10 py-10"}>
                         <QRCodeSVG value={qrValue} className={""}/>
+                        <span className={"border border-gray-600 px-4 py-2 rounded-lg mt-2 w-1/2"}> {groupIdOfQR.slice(0, 10)}...{groupIdOfQR.slice(groupIdOfQR.length - 10)} </span>
+                        <button onClick={() => setShowQR(false)} className={"border border-gray-600 px-4 py-2 rounded-xl mt-2 w-1/2"}> Back </button>
                     </div>
                 </div>
             }
