@@ -49,9 +49,11 @@ const Footer = () => {
                     </div>
 
                     <div className="flex flex-row justify-around items-center text-softPurple w-full max-w-[100%] mb-[4vw]">
-                        <div>
-                            <SiGoogleanalytics size={"40"} className="cursor-pointer text-pink" />
-                        </div>
+                        <Link to={"./recentlocations"}>
+                            <div>
+                                <SiGoogleanalytics size={"40"} className="cursor-pointer text-pink" />
+                            </div>
+                        </Link>
                         <div>
                             <MdSettings size={"40"} className="cursor-pointer text-pink" />
                         </div>

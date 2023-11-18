@@ -6,6 +6,7 @@ import {
     useEnsName,
 } from 'wagmi'
 import { useNavigate } from 'react-router-dom';
+import ConnectButton from './WalletConnect';
 
 function Login() {
     const navigate = useNavigate();
@@ -20,7 +21,9 @@ function Login() {
         navigate('/homepage')
     };
 
-    if (isConnected) {
+    
+
+/*     if (isConnected) {
         return (
             <div className='h-[100vh]'>
                 <img src={ensAvatar} alt="ENS Avatar" />
@@ -29,7 +32,7 @@ function Login() {
                 <button onClick={disconnect}>Disconnect</button>
             </div>
         )
-    }
+    } */
 
     return (
         <div className='h-[100vh] flex justify-center items-center'>
@@ -52,6 +55,7 @@ function Login() {
 
             {error && <div>{error.message}</div>}
             </div>
+            {/* <ConnectButton /> */}
         </div>
     )
 }
