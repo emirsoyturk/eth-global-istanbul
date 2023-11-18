@@ -1,9 +1,12 @@
 import React from "react";
+import './Landing.css'
+import LandingSlider from './Slider';
 
-const Landingpage = () => {
-    return(
+const LandCarousel = () => {
+    return (
+        <LandingSlider />
+    );
+};
 
-    )
-}
+export default LandCarousel;
 
-export default Landingpage;

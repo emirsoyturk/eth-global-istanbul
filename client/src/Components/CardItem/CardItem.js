@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 
 
-const CardItem = ({ title, subtitle, imageSrc }) => {
+const CardItem = ({ title, subtitle }) => {
   return (
     <div className="flex justify-center items-center relative">
       <img className='w-[90%] ml-3 h-auto' src={HeaderBG} alt="Background"/>
