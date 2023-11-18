@@ -1,6 +1,12 @@
 const noirService = require("../services/noir.service");
 const path = require("path");
-const { toHex, fromHex, hashMessage, recoverPublicKey } = require("viem");
+const {
+  toHex,
+  hexToNumber,
+  fromHex,
+  hashMessage,
+  recoverPublicKey,
+} = require("viem");
 
 const { Noir } = require("@noir-lang/noir_js");
 const { BarretenbergBackend } = require("@noir-lang/backend_barretenberg");
@@ -115,6 +121,9 @@ async function main() {
   recursiveProof = await noirs.proof_of_inside.generateFinalProof(
     recursiveInputs
   );
+
+  console.log(toHex(recursiveProof.proof));
+  console.log(recursiveProof.publicInputs.map((i) => toHex(i)));
 }
 
 main();

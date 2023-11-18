@@ -36,8 +36,7 @@ fn is_point_in_polygon(location: GeoLocation, borders: [GeoLocation; 4]) -> bool
 }
 
 fn main(verification_key : [Field; 114], proof: [Field; 157], public_inputs : [Field; 64], key_hash : Field, input_aggregation_object: [Field;16], location: GeoLocation, borders: [GeoLocation; 4]) {
-    
-    let output_aggregation_object = verify_proof(
+    let _ = verify_proof(
         verification_key.as_slice(),
         proof.as_slice(),
         public_inputs.as_slice(),
@@ -45,9 +44,11 @@ fn main(verification_key : [Field; 114], proof: [Field; 157], public_inputs : [F
         input_aggregation_object
     );
 
-    let isInside = is_point_in_polygon(location, borders);
 
+
+    let isInside = is_point_in_polygon(location, borders);
     assert(isInside);
+
 }
 
 
