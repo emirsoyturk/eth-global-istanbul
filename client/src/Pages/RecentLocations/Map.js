@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, RotationControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, ZoomControl, RotationControl } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const Map = ({ polygons, centers, timestamps }) => {
@@ -18,7 +18,15 @@ const Map = ({ polygons, centers, timestamps }) => {
         "fill-opacity": 0.7,
     };
 
-    const AllShapesPolygonCoords = [
+    const circlePaint = {
+        'circle-radius': 6,
+        'circle-color': '#223b53',
+        // 'circle-stroke-color': 'white',
+        // 'circle-stroke-width': 1,
+        'circle-opacity': 0.7
+    };
+
+    const ExamplePolygonCoordinates = [
         [
             [32.34375, 40.3130432],
             [28.2019043, 39.0533181],
@@ -40,11 +48,27 @@ const Map = ({ polygons, centers, timestamps }) => {
                 <ZoomControl />
                 <RotationControl style={{ top: 80 }} />
                 {polygons.map((polygon, i) => (
-                    <div key={i+ 1}>
+                    <div key={i + 1}>
                         <Layer type="fill" paint={multiPolygonPaint}>
                             <Feature coordinates={[polygon]} />
                         </Layer>
-                        <Popup
+                        <Layer type="circle" paint={circlePaint}>
+                            <Feature
+                                coordinates={centers[i]}
+                                onClick={(x) => {
+                                    x.map.flyTo({
+                                        center: centers[i],
+                                        zoom: 6,
+                                        speed: 5,
+                                        curve: 1,
+                                        easing(t) {
+                                            return t;
+                                        },
+                                    });
+                                }}
+                            />
+                        </Layer>
+                        {/* <Popup
                             coordinates={centers[i]}
                             // offset={{
                             //     "bottom-left": [12, -38],
@@ -53,7 +77,7 @@ const Map = ({ polygons, centers, timestamps }) => {
                             // }}
                         >
                             <h1>You were here at {new Date(timestamps[i] * 1000).toLocaleDateString()}</h1>
-                        </Popup>
+                        </Popup> */}
                     </div>
                 ))}
             </Map>

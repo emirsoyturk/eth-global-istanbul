@@ -11,7 +11,7 @@ const SUBGRAPH_URL =
 const recentLocationsQuery = `
     query GetUserLocations($userId: ID!) {
         user(id: $userId) {
-        locationHistory(orderBy: blockTimestamp, orderDirection: desc, first: 5) {
+        locationHistory(orderBy: blockTimestamp, orderDirection: desc, first: 10) {
             id
             location_latitudes
             location_longitudes
@@ -37,7 +37,7 @@ const RecentLocations = () => {
             .query({
                 query: gql(recentLocationsQuery),
                 variables: {
-                    userId: address.toLowerCase(),
+                    userId: address?.toLowerCase() ?? "0x0",
                 },
             })
             .then((data) => {
@@ -51,22 +51,18 @@ const RecentLocations = () => {
                     centers.push([0, 0]);
                     for (let j = 0; j < data.data.user.locationHistory[i].location_latitudes.length; j++) {
                         coordinates[i].push([
-                            Number(data.data.user.locationHistory[i].location_latitudes[j]) + i , // TODO: i'leri sil
-                            Number(data.data.user.locationHistory[i].location_longitudes[j]) + i,
+                            Number(data.data.user.locationHistory[i].location_latitudes[j]),
+                            Number(data.data.user.locationHistory[i].location_longitudes[j]),
                         ]);
                         centers[i][0] += coordinates[i][j][0];
                         centers[i][1] += coordinates[i][j][1];
                     }
-                    coordinates[i].push(coordinates[i][0]);
                     timestamps[i] = data.data.user.locationHistory[i].location_timestamp;
                     centers[i][0] /= data.data.user.locationHistory[i].location_latitudes.length;
                     centers[i][1] /= data.data.user.locationHistory[i].location_longitudes.length;
-
+                    coordinates[i].push(coordinates[i][0]);
                 }
                 console.log(coordinates)
-                console.log(centers)
-                console.log(timestamps)
-                
                 setCenters(centers);
                 setTimestamps(timestamps);
                 setRecentLocations(coordinates);
@@ -78,11 +74,7 @@ const RecentLocations = () => {
 
     return (
         <div className="h-[100vh]">
-            {
-                recentLocations && 
-                <Map polygons={recentLocations} centers={centers} timestamps={timestamps}/>
-                // <h1>{JSON.stringify(recentLocations).toString()}</h1>
-            }
+            {recentLocations && <Map polygons={recentLocations} centers={centers} timestamps={timestamps} />}
         </div>
     );
 };
