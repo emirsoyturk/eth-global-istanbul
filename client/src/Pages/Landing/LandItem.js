@@ -1,9 +1,9 @@
 import React from "react";
 
-const LandItem = ({ title, description, image }) => {
+const LandItem = ({ title, description, image, bgColor }) => {
   return (
     <div className="flex flex-col rounded-lg justify-center items-center w-[75vw] h-[75vw]">
-      <div className="w-[75vw] h-[50vw] bg-purple flex justify-center items-center rounded-xl">
+      <div className={`w-[75vw] h-[50vw] ${bgColor} flex justify-center items-center rounded-xl`}>
           <img className="w-full h-full p-8" src={image} alt="Card" />
       </div>
 

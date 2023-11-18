@@ -25,7 +25,7 @@ const Dots = ({ count, active }) => (
 const Slide = ({ landItem }) => (
   <div className="slide flex justify-center items-center">
     <>
-    <LandItem title={landItem.title} description={landItem.description} image={landItem.image} />
+    <LandItem title={landItem.title} description={landItem.description} image={landItem.image} bgColor={landItem.backGround} />
     </>
   </div>
 );
@@ -37,23 +37,27 @@ const LandingSlider = () => {
   const landItems = [
     {
       title: "Title 1Title 1Title 1Title ",
-      description: "Description Text ThereDescription Text ThereDescription Text ThereDescription Text There",
+      description: "Description Text ThereDescription Text",
       image: App1,
+      backGround: 'bg-pink',
     },
     {
       title: "Title 2Title 1Title 1Title ",
-      description: "Description Text There",
+      description: "Description Text ThereDescription Text",
       image: App2,
+      backGround: 'bg-purple',
     },
     {
-      title: "Title 1Title 1Title 1Title 1Title 1",
-      description: "Description Text There",
+      title: "Title 1Title 1Title 1Title",
+      description: "Description Text ThereDescription Text",
       image: App1,
+      backGround: 'bg-purpleBlack',
     },
     {
       title: "Title 2",
-      description: "Description 2",
+      description: "Description Text ThereDescription Text",
       image: App2,
+      backGround: 'bg-pink',
     },
   ];
 
