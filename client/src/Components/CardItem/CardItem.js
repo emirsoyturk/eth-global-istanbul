@@ -44,13 +44,13 @@ const CardItem = ({ title, subtitle }) => {
             <img className="w-[90%] ml-3 h-auto" src={HeaderBG} alt="Backghttps://account.mapbox.comround" />
             <div className="absolute inset-0 flex justify-around items-center flex-row">
                 <div className="relative ml-[15vw]">
-                    <p className="absolute text-[3.6vw] -top-[8vw] w-[50vw] text-pink">
+                    <p className="absolute text-[3.6vw] -top-[8vw] w-[40vw] text-pink">
                         {title || "Placeholder Title"}
                     </p>
-                    <p className="text-[6vw] font-bold w-[50vw] text-white">{isConnected
+                    <p className="text-[6vw] font-bold w-[40vw] text-white">{isConnected
                             ? totalDistance !== '-' ? `${(totalDistance / 100000).toFixed(2)} km` : '-'
                             : (subtitle || '-')}</p>
-                    <div className="cursor-pointer absolute -bottom-[19vw] left-0 ml-[10vw] mt-[5vw]">
+                    <div className="cursor-pointer absolute -bottom-[16vw] left-0 ml-[6vw] mt-[5vw]">
                         <div className="flex justify-center items-center bg-yellow-500 rounded-full w-fit">
                             <MdOutlineQrCodeScanner size={"12vw"} className="text-purpleBlack p-2" />
                         </div>

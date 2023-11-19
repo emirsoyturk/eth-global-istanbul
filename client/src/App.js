@@ -29,7 +29,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 function App() {
     return (
         <WagmiConfig config={wagmiConfig}>
-            <div className="flex flex-col h-[100vh] text-purple font-bold flex-grow mx-auto max-w-screen-xl">
+            <div className="flex flex-col h-[100vh] text-purple font-bold flex-grow mx-auto max-w-screen-xl bg-[#E1E1E1]">
                 <Routes>
                     <Route exact path="/" element={<MainPage />} />
                     <Route exact path="/homePage" element={<MainPage />} />

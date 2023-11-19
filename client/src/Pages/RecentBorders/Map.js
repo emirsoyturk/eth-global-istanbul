@@ -8,9 +8,7 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const Map2 = ({ polygons, centers, realLocation }) => {
-    console.log(realLocation)
-    console.log(centers[0])
+const Map2 = ({ polygons, centers/* , realLocation */ }) => {
   const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_MAP_APIKEY,
   });
@@ -33,13 +31,13 @@ const Map2 = ({ polygons, centers, realLocation }) => {
     "circle-opacity": 0.7,
   };
 
-  const realLocPaint = {
+/*   const realLocPaint = {
     "circle-radius": 6,
     "circle-color": "#7056B2",
     // 'circle-stroke-color': 'white',
     // 'circle-stroke-width': 1,
     "circle-opacity": 0.7,
-  };
+  }; */
 
 
   const ExamplePolygonCoordinates = [
@@ -70,7 +68,7 @@ const Map2 = ({ polygons, centers, realLocation }) => {
             <Layer type="fill" paint={multiPolygonPaint}>
               <Feature coordinates={[polygon]} />
             </Layer>
-            <Layer type="dot" paint={circlePaint}>
+            <Layer type="circle" paint={circlePaint}>
               <Feature
                 coordinates={centers[i]}
                 onClick={(x) => {
@@ -86,7 +84,7 @@ const Map2 = ({ polygons, centers, realLocation }) => {
                 }}
               />
             </Layer>
-            <Layer type="circle" paint={realLocPaint}>
+            {/* <Layer type="circle" paint={realLocPaint}>
               <Feature
                 coordinates={realLocation}
                 onClick={(x) => {
@@ -101,7 +99,7 @@ const Map2 = ({ polygons, centers, realLocation }) => {
                   });
                 }}
               />
-            </Layer>
+            </Layer> */}
           </div>
         ))}
       </Map>

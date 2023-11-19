@@ -162,8 +162,10 @@ const QrCodeScanner = () => {
       console.error("Error during polygon parse.");
     }
 
-    console.log("gps read: ");
-
+    if (qrReaderRef.current) {
+        qrReaderRef.current.stop();
+      }
+/* 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
@@ -172,14 +174,11 @@ const QrCodeScanner = () => {
           longitude: position.coords.longitude,
         };
         setGps([gpsData.longitude, gpsData.latitude]);
-        console.log("gps" + gps)
-        if (qrReaderRef.current) {
-          qrReaderRef.current.stop();
-        }
+
       });
     } else {
       console.error("Tarayici konum servisini desteklemiyor.");
-    }
+    } */
 
     const pairs = scannedText.split(" ");
 
@@ -415,7 +414,6 @@ const QrCodeScanner = () => {
             <Map2
               polygons={map2_polygons}
               centers={map2_centers}
-              realLocation={gps}
             />
           )}
         </div>

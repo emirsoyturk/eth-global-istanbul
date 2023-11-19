@@ -2,6 +2,7 @@ import React from "react";
 import SmallCardItem from "./SmallCardItem";
 import FirstCardIcon from '../../Images/SmallCardIcons/first.png';
 import SecondCardIcon from '../../Images/SmallCardIcons/second.png';
+
 import './SmallCards.css';
 
 const SmallCards = () => {
@@ -10,11 +11,11 @@ const SmallCards = () => {
             <div className="inline-block text-[5vw] h-[9vw] rounded-lg p-2 m-2 text-center">
                 <h2 className="text-left text-darkPurple">Actions</h2>
             </div>
-            <div className="flex flex-row m-1 p-2 overflow-x-auto overflow-y-visible">
-                <SmallCardItem subtitle={"Receive"} imageSrc={FirstCardIcon} bgColor={'bg-pink'}/>
-                <SmallCardItem subtitle={"Send"} imageSrc={SecondCardIcon} bgColor={'bg-darkPurple'}/>
-                <SmallCardItem subtitle={"Swap"} imageSrc={FirstCardIcon} bgColor={'bg-purpleBlack'}/>
-                <SmallCardItem subtitle={"NeBilim"} imageSrc={SecondCardIcon} bgColor={'bg-pink'}/>
+            <div className="grid grid-cols-2 gap-4 m-1 p-2 pl-[5vw] overflow-x-auto overflow-y-visible">
+                <SmallCardItem subtitle={"Chat Groups"} imageSrc={FirstCardIcon} bgColor={'bg-purpleBlack'} />
+                <SmallCardItem subtitle={"Poaps"} imageSrc={SecondCardIcon} bgColor={'bg-darkPurple'} />
+                <SmallCardItem subtitle={"Emergency"} imageSrc={SecondCardIcon} bgColor={'bg-darkPurple'} />
+                <SmallCardItem subtitle={"Launchpad"} imageSrc={FirstCardIcon} bgColor={'bg-purpleBlack'} />
             </div>
 
         </div>

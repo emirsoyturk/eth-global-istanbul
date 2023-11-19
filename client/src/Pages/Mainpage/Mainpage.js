@@ -1,6 +1,5 @@
 import CardItem from "../../Components/CardItem/CardItem";
 import SmallCards from "../../Components/SmallCardItem/SmallCards";
-import DefaultImage from "../../Images/img1.png";
 import Header from "../../Components/Header/Header";
 
 function MainPage() {
@@ -11,7 +10,6 @@ function MainPage() {
                 <CardItem
                     title={"Total Distance:"}
                     subtitle={"-"}
-                    imageSrc={DefaultImage}
                 />
                 <SmallCards />
             </div>
