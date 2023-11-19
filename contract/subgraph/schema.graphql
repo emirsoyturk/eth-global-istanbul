@@ -10,7 +10,7 @@ type Border @entity(immutable: true) {
 
 type User @entity(immutable: false) {
   id: ID!
-  totalDistance: Int!
+  totalDistance: BigInt!
   lastBorderAvgLat: Int!
   lastBorderAvgLng: Int!
   borderHistory: [Border!]! @derivedFrom(field: "user")

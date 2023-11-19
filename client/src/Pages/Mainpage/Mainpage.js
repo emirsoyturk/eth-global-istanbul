@@ -9,8 +9,8 @@ function MainPage() {
             <Header />
             <div className="flex-grow mx-auto max-w-screen-xl">
                 <CardItem
-                    title={"2.70% Today"}
-                    subtitle={"$12,670.90"}
+                    title={"Total Distance:"}
+                    subtitle={"-"}
                     imageSrc={DefaultImage}
                 />
                 <SmallCards />

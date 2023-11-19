@@ -170,17 +170,17 @@ export class User extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get totalDistance(): i32 {
+  get totalDistance(): BigInt {
     let value = this.get("totalDistance");
     if (!value || value.kind == ValueKind.NULL) {
-      return 0;
+      throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toI32();
+      return value.toBigInt();
     }
   }
 
-  set totalDistance(value: i32) {
-    this.set("totalDistance", Value.fromI32(value));
+  set totalDistance(value: BigInt) {
+    this.set("totalDistance", Value.fromBigInt(value));
   }
 
   get lastBorderAvgLat(): i32 {
