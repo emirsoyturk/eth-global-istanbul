@@ -18,8 +18,6 @@ function App() {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [alice, setAlice] = useState(null);
-  const [name, setName] = useState("istanbul");
-  const [description, setDescription] = useState("istanbul");
   const [showQR, setShowQR] = useState(false);
   const [qrValue, setQrValue] = useState("");
   const [groupIdOfQR, setGroupIdOfQR] = useState("");
@@ -33,7 +31,7 @@ function App() {
   // CreateGroup Page 2 values
   const [isPrivate, setIsPrivate] = useState(false);
 
-  let selectedCoordinates = null
+  let selectedCoordinates = null;
 
   function setPolygonCoordinates(inputCoords) {
     const temp = JSON.stringify(inputCoords);
@@ -43,14 +41,19 @@ function App() {
 
   function createAccessURL() {
     let c = selectedCoordinates;
-    const url = `${import.meta.env.VITE_BACKEND_URL}/push/${c[0][1]}/${c[1][1]}/${c[2][1]}/${c[3][1]}/${c[0][0]}/${c[1][0]}/${c[2][0]}/${c[3][0]}/{{user_address}}/checkAccess`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/push/${parseInt(
+      c[0][1] * 100000
+    )}/${parseInt(c[1][1] * 100000)}/${parseInt(c[2][1] * 100000)}/${parseInt(
+      c[3][1] * 100000
+    )}/${parseInt(c[0][0] * 100000)}/${parseInt(c[1][0] * 100000)}/${parseInt(
+      c[2][0] * 100000
+    )}/${parseInt(c[3][0] * 100000)}/{{user_address}}/checkAccess`;
     return url;
   }
 
   async function createGroup() {
-    console.log(alice);
-    const createdGroup = await alice.chat.group.create(name, {
-      description: description,
+    const createdGroup = await alice.chat.group.create(groupName, {
+      description: groupDescription,
       private: isPrivate,
       image:
         "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-consensys/events/ethglobal%20istanbul%20logo%20400x400.png",
@@ -61,14 +64,12 @@ function App() {
             category: "CustomEndpoint",
             subcategory: "GET",
             data: {
-              url: "https://ethglobal-istanbul-backend.onrender.com/push/2845383/2830003/2939042/2953599/4142161/4105397/4075713/4117192/{{user_address}}/checkAccess",
+              url: createAccessURL(),
             },
           },
         },
       },
     });
-
-    console.log(createdGroup);
   }
 
   async function joinGroup(groupChatId) {
@@ -102,7 +103,7 @@ function App() {
       setAlice(user);
     }
 
-    fetchSigner();
+    // fetchSigner();
   }, []);
 
   function handleGroupLayout_page2_back(e) {
@@ -259,7 +260,7 @@ function App() {
               "flex flex-col items-center justify-center mx-auto mt-40 rounded-2xl bg-gray-300 w-fit h-1/2 px-32 py-10"
             }
           >
-            <QRCodeSVG value={qrValue} className={""} size={150}/>
+            <QRCodeSVG value={qrValue} className={""} size={150} />
             <span
               className={
                 "border border-gray-600 px-4 py-2 rounded-lg mt-6 w-1/2 min-w-fit flex justify-center"
@@ -299,7 +300,9 @@ function App() {
           }
         >
           <button
-            className={"border border-gray-600 rounded-lg px-4 py-2"}
+            className={
+              "border border-gray-600 hover:scale-105 duration-300 rounded-lg px-4 py-2"
+            }
             onClick={() => setCreateGroupModal(true)}
           >
             Create Group
@@ -312,7 +315,7 @@ function App() {
                   <div
                     key={x.chatId}
                     onClick={() => setSelectedChat(x.chatId)}
-                    className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 text-left rounded-3xl border-2 border-gray-600 w-full"
+                    className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 hover:bg-gray-200 duration-300 text-left rounded-3xl border-2 hover:border-gray-400 border-gray-600 w-full"
                   >
                     <img
                       src={x.groupInformation.groupImage}
@@ -330,7 +333,7 @@ function App() {
             </div>
             <div className="flex flex-col space-y-2">
               <button
-                className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 text-left rounded-3xl border-2 border-gray-600 w-full"
+                className="flex space-x-4  items-center px-4 py-3 cursor-pointer hover:bg-gray-200 duration-300 bg-gray-300 text-left hover:border-gray-400 rounded-3xl border-2 border-gray-600 w-full"
                 onClick={() => {
                   setQrValue(
                     "2845383 4142161 2830003 4105397 2939042 4075713 2953599 4117192"
@@ -343,12 +346,12 @@ function App() {
               >
                 Join Istanbul Chat
               </button>
-              <button className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 text-left rounded-3xl border-2 border-gray-600 w-full">
+              {/* <button className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 text-left rounded-3xl border-2 border-gray-600 w-full">
                 Join Barcelona Chat
               </button>
               <button className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 text-left rounded-3xl border-2 border-gray-600 w-full">
                 Join Paris Chat
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -370,7 +373,6 @@ function App() {
             chatId={selectedChat}
             limit={10}
             verificationFailModalPosition={MODAL_POSITION_TYPE.RELATIVE}
-            env="staging"
           />
         </div>
       </div>
