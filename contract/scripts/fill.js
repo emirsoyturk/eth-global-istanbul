@@ -23,7 +23,9 @@ async function main() {
   ];
 
   await map.addLocation("0x00", [
-    ...inputs.map((x) => ethers.utils.hexZeroPad(ethers.utils.hexlify(x), 32)),
+    ...inputsItaly.map((x) =>
+      ethers.utils.hexZeroPad(ethers.utils.hexlify(x), 32)
+    ),
   ]);
 }
 

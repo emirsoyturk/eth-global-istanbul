@@ -103,7 +103,7 @@ function App() {
       setAlice(user);
     }
 
-    // fetchSigner();
+    fetchSigner();
   }, []);
 
   function handleGroupLayout_page2_back(e) {
@@ -248,7 +248,7 @@ function App() {
   }
 
   return (
-    <div className={"bg-gray-300 w-full h-screen p-10"}>
+    <div className={"bg-gray-300 w-full p-10"}>
       {showQR && (
         <div
           className={
@@ -293,7 +293,7 @@ function App() {
           </div>
         </div>
       )}
-      <div className={"grid lg:grid-rows-2 lg:grid-cols-6 gap-10"}>
+      <div className={"grid lg:grid-cols-6 gap-10"}>
         <div
           className={
             "lg:col-span-2 border border-gray-800 px-4 py-5 rounded-3xl"

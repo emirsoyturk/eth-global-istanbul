@@ -29,6 +29,20 @@ module.exports = {
       url: `https://rpc.notadegen.com/eth/sepolia`,
       accounts: [process.env.PRIVATE_KEY_2],
     },
+    arbitrum_sepolia: {
+      url: `https://sepolia-rollup.arbitrum.io/rpc`,
+      chainId: 421614,
+      accounts: [process.env.PRIVATE_KEY_2],
+    },
+    linea_goerli: {
+      url: `https://rpc.goerli.linea.build`,
+      chainId: 59140,
+      accounts: [process.env.PRIVATE_KEY_2],
+    },
+    scroll_testnet: {
+      url: "https://scroll-sepolia.blockpi.network/v1/rpc/public",
+      accounts: [process.env.PRIVATE_KEY_2],
+    },
   },
   etherscan: {
     apiKey: process.env.SCAN_API_KEY,
@@ -39,6 +53,14 @@ module.exports = {
         urls: {
           apiURL: "https://api-sepolia.scrollscan.com/api",
           browserURL: "https://sepolia.scrollscan.dev/",
+        },
+      },
+      {
+        network: "linea_goerli",
+        chainId: 59140,
+        urls: {
+          apiURL: "https://api-testnet.lineascan.build/api",
+          browserURL: "https://goerli.lineascan.build/",
         },
       },
     ],

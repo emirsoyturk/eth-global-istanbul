@@ -1,0 +1,6 @@
+### Networks and Contract Addresses
+
+Arbitrum Sepolia-0xe2aFdA12450DB0A8D1Bd62FDB6370Cf9298F1851
+Sepolia-0xDf0A76716934802181eA808812Fc54BFA11c6DBa
+Scroll Sepolia-https://sepolia.scrollscan.dev/address/0x1E9060C89c4c461dD59167cf654a73da76378d32
+Linea Goerli-https://goerli.lineascan.build/address/0xe2aFdA12450DB0A8D1Bd62FDB6370Cf9298F1851
