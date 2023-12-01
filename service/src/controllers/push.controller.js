@@ -26,6 +26,9 @@ async function checkAccess(req, res) {
     extensions: {},
   };
 
+  console.log(borderString);
+  console.log(user_address);
+
   request(
     {
       url: "https://api.studio.thegraph.com/query/58684/zkmap-scroll-recap-demo/v0.1",

@@ -163,9 +163,9 @@ const QrCodeScanner = () => {
     }
 
     if (qrReaderRef.current) {
-        qrReaderRef.current.stop();
-      }
-/* 
+      qrReaderRef.current.stop();
+    }
+    /* 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
@@ -198,7 +198,7 @@ const QrCodeScanner = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      "0xDf0A76716934802181eA808812Fc54BFA11c6DBa",
+      "0x1E9060C89c4c461dD59167cf654a73da76378d32",
       [
         {
           inputs: [
@@ -411,10 +411,7 @@ const QrCodeScanner = () => {
         </div>
         <div className="h-[100vh] w-[100vw]">
           {recentBorders && (
-            <Map2
-              polygons={map2_polygons}
-              centers={map2_centers}
-            />
+            <Map2 polygons={map2_polygons} centers={map2_centers} />
           )}
         </div>
       </div>

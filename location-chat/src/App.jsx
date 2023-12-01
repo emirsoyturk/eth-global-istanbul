@@ -4,7 +4,7 @@ import {
   MODAL_POSITION_TYPE,
 } from "@pushprotocol/uiweb";
 import { useEffect, useState, useRef } from "react";
-import { PushAPI } from "@pushprotocol/restapi";
+import {chat, PushAPI} from "@pushprotocol/restapi";
 import { ethers } from "ethers";
 import { QRCodeSVG } from "qrcode.react";
 import Svgdef from "./images/app_2.svg";
@@ -25,8 +25,8 @@ function App() {
   // CreateGroup Page 1 values
   const groupNameRef = useRef(null);
   const groupDescriptionRef = useRef(null);
-  const [groupName, setGroupName] = useState("");
-  const [groupDescription, setGroupDescription] = useState("");
+  const [groupName, setGroupName] = useState("istanbul");
+  const [groupDescription, setGroupDescription] = useState("istanbul");
 
   // CreateGroup Page 2 values
   const [isPrivate, setIsPrivate] = useState(false);
@@ -64,7 +64,7 @@ function App() {
             category: "CustomEndpoint",
             subcategory: "GET",
             data: {
-              url: createAccessURL(),
+              url: "https://zkmap-scroll-recap-demo.onrender.com/push/2845383/2830003/2939042/2953599/4142161/4105397/4075713/4117192/{{user_address}}/checkAccess",
             },
           },
         },
@@ -247,6 +247,8 @@ function App() {
     );
   }
 
+  console.log(chats)
+
   return (
     <div className={"bg-gray-300 w-full p-10"}>
       {showQR && (
@@ -339,7 +341,7 @@ function App() {
                     "2845383 4142161 2830003 4105397 2939042 4075713 2953599 4117192"
                   );
                   setGroupIdOfQR(
-                    "b7c697f215fdd033bcab2bbb7379d360bb753e2831446a564d58203dbf9cb65b"
+                    "fc450c6b7e08c72c5db7b600adc386f9c705535ab77de2a2455ae10c6be1f4a1"
                   );
                   setShowQR(true);
                 }}
