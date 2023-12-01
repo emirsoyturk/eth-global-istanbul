@@ -4,7 +4,7 @@ import {
   MODAL_POSITION_TYPE,
 } from "@pushprotocol/uiweb";
 import { useEffect, useState, useRef } from "react";
-import {chat, PushAPI} from "@pushprotocol/restapi";
+import { chat, PushAPI } from "@pushprotocol/restapi";
 import { ethers } from "ethers";
 import { QRCodeSVG } from "qrcode.react";
 import Svgdef from "./images/app_2.svg";
@@ -52,11 +52,11 @@ function App() {
   }
 
   async function createGroup() {
-    const createdGroup = await alice.chat.group.create(groupName, {
+    await alice.chat.group.create(groupName, {
       description: groupDescription,
       private: isPrivate,
       image:
-        "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-consensys/events/ethglobal%20istanbul%20logo%20400x400.png",
+        "https://pbs.twimg.com/profile_images/1696531511519150080/Fq5O0LeN_400x400.jpg",
       rules: {
         entry: {
           conditions: {
@@ -73,9 +73,11 @@ function App() {
   }
 
   async function joinGroup(groupChatId) {
-    const joinGroup = await alice.chat.group.join(groupChatId);
-
-    console.log(joinGroup);
+    try {
+      await alice.chat.group.join(groupChatId);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
@@ -247,7 +249,7 @@ function App() {
     );
   }
 
-  console.log(chats)
+  console.log(chats);
 
   return (
     <div className={"bg-gray-300 w-full p-10"}>
@@ -311,27 +313,25 @@ function App() {
           </button>
           <div className="flex flex-col h-[90%] mt-10 justify-between">
             <div className="flex flex-col space-y-2">
-              {chats
-                .filter((x) => x.groupInformation)
-                .map((x) => (
-                  <div
-                    key={x.chatId}
-                    onClick={() => setSelectedChat(x.chatId)}
-                    className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 hover:bg-gray-200 duration-300 text-left rounded-3xl border-2 hover:border-gray-400 border-gray-600 w-full"
-                  >
-                    <img
-                      src={x.groupInformation.groupImage}
-                      width={40}
-                      height={40}
-                    />
-                    <div className="flex flex-col">
-                      <span>{x.groupInformation?.groupName}</span>
-                      <span className="text-gray-500">
-                        {x.groupInformation?.groupDescription}
-                      </span>
-                    </div>
+              {chats.map((x) => (
+                <div
+                  key={x.chatId}
+                  onClick={() => setSelectedChat(x.chatId)}
+                  className="flex space-x-4 items-center px-4 py-3 cursor-pointer bg-gray-300 hover:bg-gray-200 duration-300 text-left rounded-3xl border-2 hover:border-gray-400 border-gray-600 w-full"
+                >
+                  <img
+                    src={x.groupInformation.groupImage}
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <span>{x.groupInformation?.groupName}</span>
+                    <span className="text-gray-500">
+                      {x.groupInformation?.groupDescription}
+                    </span>
                   </div>
-                ))}
+                </div>
+              ))}
             </div>
             <div className="flex flex-col space-y-2">
               <button
@@ -341,7 +341,7 @@ function App() {
                     "2845383 4142161 2830003 4105397 2939042 4075713 2953599 4117192"
                   );
                   setGroupIdOfQR(
-                    "fc450c6b7e08c72c5db7b600adc386f9c705535ab77de2a2455ae10c6be1f4a1"
+                    "d6c25ceec319024ffb1f561165424d79090c3408ace6bb61a8569fd6a2ec75d2"
                   );
                   setShowQR(true);
                 }}
