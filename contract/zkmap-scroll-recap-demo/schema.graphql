@@ -1,0 +1,17 @@
+type Border @entity(immutable: true) {
+  id: Bytes!
+  border_latitudes: [BigInt!]! # uint256[]
+  border_longitudes: [BigInt!]! # uint256[]
+  border_string: String!
+  border_timestamp: BigInt! # uint256
+  blockTimestamp: BigInt!
+  user: User!
+}
+
+type User @entity(immutable: false) {
+  id: ID!
+  totalDistance: BigInt!
+  lastBorderAvgLat: Int!
+  lastBorderAvgLng: Int!
+  borderHistory: [Border!]! @derivedFrom(field: "user")
+}

@@ -28,7 +28,7 @@ async function checkAccess(req, res) {
 
   request(
     {
-      url: "https://api.studio.thegraph.com/proxy/58684/ethglobal-istanbul/version/latest",
+      url: "https://api.studio.thegraph.com/query/58684/zkmap-scroll-recap-demo/v0.1",
       method: "POST",
       json: true,
       body: requestJSON,

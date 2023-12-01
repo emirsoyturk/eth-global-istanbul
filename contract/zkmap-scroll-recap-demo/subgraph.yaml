@@ -1,0 +1,25 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Map
+    network: scroll-sepolia
+    source:
+      address: "0x1E9060C89c4c461dD59167cf654a73da76378d32"
+      abi: Map
+      startBlock: 2309688
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Location
+      abis:
+        - name: Map
+          file: ./abis/Map.json
+      eventHandlers:
+        - event: LocationAdded((uint256[],uint256[],uint256))
+          handler: handleLocationAdded
+      file: ./src/map.ts
