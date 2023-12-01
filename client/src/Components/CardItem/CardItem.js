@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const SUBGRAPH_URL =
     process.env.REACT_APP_SUBGRAPH_URL ??
-    "https://api.studio.thegraph.com/query/58684/ethglobal-istanbul/version/latest";
+    "https://api.studio.thegraph.com/query/58684/zkmap-scroll-recap-demo/v0.1/";
 
 const totalDistanceQuery = `
   query GetUserTotalDistance($userId: ID!) {

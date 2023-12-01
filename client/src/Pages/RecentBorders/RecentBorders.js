@@ -5,7 +5,7 @@ import Map2 from "./Map";
 
 const SUBGRAPH_URL =
     process.env.REACT_APP_SUBGRAPH_URL ??
-    "https://api.studio.thegraph.com/query/58684/ethglobal-istanbul/version/latest";
+    "https://api.studio.thegraph.com/query/58684/zkmap-scroll-recap-demo/v0.1/";
 
 const recentBordersQuery = `
     query GetUserBorders($userId: ID!) {
