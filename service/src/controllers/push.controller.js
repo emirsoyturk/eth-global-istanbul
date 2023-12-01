@@ -34,6 +34,8 @@ async function checkAccess(req, res) {
       body: requestJSON,
     },
     function (error, response, body) {
+      if (error) console.log(error);
+      if (response?.body) console.log(response.body);
       const accessGranted = response.body.data.user?.borderHistory?.length > 0;
       if (accessGranted) res.status(200);
       else res.status(403);
